@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'd7';
+  src: url('/digital-7.ttf');
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.react-flow__node.selected {
+  border: dashed 2px #5c60b0;
+  padding: 2px;
+  margin: -4px;
+  border-radius: 6px;
+  box-shadow: 0 0 15px #5c60b0;
+}
+
+.react-flow__handle-right,
+.react-flow__handle-left {
+  transform: none !important;
+}
