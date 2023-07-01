@@ -1,22 +1,14 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
-import DataContext from './DataContext'
+import { useMemo, useState } from 'react'
 import NodeHandle from './NodeHandle'
 import { NodeProps } from 'reactflow'
 import NodeContainer from './NodeContainer'
-import OutputHandleRegion from './OutputHandleRegion'
+import InputHandleRegion from './InputHandleRegion'
+import useInboundState from './useInboundState'
 
-function InputNode({ id }: NodeProps) {
+function OutputNode({ id }: NodeProps) {
+  const inboundState = useInboundState({ nodeId: id })
   const [countHandles, setCountHandles] = useState(4)
-  const { value, setValue } = useContext(DataContext)
-  const handleOnClick = useCallback((handleId: string) => {
-    setValue((value) => ({
-      ...value,
-      [id]: {
-        ...value[id],
-        [handleId]: !(value[id] || {})[handleId],
-      },
-    }))
-  }, [])
+
   const handleIds = useMemo(() => {
     return new Array(countHandles)
       .fill(true)
@@ -24,14 +16,24 @@ function InputNode({ id }: NodeProps) {
   }, [countHandles])
   return (
     <NodeContainer>
+      <InputHandleRegion>
+        {handleIds.map((handleId) => (
+          <NodeHandle
+            id={`${handleId}`}
+            key={handleId}
+            enabled={inboundState[handleId]}
+            type="input"
+          />
+        ))}
+      </InputHandleRegion>
       <div
         style={{
           color: 'black',
-          padding: '10px 10px 10px 20px',
+          padding: '10px 20px 10px 10px',
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 18 }}>Input</div>
+        <div style={{ fontSize: 18 }}>Output</div>
         <div style={{ display: 'flex' }}>
           <button
             style={{
@@ -54,19 +56,8 @@ function InputNode({ id }: NodeProps) {
           </button>
         </div>
       </div>
-      <OutputHandleRegion>
-        {handleIds.map((handleId) => (
-          <NodeHandle
-            id={`${handleId}`}
-            key={handleId}
-            enabled={(value[id] || {})[handleId]}
-            onClick={handleOnClick}
-            type="output"
-          />
-        ))}
-      </OutputHandleRegion>
     </NodeContainer>
   )
 }
 
-export default InputNode
+export default OutputNode

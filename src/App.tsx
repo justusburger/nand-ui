@@ -14,6 +14,7 @@ import AndNode from './AndNode'
 import OrNode from './OrNode'
 import XORNode from './XORNode'
 import InputNode from './InputNode'
+import OutputNode from './OutputNode'
 import DataContext from './DataContext'
 import Drawer from './Drawer'
 
@@ -92,6 +93,11 @@ const nodeTypes = [
     id: 'in',
     name: 'Input',
     node: InputNode,
+  },
+  {
+    id: 'out',
+    name: 'Output',
+    node: OutputNode,
   },
   {
     id: 'and',
