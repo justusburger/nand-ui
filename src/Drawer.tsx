@@ -1,40 +1,53 @@
-import { useCallback } from 'react'
-import { Edge, Node, useReactFlow } from 'reactflow'
+import { useCallback, useMemo } from 'react'
+import { Edge, Node, useReactFlow, useNodes, useEdges } from 'reactflow'
 import { v4 } from 'uuid'
+import { NODE_TYPES_IDS } from './nodeTypes'
+import type { InputNodeData } from './InputNode'
+import type { OutputNodeData } from './OutputNode'
+import CustomNode from './CustomNode'
 
 interface NodeType {
   id: string
   name: string
+  data?: any
+  node: any
 }
 
 interface DrawerProps {
   nodeTypes: NodeType[]
+  setNodeTypes: (newNodeTypes: NodeType[]) => void
 }
 
-function Drawer({ nodeTypes }: DrawerProps) {
+function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
   const reactFlowInstance = useReactFlow()
+  const nodes = useNodes<any>()
+  const edges = useEdges<any>()
+
+  const selectedNodes = useMemo(() => {
+    return nodes.filter((n) => n.selected)
+  }, [nodes])
+
+  const selectedNodesMap = useMemo(() => {
+    return selectedNodes.reduce((acc, node) => {
+      acc[node.id] = node
+      return acc
+    }, {} as { [nodeId: string]: Node })
+  }, [selectedNodes])
 
   const onAddNode = useCallback(
-    (type: string) => {
+    (nodeType: NodeType) => {
       reactFlowInstance.addNodes({
-        type,
-        id: `${reactFlowInstance.getNodes().length + 1}`,
+        type: nodeType.id,
+        id: v4(),
         position: { x: 0, y: 0 },
-        data: {},
+        data: nodeType.data || {},
+        dragging: true,
       })
     },
     [reactFlowInstance]
   )
 
   const onDuplicateClick = useCallback(() => {
-    const nodes = reactFlowInstance.getNodes()
-    const edges = reactFlowInstance.getEdges()
-
-    const selectedNodes = nodes.filter((n) => n.selected)
-    const selectedNodesMap = selectedNodes.reduce((acc, node) => {
-      acc[node.id] = node
-      return acc
-    }, {} as { [nodeId: string]: Node })
     const selectedToNewNodeLookup = {} as { [selectedNodeId: string]: string }
     const newNodes = selectedNodes.map((node) => {
       const newId = v4()
@@ -87,7 +100,43 @@ function Drawer({ nodeTypes }: DrawerProps) {
         })
         .concat(newEdges)
     )
-  }, [reactFlowInstance])
+  }, [reactFlowInstance, nodes, edges, selectedNodes, selectedNodesMap])
+
+  const createTypeEnabled = useMemo(() => {
+    const hasInputsSelected =
+      nodes.filter(
+        (node) => node.type === NODE_TYPES_IDS.INPUT && node.selected
+      ).length === 1
+    const hasOutputsSelected =
+      nodes.filter(
+        (node) => node.type === NODE_TYPES_IDS.OUTPUT && node.selected
+      ).length === 1
+    return hasInputsSelected && hasOutputsSelected
+  }, [nodes])
+
+  const onCreateTypeClick = useCallback(() => {
+    const inputNode = selectedNodes.find(
+      (node) => node.type === NODE_TYPES_IDS.INPUT
+    )
+    const outputNode = selectedNodes.find(
+      (node) => node.type === NODE_TYPES_IDS.OUTPUT
+    )
+
+    setNodeTypes(
+      nodeTypes.concat([
+        {
+          id: 'custom',
+          name: 'Custom',
+          data: {
+            countInputHandles: (inputNode?.data as InputNodeData).countHandles,
+            countOutputHandles: (outputNode?.data as OutputNodeData)
+              .countHandles,
+          },
+          node: CustomNode,
+        },
+      ])
+    )
+  }, [selectedNodes, nodeTypes])
 
   return (
     <div
@@ -110,7 +159,7 @@ function Drawer({ nodeTypes }: DrawerProps) {
             marginBottom: 5,
             fontSize: 13,
           }}
-          onClick={() => onAddNode(nodeType.id)}
+          onClick={() => onAddNode(nodeType)}
         >
           {nodeType.name}
         </button>
@@ -124,6 +173,16 @@ function Drawer({ nodeTypes }: DrawerProps) {
         onClick={onDuplicateClick}
       >
         Duplicate
+      </button>
+      <button
+        style={{
+          marginBottom: 5,
+          fontSize: 13,
+        }}
+        onClick={onCreateTypeClick}
+        disabled={!createTypeEnabled}
+      >
+        Create type
       </button>
     </div>
   )

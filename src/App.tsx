@@ -15,6 +15,7 @@ import OrNode from './OrNode'
 import XORNode from './XORNode'
 import InputNode from './InputNode'
 import OutputNode from './OutputNode'
+import CustomNode from './CustomNode'
 import DataContext from './DataContext'
 import Drawer from './Drawer'
 
@@ -88,7 +89,7 @@ const edgeOptions = {
   },
 }
 
-const nodeTypes = [
+const defaultNodeTypes = [
   {
     id: 'in',
     name: 'Input',
@@ -116,15 +117,20 @@ const nodeTypes = [
   },
 ]
 
-const nodeTypeMap = nodeTypes.reduce((acc, nodeType) => {
-  acc[nodeType.id] = nodeType.node
-  return acc
-}, {} as { [id: string]: any })
-
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const [data, setData] = useState({})
+  const [nodeTypes, setNodeTypes] = useState(defaultNodeTypes)
+
+  const nodeTypeMap = useMemo(
+    () =>
+      nodeTypes.reduce((acc, nodeType) => {
+        acc[nodeType.id] = nodeType.node
+        return acc
+      }, {} as { [id: string]: any }),
+    [nodeTypes]
+  )
 
   const onConnect = useCallback(
     (params: any) => setEdges((eds) => addEdge(params, eds)),
@@ -152,7 +158,7 @@ export default function App() {
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           <Panel position="top-left">
-            <Drawer nodeTypes={nodeTypes} />
+            <Drawer nodeTypes={nodeTypes} setNodeTypes={setNodeTypes} />
           </Panel>
         </ReactFlow>
       </DataContext.Provider>

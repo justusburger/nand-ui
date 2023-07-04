@@ -4,10 +4,19 @@ import { NodeProps } from 'reactflow'
 import NodeContainer from './NodeContainer'
 import InputHandleRegion from './InputHandleRegion'
 import useInboundState from './useInboundState'
+import useNodeDataState from './useNodeDataState'
+
+export interface OutputNodeData {
+  countHandles: number
+}
 
 function OutputNode({ id }: NodeProps) {
   const inboundState = useInboundState({ nodeId: id })
-  const [countHandles, setCountHandles] = useState(4)
+  const [countHandles, setCountHandles] = useNodeDataState<OutputNodeData>(
+    id,
+    'countHandles',
+    2
+  )
 
   const handleIds = useMemo(() => {
     return new Array(countHandles)

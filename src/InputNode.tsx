@@ -1,12 +1,16 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import DataContext from './DataContext'
 import NodeHandle from './NodeHandle'
 import { NodeProps } from 'reactflow'
 import NodeContainer from './NodeContainer'
 import OutputHandleRegion from './OutputHandleRegion'
+import useNodeDataState from './useNodeDataState'
 
-function InputNode({ id }: NodeProps) {
-  const [countHandles, setCountHandles] = useState(4)
+export interface InputNodeData {
+  countHandles: number
+}
+
+function InputNode({ id }: NodeProps<InputNodeData>) {
   const { value, setValue } = useContext(DataContext)
   const handleOnClick = useCallback((handleId: string) => {
     setValue((value) => ({
@@ -17,11 +21,19 @@ function InputNode({ id }: NodeProps) {
       },
     }))
   }, [])
+
+  const [countHandles, setCountHandles] = useNodeDataState<InputNodeData>(
+    id,
+    'countHandles',
+    2
+  )
+
   const handleIds = useMemo(() => {
     return new Array(countHandles)
       .fill(true)
       .map((v: any, index) => Math.pow(2, index))
   }, [countHandles])
+
   return (
     <NodeContainer>
       <div
