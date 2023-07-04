@@ -36,10 +36,15 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
 
   const onAddNode = useCallback(
     (nodeType: NodeType) => {
+      const { x, y, zoom } = reactFlowInstance.getViewport()
+      console.log(x, y, window.innerWidth, window.innerHeight, zoom)
       reactFlowInstance.addNodes({
         type: nodeType.id,
         id: v4(),
-        position: { x: 0, y: 0 },
+        position: {
+          x: (window.innerWidth / 2 - x) / zoom - 50,
+          y: (window.innerHeight / 2 - y) / zoom - 40,
+        },
         data: nodeType.data || {},
         dragging: true,
       })
@@ -159,7 +164,7 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
             marginBottom: 5,
             fontSize: 13,
           }}
-          onClick={() => onAddNode(nodeType)}
+          onMouseDownCapture={() => onAddNode(nodeType)}
         >
           {nodeType.name}
         </button>
