@@ -8,7 +8,7 @@ function OutputHandleRegion({ children }: React.PropsWithChildren) {
         justifyContent: 'center',
         paddingTop: 5,
         paddingBottom: 5,
-        marginRight: -9,
+        marginRight: -7,
       }}
     >
       {children}

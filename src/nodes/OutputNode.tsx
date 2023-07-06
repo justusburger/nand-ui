@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react'
-import NodeHandle from './NodeHandle'
+import { useMemo } from 'react'
+import NodeHandle from '../NodeHandle'
 import { NodeProps } from 'reactflow'
-import NodeContainer from './NodeContainer'
-import InputHandleRegion from './InputHandleRegion'
-import useInboundState from './useInboundState'
-import useNodeDataState from './useNodeDataState'
+import NodeContainer from '../NodeContainer'
+import InputHandleRegion from '../InputHandleRegion'
+import useInboundState from '../useInboundState'
+import useNodeDataState from '../useNodeDataState'
 
 export interface OutputNodeData {
   countHandles: number
@@ -12,16 +12,15 @@ export interface OutputNodeData {
 
 function OutputNode({ id }: NodeProps) {
   const inboundState = useInboundState({ nodeId: id })
-  const [countHandles, setCountHandles] = useNodeDataState<OutputNodeData>(
-    id,
-    'countHandles',
-    2
-  )
+  const [countHandles, setCountHandles] = useNodeDataState<
+    OutputNodeData,
+    number
+  >(id, 'countHandles', 1)
 
   const handleIds = useMemo(() => {
     return new Array(countHandles)
       .fill(true)
-      .map((v: any, index) => Math.pow(2, index))
+      .map((v: any, index) => `${index + 1}`)
   }, [countHandles])
   return (
     <NodeContainer>

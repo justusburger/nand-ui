@@ -8,7 +8,7 @@ function InputHandleRegion({ children }: React.PropsWithChildren) {
         justifyContent: 'center',
         paddingTop: 5,
         paddingBottom: 5,
-        marginLeft: -9,
+        marginLeft: -7,
       }}
     >
       {children}

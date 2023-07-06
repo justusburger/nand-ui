@@ -1,19 +1,20 @@
-import NodeHandle from './NodeHandle'
-import useInboundState from './useInboundState'
-import useOutboundState from './useOutboundState'
+import NodeHandle from '../NodeHandle'
+import useInboundState from '../useInboundState'
+import useOutboundState from '../useOutboundState'
 import { NodeProps } from 'reactflow'
-import InputHandleRegion from './InputHandleRegion'
-import OutputHandleRegion from './OutputHandleRegion'
-import NodeContainer from './NodeContainer'
+import InputHandleRegion from '../InputHandleRegion'
+import OutputHandleRegion from '../OutputHandleRegion'
+import NodeContainer from '../NodeContainer'
 
 const inputIds = ['a', 'b']
 const outputId = 'out'
 
-function XORNode({ id }: NodeProps) {
+function AndNode({ id }: NodeProps) {
   const inboundState = useInboundState({ nodeId: id })
-  const outputEnabled =
-    (inboundState['a'] && !inboundState['b']) ||
-    (inboundState['b'] && !inboundState['a'])
+  const outputEnabled = inputIds.reduce(
+    (acc, handleId) => acc && inboundState[handleId],
+    true
+  )
   useOutboundState({ nodeId: id, outputId, outputEnabled })
 
   return (
@@ -28,7 +29,7 @@ function XORNode({ id }: NodeProps) {
           />
         ))}
       </InputHandleRegion>
-      <div style={{ color: 'black', padding: 10 }}>XOR</div>
+      <div style={{ color: 'black', padding: 10 }}>AND</div>
       <OutputHandleRegion>
         <NodeHandle id="out" type="output" enabled={outputEnabled} key={id} />
       </OutputHandleRegion>
@@ -36,4 +37,4 @@ function XORNode({ id }: NodeProps) {
   )
 }
 
-export default XORNode
+export default AndNode

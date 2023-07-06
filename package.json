@@ -13,6 +13,7 @@
     "@types/uuid": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "reactflow": "^11.7.4",
     "uuid": "^9.0.0"
   },

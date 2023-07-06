@@ -1,24 +1,22 @@
 import { useCallback, useMemo } from 'react'
 import { Edge, Node, useReactFlow, useNodes, useEdges } from 'reactflow'
 import { v4 } from 'uuid'
-import { NODE_TYPES_IDS } from './nodeTypes'
-import type { InputNodeData } from './InputNode'
-import type { OutputNodeData } from './OutputNode'
-import CustomNode from './CustomNode'
-
-interface NodeType {
-  id: string
-  name: string
-  data?: any
-  node: any
-}
+import { CustomNodeType, NODE_TYPES_IDS, NodeType } from './nodeTypes'
 
 interface DrawerProps {
   nodeTypes: NodeType[]
+  customNodeTypes: CustomNodeType[]
   setNodeTypes: (newNodeTypes: NodeType[]) => void
+  onCreateCustomNodeTypeClick: () => void
+  createCustomNodeTypeEnabled: boolean
 }
 
-function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
+function Drawer({
+  nodeTypes,
+  customNodeTypes,
+  onCreateCustomNodeTypeClick,
+  createCustomNodeTypeEnabled,
+}: DrawerProps) {
   const reactFlowInstance = useReactFlow()
   const nodes = useNodes<any>()
   const edges = useEdges<any>()
@@ -37,7 +35,6 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
   const onAddNode = useCallback(
     (nodeType: NodeType) => {
       const { x, y, zoom } = reactFlowInstance.getViewport()
-      console.log(x, y, window.innerWidth, window.innerHeight, zoom)
       reactFlowInstance.addNodes({
         type: nodeType.id,
         id: v4(),
@@ -46,11 +43,62 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
           y: (window.innerHeight / 2 - y) / zoom - 40,
         },
         data: nodeType.data || {},
-        dragging: true,
       })
     },
     [reactFlowInstance]
   )
+
+  const onAddCustomNode = useCallback((customNodeType: CustomNodeType) => {
+    const { x, y, zoom } = reactFlowInstance.getViewport()
+    const parentNodeId = v4()
+    const oldToNewNodeIdLookup: Record<string, string> = {}
+    const newNodes = customNodeType.nodes.map((node) => {
+      const newNodeId = v4()
+      oldToNewNodeIdLookup[node.id] = newNodeId
+      let newType = node.type
+      if (newType === NODE_TYPES_IDS.INPUT) newType = NODE_TYPES_IDS.INPUT_RELAY
+      if (newType === NODE_TYPES_IDS.OUTPUT)
+        newType = NODE_TYPES_IDS.OUTPUT_RELAY
+
+      return {
+        ...node,
+        type: newType,
+        id: newNodeId,
+        data: {
+          ...node.data,
+          parentNodeId,
+        },
+        parentNode: parentNodeId,
+        // style: { display: 'none' },
+      }
+    })
+    const newEdges = customNodeType.edges.map((edge) => {
+      return {
+        ...edge,
+        source: oldToNewNodeIdLookup[edge.source],
+        target: oldToNewNodeIdLookup[edge.target],
+        id: v4(),
+        // hidden: true,
+      }
+    })
+    reactFlowInstance.addNodes(newNodes)
+    reactFlowInstance.addEdges(newEdges)
+    reactFlowInstance.addNodes({
+      type: NODE_TYPES_IDS.CUSTOM,
+      id: parentNodeId,
+      position: {
+        x: (window.innerWidth / 2 - x) / zoom - 50,
+        y: (window.innerHeight / 2 - y) / zoom - 40,
+      },
+      data: {
+        customNodeType: {
+          ...customNodeType,
+          nodes: newNodes,
+          edges: newEdges,
+        },
+      },
+    })
+  }, [])
 
   const onDuplicateClick = useCallback(() => {
     const selectedToNewNodeLookup = {} as { [selectedNodeId: string]: string }
@@ -107,49 +155,12 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
     )
   }, [reactFlowInstance, nodes, edges, selectedNodes, selectedNodesMap])
 
-  const createTypeEnabled = useMemo(() => {
-    const hasInputsSelected =
-      nodes.filter(
-        (node) => node.type === NODE_TYPES_IDS.INPUT && node.selected
-      ).length === 1
-    const hasOutputsSelected =
-      nodes.filter(
-        (node) => node.type === NODE_TYPES_IDS.OUTPUT && node.selected
-      ).length === 1
-    return hasInputsSelected && hasOutputsSelected
-  }, [nodes])
-
-  const onCreateTypeClick = useCallback(() => {
-    const inputNode = selectedNodes.find(
-      (node) => node.type === NODE_TYPES_IDS.INPUT
-    )
-    const outputNode = selectedNodes.find(
-      (node) => node.type === NODE_TYPES_IDS.OUTPUT
-    )
-
-    setNodeTypes(
-      nodeTypes.concat([
-        {
-          id: 'custom',
-          name: 'Custom',
-          data: {
-            countInputHandles: (inputNode?.data as InputNodeData).countHandles,
-            countOutputHandles: (outputNode?.data as OutputNodeData)
-              .countHandles,
-          },
-          node: CustomNode,
-        },
-      ])
-    )
-  }, [selectedNodes, nodeTypes])
-
   return (
     <div
+      className="card-background"
       style={{
-        background: '#fff',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: 4,
         justifyContent: 'flex-start',
         width: 'auto',
         color: 'black',
@@ -157,23 +168,34 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
       }}
     >
       <div style={{ marginBottom: 10 }}>Node types</div>
-      {nodeTypes.map((nodeType) => (
+      {nodeTypes.map((nodeType) =>
+        nodeType.hidden ? null : (
+          <button
+            key={nodeType.id}
+            style={{
+              marginBottom: 5,
+            }}
+            onClick={() => onAddNode(nodeType)}
+          >
+            {nodeType.name}
+          </button>
+        )
+      )}
+      {customNodeTypes.map((customNodeType) => (
         <button
-          key={nodeType.id}
+          key={customNodeType.id}
           style={{
             marginBottom: 5,
-            fontSize: 13,
           }}
-          onMouseDownCapture={() => onAddNode(nodeType)}
+          onClick={() => onAddCustomNode(customNodeType)}
         >
-          {nodeType.name}
+          {customNodeType.name}
         </button>
       ))}
       <div style={{ margin: '20px 0 10px 0' }}>Tools</div>
       <button
         style={{
           marginBottom: 5,
-          fontSize: 13,
         }}
         onClick={onDuplicateClick}
       >
@@ -182,10 +204,9 @@ function Drawer({ nodeTypes, setNodeTypes }: DrawerProps) {
       <button
         style={{
           marginBottom: 5,
-          fontSize: 13,
         }}
-        onClick={onCreateTypeClick}
-        disabled={!createTypeEnabled}
+        onClick={onCreateCustomNodeTypeClick}
+        disabled={!createCustomNodeTypeEnabled}
       >
         Create type
       </button>

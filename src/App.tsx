@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactFlow, {
   Controls,
   Background,
@@ -9,78 +9,16 @@ import ReactFlow, {
   Edge,
   Node,
   BackgroundVariant,
+  OnConnect,
 } from 'reactflow'
-import AndNode from './AndNode'
-import OrNode from './OrNode'
-import XORNode from './XORNode'
-import InputNode from './InputNode'
-import OutputNode from './OutputNode'
-import CustomNode from './CustomNode'
 import DataContext from './DataContext'
 import Drawer from './Drawer'
-
+import CreateNodeDrawer from './CreateNodeDrawer'
+import { CustomNodeType, NODE_TYPES_IDS, defaultNodeTypes } from './nodeTypes'
 import 'reactflow/dist/style.css'
+import { CustomNodeData } from './nodes/CustomNode'
 
-const initialNodes: Node[] = [
-  // { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  // { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-  // {
-  //   id: 'input-1',
-  //   type: 'input8',
-  //   position: { x: 0, y: 0, width: 10 },
-  //   width: 10,
-  //   data: {},
-  // },
-  // {
-  //   id: 'input-2',
-  //   type: 'input8',
-  //   position: { x: 0, y: 300, width: 10 },
-  //   width: 10,
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-1',
-  //   type: 'and',
-  //   position: { x: 300, y: 0 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-2',
-  //   type: 'and',
-  //   position: { x: 300, y: 150 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-3',
-  //   type: 'and',
-  //   position: { x: 300, y: 300 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-4',
-  //   type: 'or',
-  //   position: { x: 300, y: 450 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-5',
-  //   type: 'or',
-  //   position: { x: 300, y: 600 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-6',
-  //   type: 'xor',
-  //   position: { x: 300, y: 750 },
-  //   data: {},
-  // },
-  // {
-  //   id: 'node-7',
-  //   type: 'xor',
-  //   position: { x: 300, y: 900 },
-  //   data: {},
-  // },
-]
+const initialNodes: Node[] = []
 const initialEdges: Edge[] = []
 const edgeOptions = {
   animated: true,
@@ -89,39 +27,14 @@ const edgeOptions = {
   },
 }
 
-const defaultNodeTypes = [
-  {
-    id: 'in',
-    name: 'Input',
-    node: InputNode,
-  },
-  {
-    id: 'out',
-    name: 'Output',
-    node: OutputNode,
-  },
-  {
-    id: 'and',
-    name: 'AND',
-    node: AndNode,
-  },
-  {
-    id: 'or',
-    name: 'OR',
-    node: OrNode,
-  },
-  {
-    id: 'xor',
-    name: 'XOR',
-    node: XORNode,
-  },
-]
-
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const [data, setData] = useState({})
   const [nodeTypes, setNodeTypes] = useState(defaultNodeTypes)
+  const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
+    useState(false)
+  const [customNodeTypes, setCustomNodeTypes] = useState<CustomNodeType[]>([])
 
   const nodeTypeMap = useMemo(
     () =>
@@ -132,14 +45,93 @@ export default function App() {
     [nodeTypes]
   )
 
-  const onConnect = useCallback(
-    (params: any) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges]
+  const onConnect: OnConnect = useCallback(
+    (connection) => {
+      const customNodeTarget = nodes.find(
+        (node) =>
+          node.id === connection.target && node.type === NODE_TYPES_IDS.CUSTOM
+      )
+      if (customNodeTarget) {
+        const { customNodeType } = customNodeTarget.data as CustomNodeData
+        const customNodeTargetInputRelay = customNodeType.nodes.find(
+          (node) => node.type === NODE_TYPES_IDS.INPUT_RELAY
+        )
+        if (customNodeTargetInputRelay)
+          setEdges((eds) =>
+            addEdge(
+              {
+                ...connection,
+                target: customNodeTargetInputRelay.id,
+                // hidden: true,
+              },
+              eds
+            )
+          )
+      }
+
+      const customNodeSource = nodes.find(
+        (node) =>
+          node.id === connection.source && node.type === NODE_TYPES_IDS.CUSTOM
+      )
+      if (customNodeSource) {
+        const { customNodeType } = customNodeSource.data as CustomNodeData
+        const customNodeTargetOutputRelay = customNodeType.nodes.find(
+          (node) => node.type === NODE_TYPES_IDS.OUTPUT_RELAY
+        )
+        if (customNodeTargetOutputRelay)
+          setEdges((eds) =>
+            addEdge(
+              {
+                ...connection,
+                source: customNodeTargetOutputRelay.id,
+                hidden: true,
+              },
+              eds
+            )
+          )
+      }
+
+      setEdges((eds) => addEdge(connection, eds))
+    },
+    [setEdges, nodes]
   )
 
   const dataContextValue = useMemo(
     () => ({ value: data, setValue: setData }),
     [data]
+  )
+
+  const onCreateCustomNodeTypeClick = useCallback(() => {
+    setIsCreatingCustomNodeType(true)
+  }, [setIsCreatingCustomNodeType])
+
+  const onCreateCustomNodeTypeClose = useCallback(() => {
+    setIsCreatingCustomNodeType(false)
+  }, [setIsCreatingCustomNodeType])
+
+  const createCustomNodeTypeEnabled = useMemo(() => {
+    const hasInputsSelected =
+      nodes.filter(
+        (node) => node.type === NODE_TYPES_IDS.INPUT && node.selected
+      ).length === 1
+    const hasOutputsSelected =
+      nodes.filter(
+        (node) => node.type === NODE_TYPES_IDS.OUTPUT && node.selected
+      ).length === 1
+    return hasInputsSelected && hasOutputsSelected
+  }, [nodes])
+
+  useEffect(() => {
+    if (isCreatingCustomNodeType && !createCustomNodeTypeEnabled)
+      setIsCreatingCustomNodeType(false)
+  }, [isCreatingCustomNodeType, createCustomNodeTypeEnabled])
+
+  const onCreateTypeComplete = useCallback(
+    (newCustomNode: CustomNodeType) => {
+      setCustomNodeTypes((prevValue) => prevValue.concat([newCustomNode]))
+      setIsCreatingCustomNodeType(false)
+    },
+    [setCustomNodeTypes, setIsCreatingCustomNodeType]
   )
 
   return (
@@ -149,7 +141,7 @@ export default function App() {
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
+          onEdgesChange={(a) => onEdgesChange(a)}
           onConnect={onConnect}
           nodeTypes={nodeTypeMap}
           defaultEdgeOptions={edgeOptions}
@@ -158,7 +150,21 @@ export default function App() {
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           <Panel position="top-left">
-            <Drawer nodeTypes={nodeTypes} setNodeTypes={setNodeTypes} />
+            <Drawer
+              nodeTypes={nodeTypes}
+              customNodeTypes={customNodeTypes}
+              setNodeTypes={setNodeTypes}
+              onCreateCustomNodeTypeClick={onCreateCustomNodeTypeClick}
+              createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
+            />
+          </Panel>
+          <Panel position="top-right">
+            {createCustomNodeTypeEnabled && isCreatingCustomNodeType && (
+              <CreateNodeDrawer
+                onClose={onCreateCustomNodeTypeClose}
+                onCreate={onCreateTypeComplete}
+              />
+            )}
           </Panel>
         </ReactFlow>
       </DataContext.Provider>

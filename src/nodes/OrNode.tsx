@@ -1,19 +1,19 @@
-import NodeHandle from './NodeHandle'
-import useInboundState from './useInboundState'
-import useOutboundState from './useOutboundState'
+import NodeHandle from '../NodeHandle'
+import useInboundState from '../useInboundState'
+import useOutboundState from '../useOutboundState'
 import { NodeProps } from 'reactflow'
-import InputHandleRegion from './InputHandleRegion'
-import OutputHandleRegion from './OutputHandleRegion'
-import NodeContainer from './NodeContainer'
+import InputHandleRegion from '../InputHandleRegion'
+import OutputHandleRegion from '../OutputHandleRegion'
+import NodeContainer from '../NodeContainer'
 
 const inputIds = ['a', 'b']
 const outputId = 'out'
 
-function AndNode({ id }: NodeProps) {
+function OrNode({ id }: NodeProps) {
   const inboundState = useInboundState({ nodeId: id })
   const outputEnabled = inputIds.reduce(
-    (acc, handleId) => acc && inboundState[handleId],
-    true
+    (acc, handleId) => acc || inboundState[handleId],
+    false
   )
   useOutboundState({ nodeId: id, outputId, outputEnabled })
 
@@ -29,7 +29,7 @@ function AndNode({ id }: NodeProps) {
           />
         ))}
       </InputHandleRegion>
-      <div style={{ color: 'black', padding: 10 }}>AND</div>
+      <div style={{ color: 'black', padding: 10 }}>OR</div>
       <OutputHandleRegion>
         <NodeHandle id="out" type="output" enabled={outputEnabled} key={id} />
       </OutputHandleRegion>
@@ -37,4 +37,4 @@ function AndNode({ id }: NodeProps) {
   )
 }
 
-export default AndNode
+export default OrNode

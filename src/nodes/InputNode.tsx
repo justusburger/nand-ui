@@ -1,37 +1,44 @@
 import { useCallback, useContext, useMemo } from 'react'
-import DataContext from './DataContext'
-import NodeHandle from './NodeHandle'
+import DataContext from '../DataContext'
+import NodeHandle from '../NodeHandle'
 import { NodeProps } from 'reactflow'
-import NodeContainer from './NodeContainer'
-import OutputHandleRegion from './OutputHandleRegion'
-import useNodeDataState from './useNodeDataState'
+import NodeContainer from '../NodeContainer'
+import OutputHandleRegion from '../OutputHandleRegion'
+import useNodeDataState from '../useNodeDataState'
+import useInboundState from '../useInboundState'
 
 export interface InputNodeData {
   countHandles: number
+  parentNodeId?: string
 }
 
-function InputNode({ id }: NodeProps<InputNodeData>) {
+function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
   const { value, setValue } = useContext(DataContext)
-  const handleOnClick = useCallback((handleId: string) => {
-    setValue((value) => ({
-      ...value,
-      [id]: {
-        ...value[id],
-        [handleId]: !(value[id] || {})[handleId],
-      },
-    }))
-  }, [])
-
-  const [countHandles, setCountHandles] = useNodeDataState<InputNodeData>(
-    id,
-    'countHandles',
-    2
+  const handleOnClick = useCallback(
+    (handleId: string) => {
+      if (parentNodeId) return
+      setValue((value) => ({
+        ...value,
+        [id]: {
+          ...value[id],
+          [handleId]: !(value[id] || {})[handleId],
+        },
+      }))
+    },
+    [parentNodeId, id]
   )
+
+  const [countHandles, setCountHandles] = useNodeDataState<
+    InputNodeData,
+    number
+  >(id, 'countHandles', 1)
+
+  const inboundState = useInboundState({ nodeId: parentNodeId })
 
   const handleIds = useMemo(() => {
     return new Array(countHandles)
       .fill(true)
-      .map((v: any, index) => Math.pow(2, index))
+      .map((v: any, index) => `${index + 1}`)
   }, [countHandles])
 
   return (
@@ -71,7 +78,11 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
           <NodeHandle
             id={`${handleId}`}
             key={handleId}
-            enabled={(value[id] || {})[handleId]}
+            enabled={
+              parentNodeId
+                ? inboundState[handleId]
+                : (value[id] || {})[handleId]
+            }
             onClick={handleOnClick}
             type="output"
           />
