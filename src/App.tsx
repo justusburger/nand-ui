@@ -19,6 +19,7 @@ import CreateNodeDrawer from './CreateNodeDrawer'
 import { CustomNodeType, NODE_TYPES_IDS, defaultNodeTypes } from './nodeTypes'
 import 'reactflow/dist/style.css'
 import { CustomNodeData } from './nodes/CustomNode'
+import useLocalStorageState from './useLocalStorageState'
 
 const initialNodes: Node[] = []
 const initialEdges: Edge[] = []
@@ -37,7 +38,9 @@ export default function App() {
   const [nodeTypes, setNodeTypes] = useState(defaultNodeTypes)
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
-  const [customNodeTypes, setCustomNodeTypes] = useState<CustomNodeType[]>([])
+  const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
+    CustomNodeType[]
+  >('customNodeTypes', [])
 
   const nodeTypeMap = useMemo(
     () =>
