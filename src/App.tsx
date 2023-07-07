@@ -10,6 +10,8 @@ import ReactFlow, {
   Node,
   BackgroundVariant,
   OnConnect,
+  DefaultEdgeOptions,
+  ConnectionLineType,
 } from 'reactflow'
 import DataContext from './DataContext'
 import Drawer from './Drawer'
@@ -20,8 +22,9 @@ import { CustomNodeData } from './nodes/CustomNode'
 
 const initialNodes: Node[] = []
 const initialEdges: Edge[] = []
-const edgeOptions = {
+const edgeOptions: DefaultEdgeOptions = {
   animated: true,
+  type: 'step',
   style: {
     stroke: 'white',
   },
@@ -146,6 +149,8 @@ export default function App() {
           nodeTypes={nodeTypeMap}
           defaultEdgeOptions={edgeOptions}
           connectionLineStyle={{ stroke: 'white' }}
+          connectionLineType={ConnectionLineType.Step}
+          snapToGrid={true}
         >
           <Controls />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

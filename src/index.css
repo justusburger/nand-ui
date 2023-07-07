@@ -86,3 +86,14 @@ button {
   display: block;
   width: 100%;
 }
+
+.react-flow__node.selected {
+  border: dashed 1px #535bf2;
+  padding: 2px;
+  margin: -3px;
+  border-radius: 6px;
+}
+
+.react-flow__edge.selected path {
+  stroke: #535bf2 !important;
+}
