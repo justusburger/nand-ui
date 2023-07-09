@@ -5,7 +5,6 @@ import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
-import { useMemo } from 'react'
 
 const inputHandleIds = ['a', 'b']
 const outputHandleId = 'out'
@@ -14,18 +13,9 @@ function AndNode({ id }: NodeProps) {
   const nodes = useNodes()
   const edges = useEdges()
   const inboundState = useInboundState(id, nodes, edges)
-  const outputEnabled = useMemo(
-    () =>
-      inputHandleIds.reduce(
-        (acc, handleId) => acc && inboundState[handleId],
-        true
-      ),
-    [inboundState]
-  )
-  const outboundState = useMemo(
-    () => ({ [outputHandleId]: outputEnabled }),
-    [outputEnabled]
-  )
+  const outboundState = {
+    [outputHandleId]: inboundState['a'] && inboundState['b'],
+  }
 
   useOutboundState(id, outboundState)
 
@@ -46,7 +36,7 @@ function AndNode({ id }: NodeProps) {
         <NodeHandle
           id={outputHandleId}
           type="output"
-          enabled={outputEnabled}
+          enabled={outboundState[outputHandleId]}
           key={id}
         />
       </OutputHandleRegion>

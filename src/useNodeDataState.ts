@@ -16,12 +16,9 @@ function useNodeDataState<TData, T>(
       reactFlowInstance.setNodes((nodes) =>
         nodes.map((node) => {
           if (node.id === nodeId) {
-            return {
-              ...node,
-              data: {
-                ...node.data,
-                [key]: newValue,
-              },
+            node.data = {
+              ...node.data,
+              [key]: newValue,
             }
           }
           return node

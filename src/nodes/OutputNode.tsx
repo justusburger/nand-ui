@@ -24,6 +24,11 @@ function OutputNode({ id }: NodeProps) {
       .fill(true)
       .map((v: any, index) => `${index + 1}`)
   }, [countHandles])
+
+  const decimalValue = handleIds.reduce((acc, handleId) => {
+    const handleBinaryColumn = Math.pow(2, parseInt(handleId) - 1)
+    return acc + (inboundState[handleId] ? handleBinaryColumn : 0)
+  }, 0)
   return (
     <NodeContainer>
       <InputHandleRegion>
@@ -64,6 +69,17 @@ function OutputNode({ id }: NodeProps) {
           >
             +
           </button>
+        </div>
+        <div>
+          <input
+            type="number"
+            style={{
+              background: '#fff',
+              border: 'solid 1px #ccc',
+              color: '#000',
+            }}
+            value={decimalValue}
+          />
         </div>
       </div>
     </NodeContainer>

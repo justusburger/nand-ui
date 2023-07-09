@@ -5,7 +5,6 @@ import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
-import { useMemo } from 'react'
 
 const inputIds = ['a', 'b']
 const outputHandleId = 'out'
@@ -17,10 +16,9 @@ function XORNode({ id }: NodeProps) {
   const outputEnabled =
     (inboundState['a'] && !inboundState['b']) ||
     (inboundState['b'] && !inboundState['a'])
-  const outboundState = useMemo(
-    () => ({ [outputHandleId]: outputEnabled }),
-    [outputEnabled]
-  )
+  const outboundState = {
+    [outputHandleId]: outputEnabled,
+  }
   useOutboundState(id, outboundState)
 
   return (

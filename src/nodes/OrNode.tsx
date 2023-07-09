@@ -5,7 +5,6 @@ import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
-import { useMemo } from 'react'
 
 const inputIds = ['a', 'b']
 const outputHandleId = 'out'
@@ -14,14 +13,9 @@ function OrNode({ id }: NodeProps) {
   const nodes = useNodes()
   const edges = useEdges()
   const inboundState = useInboundState(id, nodes, edges)
-  const outputEnabled = inputIds.reduce(
-    (acc, handleId) => acc || inboundState[handleId],
-    false
-  )
-  const outboundState = useMemo(
-    () => ({ [outputHandleId]: outputEnabled }),
-    [outputEnabled]
-  )
+  const outboundState = {
+    [outputHandleId]: inboundState['a'] || inboundState['b'],
+  }
   useOutboundState(id, outboundState)
 
   return (
@@ -41,7 +35,7 @@ function OrNode({ id }: NodeProps) {
         <NodeHandle
           id={outputHandleId}
           type="output"
-          enabled={outputEnabled}
+          enabled={outboundState[outputHandleId]}
           key={id}
         />
       </OutputHandleRegion>

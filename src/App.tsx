@@ -34,13 +34,17 @@ const edgeOptions: DefaultEdgeOptions = {
 }
 
 export default function App() {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes)
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
   const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
     CustomNodeType[]
   >({ key: 'customNodeTypes', defaultValue: [] })
+
+  const selectedNodes = nodes.filter((node) => node.selected)
+  if (selectedNodes.length > 0)
+    console.log(selectedNodes[0].data?.outboundHandleState)
 
   const onConnect: OnConnect = useCallback(
     (connection) => {
@@ -132,7 +136,7 @@ export default function App() {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
-        onEdgesChange={(a) => onEdgesChange(a)}
+        onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={defaultNodeTypeMap}
         defaultEdgeOptions={edgeOptions}
