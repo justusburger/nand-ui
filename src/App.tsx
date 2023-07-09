@@ -14,7 +14,12 @@ import ReactFlow, {
 } from 'reactflow'
 import Drawer from './Drawer'
 import CreateNodeDrawer from './CreateNodeDrawer'
-import { CustomNodeType, NODE_TYPES_IDS, defaultNodeTypes } from './nodeTypes'
+import {
+  CustomNodeType,
+  NODE_TYPES_IDS,
+  defaultNodeTypes,
+  defaultNodeTypeMap,
+} from './nodeTypes'
 import 'reactflow/dist/style.css'
 import { CustomNodeData } from './nodes/CustomNode'
 import useLocalStorageState from './useLocalStorageState'
@@ -31,21 +36,11 @@ const edgeOptions: DefaultEdgeOptions = {
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const [nodeTypes, setNodeTypes] = useState(defaultNodeTypes)
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
   const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
     CustomNodeType[]
   >({ key: 'customNodeTypes', defaultValue: [] })
-
-  const nodeTypeMap = useMemo(
-    () =>
-      nodeTypes.reduce((acc, nodeType) => {
-        acc[nodeType.id] = nodeType.node
-        return acc
-      }, {} as { [id: string]: any }),
-    [nodeTypes]
-  )
 
   const onConnect: OnConnect = useCallback(
     (connection) => {
@@ -86,7 +81,7 @@ export default function App() {
               {
                 ...connection,
                 source: customNodeTargetOutputRelay.id,
-                hidden: true,
+                // hidden: true,
               },
               eds
             )
@@ -139,7 +134,7 @@ export default function App() {
         onNodesChange={onNodesChange}
         onEdgesChange={(a) => onEdgesChange(a)}
         onConnect={onConnect}
-        nodeTypes={nodeTypeMap}
+        nodeTypes={defaultNodeTypeMap}
         defaultEdgeOptions={edgeOptions}
         connectionLineStyle={{ stroke: 'white' }}
         snapToGrid={true}
@@ -148,9 +143,8 @@ export default function App() {
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
         <Panel position="top-left">
           <Drawer
-            nodeTypes={nodeTypes}
+            nodeTypes={defaultNodeTypes}
             customNodeTypes={customNodeTypes}
-            setNodeTypes={setNodeTypes}
             onCreateCustomNodeTypeClick={onCreateCustomNodeTypeClick}
             createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
           />

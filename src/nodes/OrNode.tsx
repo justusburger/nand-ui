@@ -1,7 +1,7 @@
 import NodeHandle from '../NodeHandle'
 import useInboundState from '../useInboundState'
 import useOutboundState from '../useOutboundState'
-import { NodeProps } from 'reactflow'
+import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
@@ -11,7 +11,9 @@ const inputIds = ['a', 'b']
 const outputHandleId = 'out'
 
 function OrNode({ id }: NodeProps) {
-  const inboundState = useInboundState(id)
+  const nodes = useNodes()
+  const edges = useEdges()
+  const inboundState = useInboundState(id, nodes, edges)
   const outputEnabled = inputIds.reduce(
     (acc, handleId) => acc || inboundState[handleId],
     false

@@ -6,7 +6,6 @@ import { CustomNodeType, NODE_TYPES_IDS, NodeType } from './nodeTypes'
 interface DrawerProps {
   nodeTypes: NodeType[]
   customNodeTypes: CustomNodeType[]
-  setNodeTypes: (newNodeTypes: NodeType[]) => void
   onCreateCustomNodeTypeClick: () => void
   createCustomNodeTypeEnabled: boolean
 }
@@ -51,38 +50,38 @@ function Drawer({
   const onAddCustomNode = useCallback((customNodeType: CustomNodeType) => {
     const { x, y, zoom } = reactFlowInstance.getViewport()
     const parentNodeId = v4()
-    const oldToNewNodeIdLookup: Record<string, string> = {}
-    const newNodes = customNodeType.nodes.map((node) => {
-      const newNodeId = v4()
-      oldToNewNodeIdLookup[node.id] = newNodeId
-      let newType = node.type
-      if (newType === NODE_TYPES_IDS.INPUT) newType = NODE_TYPES_IDS.INPUT_RELAY
-      if (newType === NODE_TYPES_IDS.OUTPUT)
-        newType = NODE_TYPES_IDS.OUTPUT_RELAY
+    // const oldToNewNodeIdLookup: Record<string, string> = {}
+    // const newNodes = customNodeType.nodes.map((node) => {
+    //   const newNodeId = v4()
+    //   oldToNewNodeIdLookup[node.id] = newNodeId
+    //   let newType = node.type
+    //   // if (newType === NODE_TYPES_IDS.INPUT) newType = NODE_TYPES_IDS.INPUT_RELAY
+    //   // if (newType === NODE_TYPES_IDS.OUTPUT)
+    //   //   newType = NODE_TYPES_IDS.OUTPUT_RELAY
 
-      return {
-        ...node,
-        type: newType,
-        id: newNodeId,
-        data: {
-          ...node.data,
-          parentNodeId,
-        },
-        parentNode: parentNodeId,
-        // style: { display: 'none' },
-      }
-    })
-    const newEdges = customNodeType.edges.map((edge) => {
-      return {
-        ...edge,
-        source: oldToNewNodeIdLookup[edge.source],
-        target: oldToNewNodeIdLookup[edge.target],
-        id: v4(),
-        // hidden: true,
-      }
-    })
-    reactFlowInstance.addNodes(newNodes)
-    reactFlowInstance.addEdges(newEdges)
+    //   return {
+    //     ...node,
+    //     type: newType,
+    //     id: newNodeId,
+    //     data: {
+    //       ...node.data,
+    //       parentNodeId,
+    //     },
+    //     parentNode: parentNodeId,
+    //     // style: { display: 'none' },
+    //   }
+    // })
+    // const newEdges = customNodeType.edges.map((edge) => {
+    //   return {
+    //     ...edge,
+    //     source: oldToNewNodeIdLookup[edge.source],
+    //     target: oldToNewNodeIdLookup[edge.target],
+    //     id: v4(),
+    //     // hidden: true,
+    //   }
+    // })
+    // reactFlowInstance.addNodes(newNodes)
+    // reactFlowInstance.addEdges(newEdges)
     reactFlowInstance.addNodes({
       type: NODE_TYPES_IDS.CUSTOM,
       id: parentNodeId,
@@ -93,8 +92,8 @@ function Drawer({
       data: {
         customNodeType: {
           ...customNodeType,
-          nodes: newNodes,
-          edges: newEdges,
+          // nodes: newNodes,
+          // edges: newEdges,
         },
       },
     })

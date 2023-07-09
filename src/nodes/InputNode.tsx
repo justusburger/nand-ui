@@ -12,7 +12,7 @@ export interface InputNodeData {
   outboundHandleState: OutboundHandleState
 }
 
-function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
+function InputNode({ id }: NodeProps<InputNodeData>) {
   const [countHandles, setCountHandles] = useNodeDataState<
     InputNodeData,
     number
@@ -25,14 +25,13 @@ function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
 
   const handleOnClick = useCallback(
     (handleId: string) => {
-      if (parentNodeId) return
       const newState = {
         ...outboundHandleState,
         [handleId]: !outboundHandleState[handleId],
       }
       setOutboundHandleState(newState)
     },
-    [parentNodeId, id, outboundHandleState]
+    [id, outboundHandleState]
   )
 
   const handleIds = useMemo(() => {

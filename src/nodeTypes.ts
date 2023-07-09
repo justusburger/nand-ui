@@ -85,3 +85,8 @@ export const defaultNodeTypes: NodeType[] = [
     hidden: true,
   },
 ]
+
+export const defaultNodeTypeMap = defaultNodeTypes.reduce((acc, nodeType) => {
+  acc[nodeType.id] = nodeType.node
+  return acc
+}, {} as { [id: string]: NodeType['node'] })

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import NodeHandle from '../NodeHandle'
-import { NodeProps } from 'reactflow'
+import { NodeProps, useEdges, useNodes } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import InputHandleRegion from '../InputHandleRegion'
 import useInboundState from '../useInboundState'
@@ -11,7 +11,9 @@ export interface OutputNodeData {
 }
 
 function OutputNode({ id }: NodeProps) {
-  const inboundState = useInboundState(id)
+  const nodes = useNodes()
+  const edges = useEdges()
+  const inboundState = useInboundState(id, nodes, edges)
   const [countHandles, setCountHandles] = useNodeDataState<
     OutputNodeData,
     number

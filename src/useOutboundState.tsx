@@ -6,23 +6,6 @@ export interface NodeWithOutboundStateData {
   outboundHandleState: OutboundHandleState
 }
 
-// function useOutboundState(
-//   nodeId: string,
-//   outputHandleId: string,
-//   outputEnabled: boolean
-// ) {
-//   const [, setOutboundHandleState] = useNodeDataState<
-//     NodeWithOutboundStateData,
-//     OutboundHandleState
-//   >(nodeId, 'outboundHandleState', {})
-
-//   useEffect(() => {
-//     setOutboundHandleState({
-//       [outputHandleId]: outputEnabled,
-//     })
-//   }, [outputEnabled])
-// }
-
 function useOutboundState(
   nodeId: string,
   state: { [handleId: string]: boolean }
@@ -34,7 +17,7 @@ function useOutboundState(
 
   useEffect(() => {
     setOutboundHandleState(state)
-  }, [state])
+  }, [JSON.stringify(state)])
 }
 
 export default useOutboundState

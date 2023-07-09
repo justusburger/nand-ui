@@ -1,6 +1,6 @@
 import NodeHandle from '../NodeHandle'
 import useInboundState from '../useInboundState'
-import { NodeProps } from 'reactflow'
+import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
@@ -13,7 +13,9 @@ export interface RelayNodeData {
 }
 
 function RelayNode({ id }: NodeProps<RelayNodeData>) {
-  const inboundState = useInboundState(id)
+  const nodes = useNodes()
+  const edges = useEdges()
+  const inboundState = useInboundState(id, nodes, edges)
   const [countHandles, setCountHandles] = useNodeDataState<
     RelayNodeData,
     number

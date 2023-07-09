@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
-import { Node, useEdges, useNodes } from 'reactflow'
+import { Edge, Node } from 'reactflow'
 
-function useInboundState(nodeId: string) {
-  const edges = useEdges()
-  const nodes = useNodes()
+function useInboundState(
+  nodeId: string | undefined,
+  nodes: Node[],
+  edges: Edge[]
+) {
   const nodesLookup = useMemo(
     () =>
       nodes.reduce((acc, node) => {
@@ -22,8 +24,6 @@ function useInboundState(nodeId: string) {
         }),
     [edges, nodesLookup]
   )
-
-  console.log(inboundEdgesWithNodes)
 
   const values = useMemo(() => {
     if (!nodeId) return {}
