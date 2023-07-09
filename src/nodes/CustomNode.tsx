@@ -1,14 +1,19 @@
-import { useContext, useMemo } from 'react'
-import DataContext from '../DataContext'
+import { useMemo } from 'react'
 import NodeHandle from '../NodeHandle'
 import { NodeProps } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import InputHandleRegion from '../InputHandleRegion'
 import useInboundState from '../useInboundState'
-import { CustomNodeType, NODE_TYPES_IDS } from '../nodeTypes'
+import {
+  CustomNodeType,
+  NODE_TYPES_IDS,
+  NodeType,
+  defaultNodeTypes,
+} from '../nodeTypes'
 import { InputNodeData } from './InputNode'
 import { OutputNodeData } from './OutputNode'
+import React from 'react'
 
 export interface CustomNodeData {
   customNodeType: CustomNodeType
@@ -18,8 +23,7 @@ function CustomNode({
   id,
   data: { customNodeType },
 }: NodeProps<CustomNodeData>) {
-  const { value } = useContext(DataContext)
-  const inboundState = useInboundState({ nodeId: id })
+  const inboundState = useInboundState(id)
 
   const inputNode = useMemo(
     () =>
@@ -45,6 +49,10 @@ function CustomNode({
     () => outputNode?.data as OutputNodeData,
     [outputNode]
   )
+
+  const outboundState = useMemo(() => {
+    return (outputNodeData as any).outboundHandleState || {}
+  }, [outputNodeData])
 
   const inputHandleIds = useMemo(() => {
     return new Array(inputNodeData.countHandles)
@@ -84,7 +92,7 @@ function CustomNode({
           <NodeHandle
             id={`${handleId}`}
             key={handleId}
-            enabled={(value[outputNode!.id] || {})[handleId]}
+            enabled={outboundState[handleId]}
             type="output"
           />
         ))}

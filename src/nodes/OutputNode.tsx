@@ -11,7 +11,7 @@ export interface OutputNodeData {
 }
 
 function OutputNode({ id }: NodeProps) {
-  const inboundState = useInboundState({ nodeId: id })
+  const inboundState = useInboundState(id)
   const [countHandles, setCountHandles] = useNodeDataState<
     OutputNodeData,
     number

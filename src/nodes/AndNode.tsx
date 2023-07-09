@@ -5,33 +5,48 @@ import { NodeProps } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
+import { useMemo } from 'react'
 
-const inputIds = ['a', 'b']
-const outputId = 'out'
+const inputHandleIds = ['a', 'b']
+const outputHandleId = 'out'
 
 function AndNode({ id }: NodeProps) {
-  const inboundState = useInboundState({ nodeId: id })
-  const outputEnabled = inputIds.reduce(
-    (acc, handleId) => acc && inboundState[handleId],
-    true
+  const inboundState = useInboundState(id)
+  const outputEnabled = useMemo(
+    () =>
+      inputHandleIds.reduce(
+        (acc, handleId) => acc && inboundState[handleId],
+        true
+      ),
+    [inboundState]
   )
-  useOutboundState({ nodeId: id, outputId, outputEnabled })
+  const outboundState = useMemo(
+    () => ({ [outputHandleId]: outputEnabled }),
+    [outputEnabled]
+  )
+
+  useOutboundState(id, outboundState)
 
   return (
     <NodeContainer>
       <InputHandleRegion>
-        {inputIds.map((id) => (
+        {inputHandleIds.map((handleId) => (
           <NodeHandle
-            id={id}
-            enabled={inboundState[id]}
-            key={id}
+            id={handleId}
+            enabled={inboundState[handleId]}
+            key={handleId}
             type="input"
           />
         ))}
       </InputHandleRegion>
       <div style={{ color: 'black', padding: 10 }}>AND</div>
       <OutputHandleRegion>
-        <NodeHandle id="out" type="output" enabled={outputEnabled} key={id} />
+        <NodeHandle
+          id={outputHandleId}
+          type="output"
+          enabled={outputEnabled}
+          key={id}
+        />
       </OutputHandleRegion>
     </NodeContainer>
   )

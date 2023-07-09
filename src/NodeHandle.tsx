@@ -7,8 +7,8 @@ const handleStyle = {
   width: 15,
   height: 15,
   left: 0,
-  marginTop: 3,
-  marginBottom: 3,
+  // marginTop: 3,
+  // marginBottom: 3,
   cursor: 'pointer',
   transform: 'none',
 }

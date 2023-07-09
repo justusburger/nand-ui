@@ -1,19 +1,19 @@
 import NodeHandle from '../NodeHandle'
 import useInboundState from '../useInboundState'
-import { NodeProps, useEdges } from 'reactflow'
+import { NodeProps } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
-import { useContext, useEffect, useMemo } from 'react'
-import DataContext from '../DataContext'
+import { useMemo } from 'react'
 import useNodeDataState from '../useNodeDataState'
+import useOutboundState from '../useOutboundState'
 
 export interface RelayNodeData {
   countHandles: number
 }
 
 function RelayNode({ id }: NodeProps<RelayNodeData>) {
-  const inboundState = useInboundState({ nodeId: id })
+  const inboundState = useInboundState(id)
   const [countHandles, setCountHandles] = useNodeDataState<
     RelayNodeData,
     number
@@ -23,21 +23,7 @@ function RelayNode({ id }: NodeProps<RelayNodeData>) {
       .fill(true)
       .map((v: any, index) => `${index + 1}`)
   }, [countHandles])
-
-  const { value, setValue } = useContext(DataContext)
-  const edges = useEdges()
-  useEffect(() => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      [id]: {
-        ...(prevValue[id] || {}),
-        ...handleIds.reduce((acc, handleId) => {
-          acc[handleId] = inboundState[handleId]
-          return acc
-        }, {} as any),
-      },
-    }))
-  }, [handleIds, id, edges, JSON.stringify(inboundState)])
+  useOutboundState(id, inboundState)
 
   return (
     <NodeContainer>

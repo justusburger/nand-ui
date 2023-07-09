@@ -1,9 +1,12 @@
 import { useState } from 'react'
 
-function useLocalStorageState<T>(
-  key: string,
+function useLocalStorageState<T>({
+  key,
+  defaultValue,
+}: {
+  key: string
   defaultValue: T
-): [T, (newValue: T) => void] {
+}): [T, (newValue: T) => void] {
   const [value, setValueInternal] = useState<T>(() => {
     const valueFromStorage = localStorage.getItem(key)
     if (valueFromStorage) return JSON.parse(valueFromStorage)

@@ -1,39 +1,39 @@
-import { useCallback, useContext, useMemo } from 'react'
-import DataContext from '../DataContext'
+import { useCallback, useMemo } from 'react'
 import NodeHandle from '../NodeHandle'
 import { NodeProps } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
-import useInboundState from '../useInboundState'
+import { OutboundHandleState } from '../useOutboundState'
 
 export interface InputNodeData {
   countHandles: number
   parentNodeId?: string
+  outboundHandleState: OutboundHandleState
 }
 
 function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
-  const { value, setValue } = useContext(DataContext)
-  const handleOnClick = useCallback(
-    (handleId: string) => {
-      if (parentNodeId) return
-      setValue((value) => ({
-        ...value,
-        [id]: {
-          ...value[id],
-          [handleId]: !(value[id] || {})[handleId],
-        },
-      }))
-    },
-    [parentNodeId, id]
-  )
-
   const [countHandles, setCountHandles] = useNodeDataState<
     InputNodeData,
     number
   >(id, 'countHandles', 1)
 
-  const inboundState = useInboundState({ nodeId: parentNodeId })
+  const [outboundHandleState, setOutboundHandleState] = useNodeDataState<
+    InputNodeData,
+    OutboundHandleState
+  >(id, 'outboundHandleState', {})
+
+  const handleOnClick = useCallback(
+    (handleId: string) => {
+      if (parentNodeId) return
+      const newState = {
+        ...outboundHandleState,
+        [handleId]: !outboundHandleState[handleId],
+      }
+      setOutboundHandleState(newState)
+    },
+    [parentNodeId, id, outboundHandleState]
+  )
 
   const handleIds = useMemo(() => {
     return new Array(countHandles)
@@ -78,11 +78,7 @@ function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
           <NodeHandle
             id={`${handleId}`}
             key={handleId}
-            enabled={
-              parentNodeId
-                ? inboundState[handleId]
-                : (value[id] || {})[handleId]
-            }
+            enabled={outboundHandleState[handleId]}
             onClick={handleOnClick}
             type="output"
           />

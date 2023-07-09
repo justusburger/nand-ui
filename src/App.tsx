@@ -11,9 +11,7 @@ import ReactFlow, {
   BackgroundVariant,
   OnConnect,
   DefaultEdgeOptions,
-  ConnectionLineType,
 } from 'reactflow'
-import DataContext from './DataContext'
 import Drawer from './Drawer'
 import CreateNodeDrawer from './CreateNodeDrawer'
 import { CustomNodeType, NODE_TYPES_IDS, defaultNodeTypes } from './nodeTypes'
@@ -25,7 +23,6 @@ const initialNodes: Node[] = []
 const initialEdges: Edge[] = []
 const edgeOptions: DefaultEdgeOptions = {
   animated: true,
-  type: 'step',
   style: {
     stroke: 'white',
   },
@@ -34,13 +31,12 @@ const edgeOptions: DefaultEdgeOptions = {
 export default function App() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const [data, setData] = useState({})
   const [nodeTypes, setNodeTypes] = useState(defaultNodeTypes)
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
   const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
     CustomNodeType[]
-  >('customNodeTypes', [])
+  >({ key: 'customNodeTypes', defaultValue: [] })
 
   const nodeTypeMap = useMemo(
     () =>
@@ -102,11 +98,6 @@ export default function App() {
     [setEdges, nodes]
   )
 
-  const dataContextValue = useMemo(
-    () => ({ value: data, setValue: setData }),
-    [data]
-  )
-
   const onCreateCustomNodeTypeClick = useCallback(() => {
     setIsCreatingCustomNodeType(true)
   }, [setIsCreatingCustomNodeType])
@@ -134,48 +125,45 @@ export default function App() {
 
   const onCreateTypeComplete = useCallback(
     (newCustomNode: CustomNodeType) => {
-      setCustomNodeTypes((prevValue) => prevValue.concat([newCustomNode]))
+      setCustomNodeTypes(customNodeTypes.concat([newCustomNode]))
       setIsCreatingCustomNodeType(false)
     },
-    [setCustomNodeTypes, setIsCreatingCustomNodeType]
+    [setCustomNodeTypes, setIsCreatingCustomNodeType, customNodeTypes]
   )
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <DataContext.Provider value={dataContextValue}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={(a) => onEdgesChange(a)}
-          onConnect={onConnect}
-          nodeTypes={nodeTypeMap}
-          defaultEdgeOptions={edgeOptions}
-          connectionLineStyle={{ stroke: 'white' }}
-          connectionLineType={ConnectionLineType.Step}
-          snapToGrid={true}
-        >
-          <Controls />
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-          <Panel position="top-left">
-            <Drawer
-              nodeTypes={nodeTypes}
-              customNodeTypes={customNodeTypes}
-              setNodeTypes={setNodeTypes}
-              onCreateCustomNodeTypeClick={onCreateCustomNodeTypeClick}
-              createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={(a) => onEdgesChange(a)}
+        onConnect={onConnect}
+        nodeTypes={nodeTypeMap}
+        defaultEdgeOptions={edgeOptions}
+        connectionLineStyle={{ stroke: 'white' }}
+        snapToGrid={true}
+      >
+        <Controls />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        <Panel position="top-left">
+          <Drawer
+            nodeTypes={nodeTypes}
+            customNodeTypes={customNodeTypes}
+            setNodeTypes={setNodeTypes}
+            onCreateCustomNodeTypeClick={onCreateCustomNodeTypeClick}
+            createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
+          />
+        </Panel>
+        <Panel position="top-right">
+          {createCustomNodeTypeEnabled && isCreatingCustomNodeType && (
+            <CreateNodeDrawer
+              onClose={onCreateCustomNodeTypeClose}
+              onCreate={onCreateTypeComplete}
             />
-          </Panel>
-          <Panel position="top-right">
-            {createCustomNodeTypeEnabled && isCreatingCustomNodeType && (
-              <CreateNodeDrawer
-                onClose={onCreateCustomNodeTypeClose}
-                onCreate={onCreateTypeComplete}
-              />
-            )}
-          </Panel>
-        </ReactFlow>
-      </DataContext.Provider>
+          )}
+        </Panel>
+      </ReactFlow>
     </div>
   )
 }
