@@ -11,6 +11,7 @@ import ReactFlow, {
   BackgroundVariant,
   OnConnect,
   DefaultEdgeOptions,
+  useReactFlow,
 } from 'reactflow'
 import Drawer from './Drawer'
 import CreateNodeDrawer from './CreateNodeDrawer'
@@ -19,10 +20,12 @@ import {
   NODE_TYPES_IDS,
   defaultNodeTypes,
   defaultNodeTypeMap,
+  NodeType,
 } from './nodeTypes'
 import 'reactflow/dist/style.css'
-import { CustomNodeData } from './nodes/CustomNode'
 import useLocalStorageState from './useLocalStorageState'
+import { useDrop } from 'react-dnd'
+import { v4 } from 'uuid'
 
 const initialNodes: Node[] = []
 const initialEdges: Edge[] = []
@@ -82,8 +85,31 @@ export default function App() {
     [setCustomNodeTypes, setIsCreatingCustomNodeType, customNodeTypes]
   )
 
+  const reactFlowInstance = useReactFlow()
+  const [, drop] = useDrop(
+    () => ({
+      accept: 'node',
+      drop: (nodeType: NodeType, manager) => {
+        const { x, y, zoom } = reactFlowInstance.getViewport()
+        const dropPosition = manager.getClientOffset()
+        if (!dropPosition) throw new Error('No drop location')
+        const customNode = !defaultNodeTypeMap[nodeType.id]
+        reactFlowInstance.addNodes({
+          type: customNode ? NODE_TYPES_IDS.CUSTOM : nodeType.id,
+          id: v4(),
+          position: {
+            x: (dropPosition.x - x) / zoom,
+            y: (dropPosition.y - y) / zoom,
+          },
+          data: nodeType.data || {},
+        })
+      },
+    }),
+    [reactFlowInstance]
+  )
+
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', height: '100vh' }} ref={drop}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -95,9 +121,9 @@ export default function App() {
         connectionLineStyle={{ stroke: 'white' }}
         snapToGrid={true}
       >
-        <Controls />
+        <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        <Panel position="top-left">
+        <Panel position="bottom-left">
           <Drawer
             nodeTypes={defaultNodeTypes}
             customNodeTypes={customNodeTypes}

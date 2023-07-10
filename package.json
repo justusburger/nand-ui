@@ -12,6 +12,8 @@
   "dependencies": {
     "@types/uuid": "^9.0.2",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "reactflow": "^11.7.4",

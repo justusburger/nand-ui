@@ -2,6 +2,8 @@ import { useCallback, useMemo } from 'react'
 import { Edge, Node, useReactFlow, useNodes, useEdges } from 'reactflow'
 import { v4 } from 'uuid'
 import { CustomNodeType, NODE_TYPES_IDS, NodeType } from './nodeTypes'
+import { useDrag } from 'react-dnd'
+import NodeButton from './NodeButton'
 
 interface DrawerProps {
   nodeTypes: NodeType[]
@@ -50,38 +52,6 @@ function Drawer({
   const onAddCustomNode = useCallback((customNodeType: CustomNodeType) => {
     const { x, y, zoom } = reactFlowInstance.getViewport()
     const parentNodeId = v4()
-    // const oldToNewNodeIdLookup: Record<string, string> = {}
-    // const newNodes = customNodeType.nodes.map((node) => {
-    //   const newNodeId = v4()
-    //   oldToNewNodeIdLookup[node.id] = newNodeId
-    //   let newType = node.type
-    //   // if (newType === NODE_TYPES_IDS.INPUT) newType = NODE_TYPES_IDS.INPUT_RELAY
-    //   // if (newType === NODE_TYPES_IDS.OUTPUT)
-    //   //   newType = NODE_TYPES_IDS.OUTPUT_RELAY
-
-    //   return {
-    //     ...node,
-    //     type: newType,
-    //     id: newNodeId,
-    //     data: {
-    //       ...node.data,
-    //       parentNodeId,
-    //     },
-    //     parentNode: parentNodeId,
-    //     // style: { display: 'none' },
-    //   }
-    // })
-    // const newEdges = customNodeType.edges.map((edge) => {
-    //   return {
-    //     ...edge,
-    //     source: oldToNewNodeIdLookup[edge.source],
-    //     target: oldToNewNodeIdLookup[edge.target],
-    //     id: v4(),
-    //     // hidden: true,
-    //   }
-    // })
-    // reactFlowInstance.addNodes(newNodes)
-    // reactFlowInstance.addEdges(newEdges)
     reactFlowInstance.addNodes({
       type: NODE_TYPES_IDS.CUSTOM,
       id: parentNodeId,
@@ -92,8 +62,6 @@ function Drawer({
       data: {
         customNodeType: {
           ...customNodeType,
-          // nodes: newNodes,
-          // edges: newEdges,
         },
       },
     })
@@ -156,42 +124,30 @@ function Drawer({
 
   return (
     <div
-      className="card-background"
       style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         justifyContent: 'flex-start',
         width: 'auto',
         color: 'black',
-        padding: 10,
       }}
     >
-      <div style={{ marginBottom: 10 }}>Node types</div>
       {nodeTypes.map((nodeType) =>
         nodeType.hidden ? null : (
-          <button
-            key={nodeType.id}
-            style={{
-              marginBottom: 5,
-            }}
-            onClick={() => onAddNode(nodeType)}
-          >
-            {nodeType.name}
-          </button>
+          <NodeButton nodeType={nodeType} key={nodeType.id} />
         )
       )}
+      <div style={{ width: 10 }} />
       {customNodeTypes.map((customNodeType) => (
-        <button
-          key={customNodeType.id}
-          style={{
-            marginBottom: 5,
-          }}
-          onClick={() => onAddCustomNode(customNodeType)}
-        >
-          {customNodeType.name}
-        </button>
+        <NodeButton nodeType={customNodeType} key={customNodeType.id} />
       ))}
-      <div style={{ margin: '20px 0 10px 0' }}>Tools</div>
+      <button
+        onClick={onCreateCustomNodeTypeClick}
+        disabled={!createCustomNodeTypeEnabled}
+      >
+        + Create type
+      </button>
+      {/* <div style={{ margin: '20px 0 10px 0' }}>Tools</div>
       <button
         style={{
           marginBottom: 5,
@@ -208,7 +164,7 @@ function Drawer({
         disabled={!createCustomNodeTypeEnabled}
       >
         Create type
-      </button>
+      </button> */}
     </div>
   )
 }

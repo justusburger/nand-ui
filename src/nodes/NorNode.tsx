@@ -6,32 +6,31 @@ import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
 
-const inputHandleIds = ['a']
+const inputIds = ['a', 'b']
 const outputHandleId = 'out'
 
-function NotNode({ id }: NodeProps) {
+function NorNode({ id }: NodeProps) {
   const nodes = useNodes()
   const edges = useEdges()
   const inboundState = useInboundState(id, nodes, edges)
   const outboundState = {
-    [outputHandleId]: !inboundState['a'],
+    [outputHandleId]: !(inboundState['a'] || inboundState['b']),
   }
-
-  useOutboundState(id, outboundState, 100)
+  useOutboundState(id, outboundState)
 
   return (
     <NodeContainer>
       <InputHandleRegion>
-        {inputHandleIds.map((handleId) => (
+        {inputIds.map((id) => (
           <NodeHandle
-            id={handleId}
-            enabled={inboundState[handleId]}
-            key={handleId}
+            id={id}
+            enabled={inboundState[id]}
+            key={id}
             type="input"
           />
         ))}
       </InputHandleRegion>
-      <div style={{ color: 'black', padding: 10 }}>NOT</div>
+      <div style={{ color: 'black', padding: 10 }}>NOR</div>
       <OutputHandleRegion>
         <NodeHandle
           id={outputHandleId}
@@ -44,4 +43,4 @@ function NotNode({ id }: NodeProps) {
   )
 }
 
-export default NotNode
+export default NorNode

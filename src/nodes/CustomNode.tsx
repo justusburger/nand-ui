@@ -15,7 +15,7 @@ import OutputHandleRegion from '../OutputHandleRegion'
 import InputHandleRegion from '../InputHandleRegion'
 import useInboundState from '../useInboundState'
 import {
-  CustomNodeType,
+  CustomNodeTypeData,
   NODE_TYPES_IDS,
   defaultNodeTypeMap,
 } from '../nodeTypes'
@@ -24,16 +24,9 @@ import { OutputNodeData } from './OutputNode'
 import { ReactFlowProvider, ReactFlow } from 'reactflow'
 import useOutboundState from '../useOutboundState'
 
-export interface CustomNodeData {
-  customNodeType: CustomNodeType
-}
-
-function CustomNode({
-  id,
-  data: { customNodeType },
-}: NodeProps<CustomNodeData>) {
+function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const [childNodes, setChildNodes, onChildNodesChange] = useNodesState(
-    customNodeType.nodes.map((node) => {
+    data.nodes.map((node) => {
       node.selectable = false
       node.selected = false
       node.deletable = false
@@ -41,7 +34,7 @@ function CustomNode({
     })
   )
   const [childEdges, , onChildEdgesChange] = useEdgesState(
-    customNodeType.edges.map((edge) => {
+    data.edges.map((edge) => {
       edge.selected = false
       edge.deletable = false
       edge.focusable = false
@@ -83,7 +76,7 @@ function CustomNode({
 
   useEffect(() => {
     setChildNodes((nodes) =>
-      nodes.map((childNode: Node) => {
+      nodes?.map((childNode: Node) => {
         if (childNode.type === NODE_TYPES_IDS.INPUT) {
           childNode.data = {
             ...childNode.data,
@@ -121,7 +114,7 @@ function CustomNode({
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 18 }}>{customNodeType.name}</div>
+        <div style={{ fontSize: 18 }}>{data.name}</div>
       </div>
       <OutputHandleRegion>
         {outputHandleIds.map((handleId) => (

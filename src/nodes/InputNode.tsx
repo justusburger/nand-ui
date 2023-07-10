@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import NodeHandle from '../NodeHandle'
-import { NodeProps } from 'reactflow'
+import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
@@ -45,8 +45,52 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
     return acc + (outboundHandleState[handleId] ? handleBinaryColumn : 0)
   }, 0)
 
+  const minValue = useMemo(() => {
+    return 0
+  }, [])
+
+  const maxValue = useMemo(() => {
+    return handleIds.reduce((acc, handleId) => {
+      const handleBinaryColumn = Math.pow(2, parseInt(handleId) - 1)
+      return acc + handleBinaryColumn
+    }, 0)
+  }, [handleIds])
+
   return (
     <NodeContainer>
+      <NodeToolbar position={Position.Top}>
+        <div
+          className="card-background"
+          style={{
+            display: 'flex',
+            background: '#fff',
+            color: '#000',
+            padding: 3,
+          }}
+        >
+          <button
+            style={{
+              padding: `0px 7px 2px 7px`,
+              lineHeight: 1,
+              marginRight: 2,
+            }}
+            onClick={() => setCountHandles(countHandles - 1)}
+          >
+            -
+          </button>
+          <div
+            style={{ fontSize: 15, padding: '2px 4px 0 2px', lineHeight: 1 }}
+          >
+            {countHandles}bit
+          </div>
+          <button
+            style={{ padding: `2px 6px 2px 6px`, lineHeight: 1 }}
+            onClick={() => setCountHandles(countHandles + 1)}
+          >
+            +
+          </button>
+        </div>
+      </NodeToolbar>
       <div
         style={{
           color: 'black',
@@ -55,27 +99,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
         }}
       >
         <div style={{ fontSize: 18 }}>Input</div>
-        <div style={{ display: 'flex' }}>
-          <button
-            style={{
-              padding: `0px 5px 2px 5px`,
-              lineHeight: 1,
-              marginRight: 2,
-            }}
-            onClick={() => setCountHandles(countHandles - 1)}
-          >
-            -
-          </button>
-          <div style={{ fontSize: 12, padding: '0 4px 0 2px' }}>
-            {countHandles}bit
-          </div>
-          <button
-            style={{ padding: `0px 5px 2px 5px`, lineHeight: 1 }}
-            onClick={() => setCountHandles(countHandles + 1)}
-          >
-            +
-          </button>
-        </div>
+
         <div>
           <input
             type="number"
@@ -83,8 +107,13 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
               background: '#fff',
               border: 'solid 1px #ccc',
               color: '#000',
+              width: 40,
+              borderRadius: 4,
             }}
+            min={minValue}
+            max={maxValue}
             value={decimalValue}
+            readOnly
           />
         </div>
       </div>

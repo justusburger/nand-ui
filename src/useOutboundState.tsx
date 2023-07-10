@@ -8,7 +8,8 @@ export interface NodeWithOutboundStateData {
 
 function useOutboundState(
   nodeId: string,
-  state: { [handleId: string]: boolean }
+  state: { [handleId: string]: boolean },
+  delay?: number
 ) {
   const [, setOutboundHandleState] = useNodeDataState<
     NodeWithOutboundStateData,
@@ -16,8 +17,9 @@ function useOutboundState(
   >(nodeId, 'outboundHandleState', {})
 
   useEffect(() => {
-    setOutboundHandleState(state)
-  }, [JSON.stringify(state)])
+    if (delay) setTimeout(() => setOutboundHandleState(state), delay)
+    else setOutboundHandleState(state)
+  }, [JSON.stringify(state), delay])
 }
 
 export default useOutboundState
