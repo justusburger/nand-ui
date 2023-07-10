@@ -42,56 +42,8 @@ export default function App() {
     CustomNodeType[]
   >({ key: 'customNodeTypes', defaultValue: [] })
 
-  const selectedNodes = nodes.filter((node) => node.selected)
-  if (selectedNodes.length > 0)
-    console.log(selectedNodes[0].data?.outboundHandleState)
-
   const onConnect: OnConnect = useCallback(
     (connection) => {
-      const customNodeTarget = nodes.find(
-        (node) =>
-          node.id === connection.target && node.type === NODE_TYPES_IDS.CUSTOM
-      )
-      if (customNodeTarget) {
-        const { customNodeType } = customNodeTarget.data as CustomNodeData
-        const customNodeTargetInputRelay = customNodeType.nodes.find(
-          (node) => node.type === NODE_TYPES_IDS.INPUT_RELAY
-        )
-        if (customNodeTargetInputRelay)
-          setEdges((eds) =>
-            addEdge(
-              {
-                ...connection,
-                target: customNodeTargetInputRelay.id,
-                // hidden: true,
-              },
-              eds
-            )
-          )
-      }
-
-      const customNodeSource = nodes.find(
-        (node) =>
-          node.id === connection.source && node.type === NODE_TYPES_IDS.CUSTOM
-      )
-      if (customNodeSource) {
-        const { customNodeType } = customNodeSource.data as CustomNodeData
-        const customNodeTargetOutputRelay = customNodeType.nodes.find(
-          (node) => node.type === NODE_TYPES_IDS.OUTPUT_RELAY
-        )
-        if (customNodeTargetOutputRelay)
-          setEdges((eds) =>
-            addEdge(
-              {
-                ...connection,
-                source: customNodeTargetOutputRelay.id,
-                // hidden: true,
-              },
-              eds
-            )
-          )
-      }
-
       setEdges((eds) => addEdge(connection, eds))
     },
     [setEdges, nodes]

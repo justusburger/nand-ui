@@ -1,10 +1,12 @@
 import AndNode from './nodes/AndNode'
+import NandNode from './nodes/NandNode'
 import OrNode from './nodes/OrNode'
 import XORNode from './nodes/XORNode'
 import InputNode from './nodes/InputNode'
 import OutputNode from './nodes/OutputNode'
 import CustomNode from './nodes/CustomNode'
 import RelayNode from './nodes/RelayNode'
+import NotNode from './nodes/NotNode'
 import { Node, Edge, NodeProps } from 'reactflow'
 import { ReactElement } from 'react'
 
@@ -12,12 +14,12 @@ export const NODE_TYPES_IDS = {
   INPUT: 'in',
   OUTPUT: 'out',
   AND: 'and',
+  NAND: 'nand',
   OR: 'or',
   XOR: 'xor',
   CUSTOM: 'custom',
   RELAY: 'relay',
-  INPUT_RELAY: 'input-relay',
-  OUTPUT_RELAY: 'output-relay',
+  NOT: 'not',
 } as const
 
 export type NodeType = {
@@ -52,6 +54,11 @@ export const defaultNodeTypes: NodeType[] = [
     node: AndNode,
   },
   {
+    id: NODE_TYPES_IDS.NAND,
+    name: 'NAND',
+    node: NandNode,
+  },
+  {
     id: NODE_TYPES_IDS.OR,
     name: 'OR',
     node: OrNode,
@@ -73,16 +80,9 @@ export const defaultNodeTypes: NodeType[] = [
     node: RelayNode,
   },
   {
-    id: NODE_TYPES_IDS.INPUT_RELAY,
-    name: 'Relay',
-    node: RelayNode,
-    hidden: true,
-  },
-  {
-    id: NODE_TYPES_IDS.OUTPUT_RELAY,
-    name: 'Relay',
-    node: RelayNode,
-    hidden: true,
+    id: NODE_TYPES_IDS.NOT,
+    name: 'Not',
+    node: NotNode,
   },
 ]
 
