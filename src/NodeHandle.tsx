@@ -7,10 +7,14 @@ const handleStyle = {
   width: 15,
   height: 15,
   left: 0,
-  // marginTop: 3,
-  // marginBottom: 3,
   cursor: 'pointer',
   transform: 'none',
+}
+
+export interface NodeHandleData {
+  id: string
+  label: string
+  isBinary: boolean
 }
 
 interface NodeHandleProps {
@@ -18,9 +22,10 @@ interface NodeHandleProps {
   enabled?: boolean
   onClick?: (id: string) => void
   type: 'input' | 'output'
+  label: string
 }
 
-function NodeHandle({ id, enabled, onClick, type }: NodeHandleProps) {
+function NodeHandle({ id, enabled, onClick, type, label }: NodeHandleProps) {
   const style: any = useMemo(() => {
     return {
       ...handleStyle,
@@ -38,7 +43,7 @@ function NodeHandle({ id, enabled, onClick, type }: NodeHandleProps) {
       <div
         style={{ color: '#999', fontSize: 12, paddingLeft: 5, paddingRight: 5 }}
       >
-        {id}
+        {label || id}
       </div>
       <Handle
         type={type === 'input' ? 'target' : 'source'}

@@ -36,6 +36,7 @@ function SimpleNode({
         {inputHandleIds.map((handleId) => (
           <NodeHandle
             id={handleId}
+            label={handleId}
             enabled={inboundState[handleId]}
             key={handleId}
             type="input"
@@ -46,6 +47,7 @@ function SimpleNode({
       <OutputHandleRegion>
         <NodeHandle
           id={outputHandleId}
+          label={outputHandleId}
           type="output"
           enabled={outboundState[outputHandleId]}
           key={id}

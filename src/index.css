@@ -51,6 +51,10 @@ h1 {
   padding: 10px;
 }
 
+.card-floating {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .title {
   font-weight: bold;
   font-size: 20px;

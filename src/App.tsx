@@ -12,6 +12,7 @@ import ReactFlow, {
   OnConnect,
   DefaultEdgeOptions,
   useReactFlow,
+  EdgeTypes,
 } from 'reactflow'
 import Drawer from './Drawer'
 import CreateNodeDrawer from './CreateNodeDrawer'
@@ -26,9 +27,10 @@ import 'reactflow/dist/style.css'
 import useLocalStorageState from './useLocalStorageState'
 import { useDrop } from 'react-dnd'
 import { v4 } from 'uuid'
+import NodeEdge from './NodeEdge'
 
-const initialNodes: Node[] = []
-const initialEdges: Edge[] = []
+const initialNodes: Node[] = JSON.parse(localStorage.getItem('nodes') || '[]')
+const initialEdges: Edge[] = JSON.parse(localStorage.getItem('edges') || '[]')
 const edgeOptions: DefaultEdgeOptions = {
   animated: true,
   style: {
@@ -36,9 +38,19 @@ const edgeOptions: DefaultEdgeOptions = {
   },
 }
 
+const edgeTypes: EdgeTypes = {
+  nodeEdge: NodeEdge,
+}
+
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  useEffect(() => {
+    localStorage.setItem('nodes', JSON.stringify(nodes))
+  }, [nodes])
+  useEffect(() => {
+    localStorage.setItem('edges', JSON.stringify(edges))
+  }, [edges])
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
   const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
@@ -47,7 +59,7 @@ export default function App() {
 
   const onConnect: OnConnect = useCallback(
     (connection) => {
-      setEdges((eds) => addEdge(connection, eds))
+      setEdges((eds) => addEdge({ ...connection, type: 'nodeEdge' }, eds))
     },
     [setEdges, nodes]
   )
@@ -120,6 +132,7 @@ export default function App() {
         defaultEdgeOptions={edgeOptions}
         connectionLineStyle={{ stroke: 'white' }}
         snapToGrid={true}
+        edgeTypes={edgeTypes}
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

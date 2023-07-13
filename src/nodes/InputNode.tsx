@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import NodeHandle from '../NodeHandle'
+import NodeHandle, { NodeHandleData } from '../NodeHandle'
 import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
@@ -7,21 +7,20 @@ import useNodeDataState from '../useNodeDataState'
 import { OutboundHandleState } from '../useOutboundState'
 
 export interface InputNodeData {
-  countHandles: number
   parentNodeId?: string
   outboundHandleState: OutboundHandleState
+  handles: NodeHandleData[]
 }
 
 function InputNode({ id }: NodeProps<InputNodeData>) {
-  const [countHandles, setCountHandles] = useNodeDataState<
-    InputNodeData,
-    number
-  >(id, 'countHandles', 1)
-
   const [outboundHandleState, setOutboundHandleState] = useNodeDataState<
     InputNodeData,
     OutboundHandleState
   >(id, 'outboundHandleState', {})
+  const [handles, setHandles] = useNodeDataState<
+    InputNodeData,
+    NodeHandleData[]
+  >(id, 'handles', [{ id: '1', label: '', isBinary: true }])
 
   const handleOnClick = useCallback(
     (handleId: string) => {
@@ -34,27 +33,78 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
     [id, outboundHandleState]
   )
 
-  const handleIds = useMemo(() => {
-    return new Array(countHandles)
-      .fill(true)
-      .map((v: any, index) => `${index + 1}`)
-  }, [countHandles])
+  const binaryHandles = useMemo(() => {
+    return handles.filter((handle) => handle.isBinary)
+  }, [handles])
 
-  const decimalValue = handleIds.reduce((acc, handleId) => {
-    const handleBinaryColumn = Math.pow(2, parseInt(handleId) - 1)
-    return acc + (outboundHandleState[handleId] ? handleBinaryColumn : 0)
+  const nonBinaryHandles = useMemo(() => {
+    return handles.filter((handle) => !handle.isBinary)
+  }, [handles])
+
+  const decimalValue = binaryHandles.reduce((acc, handle, i) => {
+    const binaryColumnValue = Math.pow(2, i)
+    return acc + (outboundHandleState[handle.id] ? binaryColumnValue : 0)
   }, 0)
 
   const minValue = useMemo(() => {
     return 0
   }, [])
-
   const maxValue = useMemo(() => {
-    return handleIds.reduce((acc, handleId) => {
-      const handleBinaryColumn = Math.pow(2, parseInt(handleId) - 1)
+    return binaryHandles.reduce((acc, handle, i) => {
+      const handleBinaryColumn = Math.pow(2, i)
       return acc + handleBinaryColumn
     }, 0)
-  }, [handleIds])
+  }, [binaryHandles])
+
+  const handleLabelChange = useCallback(
+    (e: any, handleId: string) => {
+      setHandles(
+        handles.map((handle) => {
+          if (handle.id === handleId) {
+            return {
+              ...handle,
+              label: e.target.value,
+            }
+          }
+          return handle
+        })
+      )
+    },
+    [handles]
+  )
+
+  const handleBinaryChange = useCallback(
+    (e: any, handleId: string) => {
+      setHandles(
+        handles.map((handle) => {
+          if (handle.id === handleId) {
+            return {
+              ...handle,
+              isBinary: !handle.isBinary,
+            }
+          }
+          return handle
+        })
+      )
+    },
+    [handles]
+  )
+
+  const handleAddHandle = useCallback(() => {
+    setHandles(
+      handles.concat({
+        id: (handles.length + 1).toString(),
+        label: '',
+        isBinary: true,
+      })
+    )
+  }, [handles])
+
+  const handleRemoveHandle = useCallback(() => {
+    const newHandles = [...handles]
+    newHandles.pop()
+    setHandles(newHandles)
+  }, [handles])
 
   return (
     <NodeContainer>
@@ -74,23 +124,74 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
               lineHeight: 1,
               marginRight: 2,
             }}
-            onClick={() => setCountHandles(countHandles - 1)}
+            onClick={handleRemoveHandle}
           >
             -
           </button>
           <div
             style={{ fontSize: 15, padding: '2px 4px 0 2px', lineHeight: 1 }}
           >
-            {countHandles}bit
+            {handles.length}bit
           </div>
           <button
             style={{ padding: `2px 6px 2px 6px`, lineHeight: 1 }}
-            onClick={() => setCountHandles(countHandles + 1)}
+            onClick={handleAddHandle}
           >
             +
           </button>
         </div>
       </NodeToolbar>
+      <NodeToolbar position={Position.Left}>
+        <div className="card-background card-content card-floating">
+          <div>Handles</div>
+          {nonBinaryHandles.map((handleData) => (
+            <div key={handleData.id}>
+              <input
+                type="checkbox"
+                checked={false}
+                onChange={(e) => handleBinaryChange(e, handleData.id)}
+              />
+              <input
+                type="text"
+                value={handleData.label}
+                onChange={(e) => handleLabelChange(e, handleData.id)}
+                style={{
+                  background: '#fff',
+                  border: 'solid 1px #ccc',
+                  color: '#000',
+                }}
+              />
+            </div>
+          ))}
+          {binaryHandles.map((handleData, i) => (
+            <div key={handleData.id}>
+              <input
+                type="checkbox"
+                checked={true}
+                onChange={(e) => handleBinaryChange(e, handleData.id)}
+              />
+              <input
+                type="text"
+                value={handleData.label}
+                onChange={(e) => handleLabelChange(e, handleData.id)}
+                style={{
+                  background: '#fff',
+                  border: 'solid 1px #ccc',
+                  color: '#000',
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </NodeToolbar>
+      {/* <NodeToolbar position={Position.Bottom}>
+        <div className="card-background card-content">
+          <div>Data</div>
+          <pre style={{ fontSize: 12, lineHeight: 1.1 }}>
+            {JSON.stringify(data, null, 2)}
+          </pre>
+        </div>
+      </NodeToolbar> */}
       <div
         style={{
           color: 'black',
@@ -118,11 +219,22 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
         </div>
       </div>
       <OutputHandleRegion>
-        {handleIds.map((handleId) => (
+        {nonBinaryHandles.map((handleData, i) => (
           <NodeHandle
-            id={`${handleId}`}
-            key={handleId}
-            enabled={outboundHandleState[handleId]}
+            label={handleData.label}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={outboundHandleState[handleData.id]}
+            onClick={handleOnClick}
+            type="output"
+          />
+        ))}
+        {binaryHandles.map((handleData, i) => (
+          <NodeHandle
+            label={handleData.label || Math.pow(2, i).toString()}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={outboundHandleState[handleData.id]}
             onClick={handleOnClick}
             type="output"
           />

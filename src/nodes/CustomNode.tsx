@@ -68,11 +68,18 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const outboundState = useInboundState(outputNode?.id, childNodes, childEdges)
   useOutboundState(id, outboundState)
 
-  const inputHandleIds = useMemo(() => {
-    return new Array(inputNodeData?.countHandles)
-      .fill(true)
-      .map((v: any, index) => `${index + 1}`)
+  const binaryInputHandles = useMemo(() => {
+    return inputNodeData?.handles.filter((handle) => handle.isBinary)
   }, [inputNodeData])
+  const nonBinaryInputHandles = useMemo(() => {
+    return inputNodeData?.handles.filter((handle) => !handle.isBinary)
+  }, [inputNodeData])
+  const binaryOutputHandles = useMemo(() => {
+    return outputNodeData?.handles.filter((handle) => handle.isBinary)
+  }, [outputNodeData])
+  const nonBinaryOutputHandles = useMemo(() => {
+    return outputNodeData?.handles.filter((handle) => !handle.isBinary)
+  }, [outputNodeData])
 
   useEffect(() => {
     setChildNodes((nodes) =>
@@ -89,20 +96,24 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
     )
   }, [JSON.stringify(inboundState), inputNode, reactFlowInstance, id])
 
-  const outputHandleIds = useMemo(() => {
-    return new Array(outputNodeData?.countHandles)
-      .fill(true)
-      .map((v: any, index) => `${index + 1}`)
-  }, [outputNodeData])
-
   return (
     <NodeContainer>
       <InputHandleRegion>
-        {inputHandleIds.map((handleId) => (
+        {nonBinaryInputHandles.map((handleData) => (
           <NodeHandle
-            id={`${handleId}`}
-            key={handleId}
-            enabled={inboundState[handleId]}
+            label={handleData.label}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
+            type="input"
+          />
+        ))}
+        {binaryInputHandles.map((handleData, i) => (
+          <NodeHandle
+            label={handleData.label || Math.pow(2, i).toString()}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
             type="input"
           />
         ))}
@@ -117,11 +128,21 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         <div style={{ fontSize: 18 }}>{data.name}</div>
       </div>
       <OutputHandleRegion>
-        {outputHandleIds.map((handleId) => (
+        {nonBinaryOutputHandles.map((handleData) => (
           <NodeHandle
-            id={`${handleId}`}
-            key={handleId}
-            enabled={outboundState[handleId]}
+            label={handleData.label}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={outboundState[handleData.id]}
+            type="output"
+          />
+        ))}
+        {binaryOutputHandles.map((handleData, i) => (
+          <NodeHandle
+            label={handleData.label || Math.pow(2, i).toString()}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={outboundState[handleData.id]}
             type="output"
           />
         ))}

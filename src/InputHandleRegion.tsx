@@ -4,7 +4,7 @@ function InputHandleRegion({ children }: React.PropsWithChildren) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         paddingTop: 5,
         paddingBottom: 5,

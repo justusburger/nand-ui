@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useReactFlow } from 'reactflow'
 import useNodeById from './useNodeById'
 
@@ -27,6 +27,12 @@ function useNodeDataState<TData, T>(
     },
     [reactFlowInstance, nodeId, key]
   )
+  const [initialised, setInitialised] = useState(false)
+  useEffect(() => {
+    if (initialised) return
+    setInitialised(true)
+    if (!currentValue) setValue(defaultValue)
+  }, [initialised, currentValue, defaultValue])
   return [currentValue || defaultValue, setValue]
 }
 
