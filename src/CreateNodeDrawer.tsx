@@ -12,26 +12,20 @@ function CreateNodeDrawer({ onCreate }: CreateNodeDrawerProps) {
   const nodes = useNodes<any>()
   const edges = useEdges<any>()
   const onCreateClick = useCallback(() => {
-    const oldToNewNodeIdLookup: Record<string, string> = {}
+    // const oldToNewNodeIdLookup: Record<string, string> = {}
+    const selectedNodesIdLookup: Record<string, boolean> = {}
     const newNodes = nodes
       .filter((n) => n.selected)
       .map((node) => {
-        const newNodeId = v4()
-        oldToNewNodeIdLookup[node.id] = newNodeId
-        return { ...node, id: newNodeId }
+        // const newNodeId = v4()
+        // oldToNewNodeIdLookup[node.id] = newNodeId
+        selectedNodesIdLookup[node.id] = true
+        return node
       })
 
-    const newEdges = edges
-      .filter(
-        (e) => oldToNewNodeIdLookup[e.source] && oldToNewNodeIdLookup[e.target]
-      )
-      .map((edge) => {
-        return {
-          ...edge,
-          source: oldToNewNodeIdLookup[edge.source],
-          target: oldToNewNodeIdLookup[edge.target],
-        }
-      })
+    const newEdges = edges.filter(
+      (e) => selectedNodesIdLookup[e.source] && selectedNodesIdLookup[e.target]
+    )
     onCreate({
       id: name.toLocaleLowerCase().replace(' ', '_'),
       name,

@@ -47,13 +47,9 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const inboundState = useInboundState(id, nodes, edges)
   const reactFlowInstance = useReactFlow()
 
-  const inputNode = useMemo(
-    () => childNodes.find((node) => node.type === NODE_TYPES_IDS.INPUT),
+  const inputNodes: Node<InputNodeData>[] = useMemo(
+    () => childNodes.filter((node) => node.type === NODE_TYPES_IDS.INPUT),
     [childNodes]
-  )
-  const inputNodeData = useMemo(
-    () => inputNode?.data as InputNodeData,
-    [inputNode]
   )
 
   const outputNode = useMemo(
@@ -68,12 +64,12 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const outboundState = useInboundState(outputNode?.id, childNodes, childEdges)
   useOutboundState(id, outboundState)
 
-  const binaryInputHandles = useMemo(() => {
-    return inputNodeData?.handles.filter((handle) => handle.isBinary)
-  }, [inputNodeData])
-  const nonBinaryInputHandles = useMemo(() => {
-    return inputNodeData?.handles.filter((handle) => !handle.isBinary)
-  }, [inputNodeData])
+  // const binaryInputHandles = useMemo(() => {
+  //   return inputNodeData?.handles.filter((handle) => handle.isBinary)
+  // }, [inputNodeData])
+  // const nonBinaryInputHandles = useMemo(() => {
+  //   return inputNodeData?.handles.filter((handle) => !handle.isBinary)
+  // }, [inputNodeData])
   const binaryOutputHandles = useMemo(() => {
     return outputNodeData?.handles.filter((handle) => handle.isBinary)
   }, [outputNodeData])
@@ -94,28 +90,36 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         return childNode
       })
     )
-  }, [JSON.stringify(inboundState), inputNode, reactFlowInstance, id])
+  }, [JSON.stringify(inboundState), reactFlowInstance, id])
 
   return (
     <NodeContainer>
       <InputHandleRegion>
-        {nonBinaryInputHandles.map((handleData) => (
-          <NodeHandle
-            label={handleData.label}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={inboundState[handleData.id]}
-            type="input"
-          />
-        ))}
-        {binaryInputHandles.map((handleData, i) => (
-          <NodeHandle
-            label={handleData.label || Math.pow(2, i).toString()}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={inboundState[handleData.id]}
-            type="input"
-          />
+        {inputNodes.map((inputNode) => (
+          <div key={inputNode.id}>
+            {inputNode.data.handles
+              .filter((handleData) => !handleData.isBinary)
+              .map((handleData) => (
+                <NodeHandle
+                  label={handleData.label}
+                  id={handleData.id}
+                  key={handleData.id}
+                  enabled={inboundState[handleData.id]}
+                  type="input"
+                />
+              ))}
+            {inputNode.data.handles
+              .filter((handleData) => handleData.isBinary)
+              .map((handleData, i) => (
+                <NodeHandle
+                  label={handleData.label || Math.pow(2, i).toString()}
+                  id={handleData.id}
+                  key={handleData.id}
+                  enabled={inboundState[handleData.id]}
+                  type="input"
+                />
+              ))}
+          </div>
         ))}
       </InputHandleRegion>
       <div

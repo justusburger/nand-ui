@@ -5,6 +5,7 @@ import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
 import { OutboundHandleState } from '../useOutboundState'
+import { v4 } from 'uuid'
 
 export interface InputNodeData {
   parentNodeId?: string
@@ -20,7 +21,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   const [handles, setHandles] = useNodeDataState<
     InputNodeData,
     NodeHandleData[]
-  >(id, 'handles', [{ id: '1', label: '', isBinary: true }])
+  >(id, 'handles', [{ id: v4(), label: '', isBinary: true }])
 
   const handleOnClick = useCallback(
     (handleId: string) => {
@@ -93,7 +94,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   const handleAddHandle = useCallback(() => {
     setHandles(
       handles.concat({
-        id: (handles.length + 1).toString(),
+        id: v4(),
         label: '',
         isBinary: true,
       })

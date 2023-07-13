@@ -33,40 +33,6 @@ function Drawer({
     }, {} as { [nodeId: string]: Node })
   }, [selectedNodes])
 
-  const onAddNode = useCallback(
-    (nodeType: NodeType) => {
-      const { x, y, zoom } = reactFlowInstance.getViewport()
-      reactFlowInstance.addNodes({
-        type: nodeType.id,
-        id: v4(),
-        position: {
-          x: (window.innerWidth / 2 - x) / zoom - 50,
-          y: (window.innerHeight / 2 - y) / zoom - 40,
-        },
-        data: nodeType.data || {},
-      })
-    },
-    [reactFlowInstance]
-  )
-
-  const onAddCustomNode = useCallback((customNodeType: CustomNodeType) => {
-    const { x, y, zoom } = reactFlowInstance.getViewport()
-    const parentNodeId = v4()
-    reactFlowInstance.addNodes({
-      type: NODE_TYPES_IDS.CUSTOM,
-      id: parentNodeId,
-      position: {
-        x: (window.innerWidth / 2 - x) / zoom - 50,
-        y: (window.innerHeight / 2 - y) / zoom - 40,
-      },
-      data: {
-        customNodeType: {
-          ...customNodeType,
-        },
-      },
-    })
-  }, [])
-
   const onDuplicateClick = useCallback(() => {
     const selectedToNewNodeLookup = {} as { [selectedNodeId: string]: string }
     const newNodes = selectedNodes.map((node) => {

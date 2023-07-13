@@ -76,11 +76,11 @@ export default function App() {
     const hasInputsSelected =
       nodes.filter(
         (node) => node.type === NODE_TYPES_IDS.INPUT && node.selected
-      ).length === 1
+      ).length > 0
     const hasOutputsSelected =
       nodes.filter(
         (node) => node.type === NODE_TYPES_IDS.OUTPUT && node.selected
-      ).length === 1
+      ).length > 0
     return hasInputsSelected && hasOutputsSelected
   }, [nodes])
 
