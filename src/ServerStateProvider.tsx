@@ -9,7 +9,6 @@ const customNodeTypesUrl = `${serveBaseUrl}/items/customNodeTypes`
 const updateDelay = 2000
 
 const saveNodes = throttle(async function saveNodes(nodes: any[]) {
-  console.log('Updating nodes')
   await fetch(nodesUrl, {
     method: 'PUT',
     body: JSON.stringify({ id: 'nodes', data: nodes }),

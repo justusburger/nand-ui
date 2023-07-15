@@ -110,6 +110,7 @@ function Drawer({
       <button
         onClick={onCreateCustomNodeTypeClick}
         disabled={!createCustomNodeTypeEnabled}
+        className="bg-white rounded px-2 text-sm"
       >
         + Create type
       </button>
