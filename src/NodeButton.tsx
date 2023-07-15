@@ -14,7 +14,12 @@ function NodeButton({ nodeType }: NodeButtonProps) {
     []
   )
   return (
-    <button ref={dragRef} key={nodeType.id} style={{ marginRight: 3 }}>
+    <button
+      ref={dragRef}
+      key={nodeType.id}
+      style={{ marginRight: 3 }}
+      className="bg-gray-400"
+    >
       {nodeType.name}
     </button>
   )

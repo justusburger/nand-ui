@@ -96,7 +96,14 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
     <NodeContainer>
       <InputHandleRegion>
         {inputNodes.map((inputNode) => (
-          <div key={inputNode.id}>
+          <div
+            key={inputNode.id}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}
+          >
             {inputNode.data.handles
               .filter((handleData) => !handleData.isBinary)
               .map((handleData) => (

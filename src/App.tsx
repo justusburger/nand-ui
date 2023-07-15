@@ -42,20 +42,45 @@ const edgeTypes: EdgeTypes = {
   nodeEdge: NodeEdge,
 }
 
-export default function App() {
+interface AppProps {
+  initialNodes: Node[]
+  saveNodes: (nodes: Node[]) => Promise<void>
+  initialEdges: Edge[]
+  saveEdges: (edges: Edge[]) => Promise<void>
+  initialCustomNodeTypes: CustomNodeType[]
+  saveCustomNodeTypes: (customNodeTypes: CustomNodeType[]) => Promise<void>
+}
+
+export default function App({
+  initialNodes,
+  saveNodes,
+  initialEdges,
+  saveEdges,
+  initialCustomNodeTypes,
+  saveCustomNodeTypes,
+}: AppProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+  useEffect(() => {
+    saveNodes(nodes)
+  }, [nodes])
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   useEffect(() => {
-    localStorage.setItem('nodes', JSON.stringify(nodes))
-  }, [nodes])
-  useEffect(() => {
-    localStorage.setItem('edges', JSON.stringify(edges))
+    saveEdges(edges)
   }, [edges])
+  const [customNodeTypes, setCustomNodeTypes] = useState<CustomNodeType[]>(
+    initialCustomNodeTypes
+  )
+  useEffect(() => {
+    saveCustomNodeTypes(customNodeTypes)
+  }, [customNodeTypes])
+  // useEffect(() => {
+  //   localStorage.setItem('nodes', JSON.stringify(nodes))
+  // }, [nodes])
+  // useEffect(() => {
+  //   localStorage.setItem('edges', JSON.stringify(edges))
+  // }, [edges])
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
-  const [customNodeTypes, setCustomNodeTypes] = useLocalStorageState<
-    CustomNodeType[]
-  >({ key: 'customNodeTypes', defaultValue: [] })
 
   const onConnect: OnConnect = useCallback(
     (connection) => {

@@ -1,7 +1,7 @@
 function NodeContainer({ children }: React.PropsWithChildren) {
   return (
     <div
-      className="card-background"
+      className="card-background bg-white rounded"
       style={{
         display: 'flex',
         justifyContent: 'flex-end',
