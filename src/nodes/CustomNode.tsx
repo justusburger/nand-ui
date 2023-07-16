@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import NodeHandle from '../NodeHandle'
+import NodeHandle from '../components/NodeHandle'
 import {
   useReactFlow,
   NodeProps,
@@ -9,6 +9,7 @@ import {
   useEdgesState,
   useNodes,
   useEdges,
+  EdgeTypes,
 } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
@@ -23,6 +24,11 @@ import { InputNodeData } from './InputNode'
 import { OutputNodeData } from './OutputNode'
 import { ReactFlowProvider, ReactFlow } from 'reactflow'
 import useOutboundState from '../useOutboundState'
+import NodeEdge from '../NodeEdge'
+
+const edgeTypes: EdgeTypes = {
+  nodeEdge: NodeEdge,
+}
 
 function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const [childNodes, setChildNodes, onChildNodesChange] = useNodesState(
@@ -166,6 +172,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
             onNodesChange={onChildNodesChange}
             onEdgesChange={onChildEdgesChange}
             nodeTypes={defaultNodeTypeMap}
+            edgeTypes={edgeTypes}
           >
             <Controls />
           </ReactFlow>

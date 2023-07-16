@@ -24,13 +24,11 @@ import {
   NodeType,
 } from './nodeTypes'
 import 'reactflow/dist/style.css'
-import useLocalStorageState from './useLocalStorageState'
 import { useDrop } from 'react-dnd'
 import { v4 } from 'uuid'
 import NodeEdge from './NodeEdge'
+import Toolbar from './components/Toolbar'
 
-const initialNodes: Node[] = JSON.parse(localStorage.getItem('nodes') || '[]')
-const initialEdges: Edge[] = JSON.parse(localStorage.getItem('edges') || '[]')
 const edgeOptions: DefaultEdgeOptions = {
   animated: true,
   style: {
@@ -59,7 +57,7 @@ export default function App({
   initialCustomNodeTypes,
   saveCustomNodeTypes,
 }: AppProps) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+  const [nodes, , onNodesChange] = useNodesState(initialNodes)
   useEffect(() => {
     saveNodes(nodes)
   }, [nodes])
@@ -73,12 +71,6 @@ export default function App({
   useEffect(() => {
     saveCustomNodeTypes(customNodeTypes)
   }, [customNodeTypes])
-  // useEffect(() => {
-  //   localStorage.setItem('nodes', JSON.stringify(nodes))
-  // }, [nodes])
-  // useEffect(() => {
-  //   localStorage.setItem('edges', JSON.stringify(edges))
-  // }, [edges])
   const [isCreatingCustomNodeType, setIsCreatingCustomNodeType] =
     useState(false)
 
@@ -158,9 +150,14 @@ export default function App({
         connectionLineStyle={{ stroke: 'white' }}
         snapToGrid={true}
         edgeTypes={edgeTypes}
+        minZoom={0.1}
+        maxZoom={5}
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        <Panel position="top-left">
+          <Toolbar />
+        </Panel>
         <Panel position="bottom-left">
           <Drawer
             nodeTypes={defaultNodeTypes}

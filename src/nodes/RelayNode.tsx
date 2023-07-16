@@ -1,4 +1,4 @@
-import NodeHandle from '../NodeHandle'
+import NodeHandle from '../components/NodeHandle'
 import useInboundState from '../useInboundState'
 import { NodeProps, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'

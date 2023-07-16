@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'd7';
+  src: url('/public/digital-7.ttf');
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -112,3 +117,8 @@ h1 {
 .react-flow__edge.selected path {
   stroke: #535bf2 !important;
 } */
+
+.react-flow__handle-right,
+.react-flow__handle-left {
+  transform: none !important;
+}

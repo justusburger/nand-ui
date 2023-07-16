@@ -1,11 +1,16 @@
 import { useCallback, useMemo } from 'react'
-import NodeHandle, { NodeHandleData } from '../NodeHandle'
+import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
 import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
 import { OutboundHandleState } from '../useOutboundState'
 import { v4 } from 'uuid'
+import {
+  PlusCircleIcon,
+  MinusCircleIcon,
+  StopCircleIcon,
+} from '@heroicons/react/24/outline'
 
 export interface InputNodeData {
   parentNodeId?: string
@@ -47,15 +52,15 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
     return acc + (outboundHandleState[handle.id] ? binaryColumnValue : 0)
   }, 0)
 
-  const minValue = useMemo(() => {
-    return 0
-  }, [])
-  const maxValue = useMemo(() => {
-    return binaryHandles.reduce((acc, handle, i) => {
-      const handleBinaryColumn = Math.pow(2, i)
-      return acc + handleBinaryColumn
-    }, 0)
-  }, [binaryHandles])
+  // const minValue = useMemo(() => {
+  //   return 0
+  // }, [])
+  // const maxValue = useMemo(() => {
+  //   return binaryHandles.reduce((acc, handle, i) => {
+  //     const handleBinaryColumn = Math.pow(2, i)
+  //     return acc + handleBinaryColumn
+  //   }, 0)
+  // }, [binaryHandles])
 
   const handleLabelChange = useCallback(
     (e: any, handleId: string) => {
@@ -75,7 +80,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   )
 
   const handleBinaryChange = useCallback(
-    (e: any, handleId: string) => {
+    (handleId: string) => {
       setHandles(
         handles.map((handle) => {
           if (handle.id === handleId) {
@@ -108,140 +113,111 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   }, [handles])
 
   return (
-    <NodeContainer>
-      <NodeToolbar position={Position.Top}>
-        <div
-          className="card-background"
-          style={{
-            display: 'flex',
-            background: '#fff',
-            color: '#000',
-            padding: 3,
-          }}
-        >
-          <button
-            style={{
-              padding: `0px 7px 2px 7px`,
-              lineHeight: 1,
-              marginRight: 2,
-            }}
-            onClick={handleRemoveHandle}
-          >
-            -
-          </button>
-          <div
-            style={{ fontSize: 15, padding: '2px 4px 0 2px', lineHeight: 1 }}
-          >
-            {handles.length}bit
-          </div>
-          <button
-            style={{ padding: `2px 6px 2px 6px`, lineHeight: 1 }}
-            onClick={handleAddHandle}
-          >
-            +
-          </button>
-        </div>
-      </NodeToolbar>
-      <NodeToolbar position={Position.Left}>
-        <div className="card-background card-content card-floating">
-          <div>Handles</div>
-          {nonBinaryHandles.map((handleData) => (
-            <div key={handleData.id}>
-              <input
-                type="checkbox"
-                checked={false}
-                onChange={(e) => handleBinaryChange(e, handleData.id)}
-              />
-              <input
-                type="text"
-                value={handleData.label}
-                onChange={(e) => handleLabelChange(e, handleData.id)}
-                style={{
-                  background: '#fff',
-                  border: 'solid 1px #ccc',
-                  color: '#000',
-                }}
-              />
-            </div>
-          ))}
-          {binaryHandles.map((handleData, i) => (
-            <div key={handleData.id}>
-              <input
-                type="checkbox"
-                checked={true}
-                onChange={(e) => handleBinaryChange(e, handleData.id)}
-              />
-              <input
-                type="text"
-                value={handleData.label}
-                onChange={(e) => handleLabelChange(e, handleData.id)}
-                style={{
-                  background: '#fff',
-                  border: 'solid 1px #ccc',
-                  color: '#000',
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      </NodeToolbar>
-      {/* <NodeToolbar position={Position.Bottom}>
-        <div className="card-background card-content">
-          <div>Data</div>
-          <pre style={{ fontSize: 12, lineHeight: 1.1 }}>
-            {JSON.stringify(data, null, 2)}
-          </pre>
-        </div>
-      </NodeToolbar> */}
+    <div className="relative">
       <div
         style={{
-          color: 'black',
-          padding: '10px 10px 10px 20px',
-          textAlign: 'center',
+          fontFamily: 'd7',
+          top: 0,
+          left: '50%',
+          transform: 'translate(-50%, -100%)',
         }}
+        className="text-blue-300  absolute text-xl"
       >
-        <div style={{ fontSize: 18 }}>Input</div>
-
-        <div>
-          <input
-            type="number"
-            style={{
-              background: '#fff',
-              border: 'solid 1px #ccc',
-              color: '#000',
-              width: 40,
-              borderRadius: 4,
-            }}
-            min={minValue}
-            max={maxValue}
-            value={decimalValue}
-            readOnly
-          />
-        </div>
+        {decimalValue}
       </div>
-      <OutputHandleRegion>
-        {nonBinaryHandles.map((handleData, i) => (
-          <NodeHandle
-            label={handleData.label}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={outboundHandleState[handleData.id]}
-            onClick={handleOnClick}
-            type="output"
-          />
-        ))}
-        {binaryHandles.map((handleData, i) => (
-          <NodeHandle
-            label={handleData.label || Math.pow(2, i).toString()}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={outboundHandleState[handleData.id]}
-            onClick={handleOnClick}
-            type="output"
-          />
-        ))}
-      </OutputHandleRegion>
-    </NodeContainer>
+      <NodeContainer>
+        <NodeToolbar position={Position.Left}>
+          <div className="bg-white rounded text-black p-3">
+            <div className="mb-2 text-lg flex">
+              <div className="mr-auto font-bold">Handles</div>
+              <div className="flex justify-center items-center">
+                <button
+                  className="disabled:opacity-20 text-gray-300  hover:text-gray-500"
+                  onClick={handleRemoveHandle}
+                  disabled={handles.length < 2}
+                >
+                  <MinusCircleIcon className="w-6 h-6" />
+                </button>
+                <div className="px-1 text-sm">{handles.length}bit</div>
+                <button
+                  onClick={handleAddHandle}
+                  className="text-gray-300 hover:text-gray-500"
+                >
+                  <PlusCircleIcon className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr className="text-xs text-left font-normal">
+                  <th className="font-normal text-left"></th>
+                  <th className="font-normal text-right">Label</th>
+                </tr>
+              </thead>
+              <tbody>
+                {handles.map((handleData) => (
+                  <tr key={handleData.id}>
+                    <td className="">
+                      <div
+                        className={
+                          'cursor-pointer pr-1 hover:text-gray-500 ' +
+                          (handleData.isBinary
+                            ? 'text-gray-300'
+                            : 'text-gray-700')
+                        }
+                        onClick={() => handleBinaryChange(handleData.id)}
+                      >
+                        <StopCircleIcon className="w-6 h-6 " />
+                      </div>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        className="bg-gray-100 rounded py-1 px-2 text-sm"
+                        value={handleData.label}
+                        onChange={(e) => handleLabelChange(e, handleData.id)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </NodeToolbar>
+        <div
+          style={{
+            color: 'black',
+            padding: '10px 10px 10px 20px',
+            textAlign: 'center',
+          }}
+        >
+          <div style={{ fontSize: 18 }}>Input</div>
+        </div>
+        <OutputHandleRegion>
+          {nonBinaryHandles.map((handleData, i) => (
+            <NodeHandle
+              label={handleData.label}
+              id={handleData.id}
+              key={handleData.id}
+              enabled={outboundHandleState[handleData.id]}
+              onClick={handleOnClick}
+              type="output"
+              custom
+            />
+          ))}
+          {binaryHandles.map((handleData, i) => (
+            <NodeHandle
+              label={handleData.label || Math.pow(2, i).toString()}
+              id={handleData.id}
+              key={handleData.id}
+              enabled={outboundHandleState[handleData.id]}
+              onClick={handleOnClick}
+              type="output"
+            />
+          ))}
+        </OutputHandleRegion>
+      </NodeContainer>
+    </div>
   )
 }
 

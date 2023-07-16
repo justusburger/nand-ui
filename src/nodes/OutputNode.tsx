@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import NodeHandle, { NodeHandleData } from '../NodeHandle'
+import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
 import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import InputHandleRegion from '../InputHandleRegion'
@@ -187,7 +187,7 @@ function OutputNode({ id }: NodeProps) {
         }}
       >
         <div style={{ fontSize: 18 }}>Output</div>
-
+        
         <div>
           <input
             type="number"

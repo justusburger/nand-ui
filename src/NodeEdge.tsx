@@ -32,7 +32,6 @@ function NodeEdge({
       return {
         stroke: 'red',
         strokeWidth: 2,
-        strokeLinecap: 'round',
       }
     return {
       stroke: '#fff',
@@ -40,7 +39,9 @@ function NodeEdge({
     }
   }, [enabled])
 
-  return <BaseEdge path={edgePath} style={style} />
+  return (
+    <BaseEdge path={edgePath} style={{ ...style, strokeLinecap: 'round' }} />
+  )
 }
 
 export default NodeEdge
