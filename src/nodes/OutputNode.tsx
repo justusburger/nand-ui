@@ -6,6 +6,9 @@ import InputHandleRegion from '../InputHandleRegion'
 import useInboundState from '../useInboundState'
 import useNodeDataState from '../useNodeDataState'
 import { v4 } from 'uuid'
+import EditHandlesPanel from '../components/EditHandlesPanel'
+import DigitalNumber from '../components/DigitalNumber'
+import getHandleBinaryValue from '../getHandleBinaryValue'
 
 export interface OutputNodeData {
   handles: NodeHandleData[]
@@ -28,7 +31,7 @@ function OutputNode({ id }: NodeProps) {
   }, [handles])
 
   const decimalValue = binaryHandles.reduce((acc, handle, i) => {
-    const binaryColumnValue = Math.pow(2, i)
+    const binaryColumnValue = getHandleBinaryValue(i, binaryHandles.length)
     return acc + (inboundState[handle.id] ? binaryColumnValue : 0)
   }, 0)
 
@@ -50,7 +53,7 @@ function OutputNode({ id }: NodeProps) {
   )
 
   const handleBinaryChange = useCallback(
-    (e: any, handleId: string) => {
+    (handleId: string) => {
       setHandles(
         handles.map((handle) => {
           if (handle.id === handleId) {
@@ -82,8 +85,19 @@ function OutputNode({ id }: NodeProps) {
     setHandles(newHandles)
   }, [handles])
   return (
-    <NodeContainer>
-      <NodeToolbar position={Position.Top}>
+    <div>
+      <DigitalNumber>{decimalValue}</DigitalNumber>
+      <NodeContainer>
+        <NodeToolbar position={Position.Right}>
+          <EditHandlesPanel
+            handles={handles}
+            handleAddHandle={handleAddHandle}
+            handleBinaryChange={handleBinaryChange}
+            handleLabelChange={handleLabelChange}
+            handleRemoveHandle={handleRemoveHandle}
+          />
+        </NodeToolbar>
+        {/* <NodeToolbar position={Position.Top}>
         <div
           className="card-background"
           style={{
@@ -115,8 +129,8 @@ function OutputNode({ id }: NodeProps) {
             +
           </button>
         </div>
-      </NodeToolbar>
-      <NodeToolbar position={Position.Right}>
+      </NodeToolbar> */}
+        {/* <NodeToolbar position={Position.Right}>
         <div className="card-background card-content card-floating">
           <div>Handles</div>
           {nonBinaryHandles.map((handleData) => (
@@ -158,52 +172,42 @@ function OutputNode({ id }: NodeProps) {
             </div>
           ))}
         </div>
-      </NodeToolbar>
-      <InputHandleRegion>
-        {nonBinaryHandles.map((handleData) => (
-          <NodeHandle
-            label={handleData.label}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={inboundState[handleData.id]}
-            type="input"
-          />
-        ))}
-        {binaryHandles.map((handleData, i) => (
-          <NodeHandle
-            label={handleData.label || Math.pow(2, i).toString()}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={inboundState[handleData.id]}
-            type="input"
-          />
-        ))}
-      </InputHandleRegion>
-      <div
-        style={{
-          color: 'black',
-          padding: '10px 20px 10px 10px',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ fontSize: 18 }}>Output</div>
-        
-        <div>
-          <input
-            type="number"
-            style={{
-              background: '#fff',
-              border: 'solid 1px #ccc',
-              color: '#000',
-              width: 40,
-              borderRadius: 4,
-            }}
-            value={decimalValue}
-            readOnly
-          />
+      </NodeToolbar> */}
+        <InputHandleRegion>
+          {nonBinaryHandles.map((handleData) => (
+            <NodeHandle
+              label={handleData.label}
+              id={handleData.id}
+              key={handleData.id}
+              enabled={inboundState[handleData.id]}
+              type="input"
+              custom
+            />
+          ))}
+          {binaryHandles.map((handleData, i) => (
+            <NodeHandle
+              label={
+                handleData.label ||
+                getHandleBinaryValue(i, binaryHandles.length).toString()
+              }
+              id={handleData.id}
+              key={handleData.id}
+              enabled={inboundState[handleData.id]}
+              type="input"
+            />
+          ))}
+        </InputHandleRegion>
+        <div
+          style={{
+            color: 'black',
+            padding: '10px 20px 10px 10px',
+            textAlign: 'center',
+          }}
+        >
+          <div style={{ fontSize: 18 }}>Output</div>
         </div>
-      </div>
-    </NodeContainer>
+      </NodeContainer>
+    </div>
   )
 }
 

@@ -6,11 +6,9 @@ import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
 import { OutboundHandleState } from '../useOutboundState'
 import { v4 } from 'uuid'
-import {
-  PlusCircleIcon,
-  MinusCircleIcon,
-  StopCircleIcon,
-} from '@heroicons/react/24/outline'
+import EditHandlesPanel from '../components/EditHandlesPanel'
+import DigitalNumber from '../components/DigitalNumber'
+import getHandleBinaryValue from '../getHandleBinaryValue'
 
 export interface InputNodeData {
   parentNodeId?: string
@@ -48,19 +46,9 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   }, [handles])
 
   const decimalValue = binaryHandles.reduce((acc, handle, i) => {
-    const binaryColumnValue = Math.pow(2, i)
+    const binaryColumnValue = getHandleBinaryValue(i, binaryHandles.length)
     return acc + (outboundHandleState[handle.id] ? binaryColumnValue : 0)
   }, 0)
-
-  // const minValue = useMemo(() => {
-  //   return 0
-  // }, [])
-  // const maxValue = useMemo(() => {
-  //   return binaryHandles.reduce((acc, handle, i) => {
-  //     const handleBinaryColumn = Math.pow(2, i)
-  //     return acc + handleBinaryColumn
-  //   }, 0)
-  // }, [binaryHandles])
 
   const handleLabelChange = useCallback(
     (e: any, handleId: string) => {
@@ -114,75 +102,16 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
 
   return (
     <div className="relative">
-      <div
-        style={{
-          fontFamily: 'd7',
-          top: 0,
-          left: '50%',
-          transform: 'translate(-50%, -100%)',
-        }}
-        className="text-blue-300  absolute text-xl"
-      >
-        {decimalValue}
-      </div>
+      <DigitalNumber>{decimalValue}</DigitalNumber>
       <NodeContainer>
         <NodeToolbar position={Position.Left}>
-          <div className="bg-white rounded text-black p-3">
-            <div className="mb-2 text-lg flex">
-              <div className="mr-auto font-bold">Handles</div>
-              <div className="flex justify-center items-center">
-                <button
-                  className="disabled:opacity-20 text-gray-300  hover:text-gray-500"
-                  onClick={handleRemoveHandle}
-                  disabled={handles.length < 2}
-                >
-                  <MinusCircleIcon className="w-6 h-6" />
-                </button>
-                <div className="px-1 text-sm">{handles.length}bit</div>
-                <button
-                  onClick={handleAddHandle}
-                  className="text-gray-300 hover:text-gray-500"
-                >
-                  <PlusCircleIcon className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-            <table>
-              <thead>
-                <tr className="text-xs text-left font-normal">
-                  <th className="font-normal text-left"></th>
-                  <th className="font-normal text-right">Label</th>
-                </tr>
-              </thead>
-              <tbody>
-                {handles.map((handleData) => (
-                  <tr key={handleData.id}>
-                    <td className="">
-                      <div
-                        className={
-                          'cursor-pointer pr-1 hover:text-gray-500 ' +
-                          (handleData.isBinary
-                            ? 'text-gray-300'
-                            : 'text-gray-700')
-                        }
-                        onClick={() => handleBinaryChange(handleData.id)}
-                      >
-                        <StopCircleIcon className="w-6 h-6 " />
-                      </div>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        className="bg-gray-100 rounded py-1 px-2 text-sm"
-                        value={handleData.label}
-                        onChange={(e) => handleLabelChange(e, handleData.id)}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <EditHandlesPanel
+            handles={handles}
+            handleAddHandle={handleAddHandle}
+            handleBinaryChange={handleBinaryChange}
+            handleLabelChange={handleLabelChange}
+            handleRemoveHandle={handleRemoveHandle}
+          />
         </NodeToolbar>
         <div
           style={{
@@ -207,7 +136,10 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
           ))}
           {binaryHandles.map((handleData, i) => (
             <NodeHandle
-              label={handleData.label || Math.pow(2, i).toString()}
+              label={
+                handleData.label ||
+                getHandleBinaryValue(i, binaryHandles.length).toString()
+              }
               id={handleData.id}
               key={handleData.id}
               enabled={outboundHandleState[handleData.id]}

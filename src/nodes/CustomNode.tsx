@@ -68,14 +68,8 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   )
 
   const outboundState = useInboundState(outputNode?.id, childNodes, childEdges)
-  useOutboundState(id, outboundState)
+  useOutboundState(id, outboundState, 10)
 
-  // const binaryInputHandles = useMemo(() => {
-  //   return inputNodeData?.handles.filter((handle) => handle.isBinary)
-  // }, [inputNodeData])
-  // const nonBinaryInputHandles = useMemo(() => {
-  //   return inputNodeData?.handles.filter((handle) => !handle.isBinary)
-  // }, [inputNodeData])
   const binaryOutputHandles = useMemo(() => {
     return outputNodeData?.handles.filter((handle) => handle.isBinary)
   }, [outputNodeData])
@@ -111,10 +105,10 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
             }}
           >
             {inputNode.data.handles
-              .filter((handleData) => !handleData.isBinary)
-              .map((handleData) => (
+              .filter((handleData) => handleData.isBinary)
+              .map((handleData, i) => (
                 <NodeHandle
-                  label={handleData.label}
+                  label={handleData.label || Math.pow(2, i).toString()}
                   id={handleData.id}
                   key={handleData.id}
                   enabled={inboundState[handleData.id]}
@@ -122,10 +116,10 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
                 />
               ))}
             {inputNode.data.handles
-              .filter((handleData) => handleData.isBinary)
-              .map((handleData, i) => (
+              .filter((handleData) => !handleData.isBinary)
+              .map((handleData) => (
                 <NodeHandle
-                  label={handleData.label || Math.pow(2, i).toString()}
+                  label={handleData.label}
                   id={handleData.id}
                   key={handleData.id}
                   enabled={inboundState[handleData.id]}

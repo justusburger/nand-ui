@@ -2,6 +2,7 @@ import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import { useCallback, useMemo } from 'react'
 import { Edge, useEdges, useNodes, useReactFlow, Node } from 'reactflow'
 import { v4 } from 'uuid'
+import { NodeHandleData } from '../NodeHandle'
 
 function Toolbar() {
   const reactFlowInstance = useReactFlow()
@@ -18,6 +19,7 @@ function Toolbar() {
 
   const onDuplicateClick = useCallback(() => {
     const selectedToNewNodeLookup = {} as { [selectedNodeId: string]: string }
+    const handleLookup = {} as { [oldHandleId: string]: string }
     const newNodes = selectedNodes.map((node) => {
       const newId = v4()
       selectedToNewNodeLookup[node.id] = newId
@@ -25,7 +27,17 @@ function Toolbar() {
         id: newId,
         type: node.type,
         position: { x: node.position.x + 30, y: node.position.y + 30 },
-        data: { ...node.data },
+        data: {
+          ...node.data,
+          handles: node.data.handles?.map((handleData: NodeHandleData) => {
+            const newHandleId = v4()
+            handleLookup[handleData.id] = newHandleId
+            return {
+              ...handleData,
+              id: newHandleId,
+            }
+          }),
+        },
         selected: true,
       } as Node
     })
@@ -36,9 +48,13 @@ function Toolbar() {
         newEdges.push({
           id: v4(),
           source: selectedToNewNodeLookup[edge.source],
-          sourceHandle: edge.sourceHandle,
+          sourceHandle: edge.sourceHandle
+            ? handleLookup[edge.sourceHandle]
+            : null,
           target: selectedToNewNodeLookup[edge.target],
-          targetHandle: edge.targetHandle,
+          targetHandle: edge.targetHandle
+            ? handleLookup[edge.targetHandle]
+            : null,
           selected: true,
         } as Edge)
       }
