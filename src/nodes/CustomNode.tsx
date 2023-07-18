@@ -25,6 +25,7 @@ import { OutputNodeData } from './OutputNode'
 import { ReactFlowProvider, ReactFlow } from 'reactflow'
 import useOutboundState from '../useOutboundState'
 import NodeEdge from '../NodeEdge'
+import getHandleBinaryValue from '../getHandleBinaryValue'
 
 const edgeTypes: EdgeTypes = {
   nodeEdge: NodeEdge,
@@ -68,7 +69,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   )
 
   const outboundState = useInboundState(outputNode?.id, childNodes, childEdges)
-  useOutboundState(id, outboundState, 10)
+  useOutboundState(id, outboundState, 1)
 
   const binaryOutputHandles = useMemo(() => {
     return outputNodeData?.handles.filter((handle) => handle.isBinary)
@@ -150,7 +151,10 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         ))}
         {binaryOutputHandles.map((handleData, i) => (
           <NodeHandle
-            label={handleData.label || Math.pow(2, i).toString()}
+            label={
+              handleData.label ||
+              getHandleBinaryValue(i, outputNodeData?.handles.length).toString()
+            }
             id={handleData.id}
             key={handleData.id}
             enabled={outboundState[handleData.id]}

@@ -1,18 +1,23 @@
 import { CustomNodeType, NodeType } from './nodeTypes'
 import NodeButton from './NodeButton'
+import CreateTypeButton from './components/CreateTypeButton'
 
 interface DrawerProps {
   nodeTypes: NodeType[]
   customNodeTypes: CustomNodeType[]
-  onCreateCustomNodeTypeClick: () => void
+  onCreateStart: () => void
   createCustomNodeTypeEnabled: boolean
+  onCreateComplete: (newCustomNodeType: CustomNodeType) => void
+  creating: boolean
 }
 
 function Drawer({
   nodeTypes,
   customNodeTypes,
-  onCreateCustomNodeTypeClick,
+  onCreateStart,
   createCustomNodeTypeEnabled,
+  onCreateComplete,
+  creating,
 }: DrawerProps) {
   return (
     <div
@@ -33,13 +38,19 @@ function Drawer({
       {customNodeTypes.map((customNodeType) => (
         <NodeButton nodeType={customNodeType} key={customNodeType.id} />
       ))}
-      <button
+      {/* <button
         onClick={onCreateCustomNodeTypeClick}
         disabled={!createCustomNodeTypeEnabled}
         className="bg-white rounded px-2 text-sm"
       >
         + Create type
-      </button>
+      </button> */}
+      <CreateTypeButton
+        onCreateStart={onCreateStart}
+        enabled={createCustomNodeTypeEnabled}
+        onCreateComplete={onCreateComplete}
+        creating={creating}
+      />
     </div>
   )
 }

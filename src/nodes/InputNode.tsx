@@ -123,7 +123,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
           <div style={{ fontSize: 18 }}>Input</div>
         </div>
         <OutputHandleRegion>
-          {nonBinaryHandles.map((handleData, i) => (
+          {nonBinaryHandles.map((handleData) => (
             <NodeHandle
               label={handleData.label}
               id={handleData.id}

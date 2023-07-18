@@ -15,7 +15,6 @@ import ReactFlow, {
   EdgeTypes,
 } from 'reactflow'
 import Drawer from './Drawer'
-import CreateNodeDrawer from './CreateNodeDrawer'
 import {
   CustomNodeType,
   NODE_TYPES_IDS,
@@ -83,10 +82,6 @@ export default function App({
 
   const onCreateCustomNodeTypeClick = useCallback(() => {
     setIsCreatingCustomNodeType(true)
-  }, [setIsCreatingCustomNodeType])
-
-  const onCreateCustomNodeTypeClose = useCallback(() => {
-    setIsCreatingCustomNodeType(false)
   }, [setIsCreatingCustomNodeType])
 
   const createCustomNodeTypeEnabled = useMemo(() => {
@@ -162,17 +157,11 @@ export default function App({
           <Drawer
             nodeTypes={defaultNodeTypes}
             customNodeTypes={customNodeTypes}
-            onCreateCustomNodeTypeClick={onCreateCustomNodeTypeClick}
+            onCreateStart={onCreateCustomNodeTypeClick}
             createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
+            creating={isCreatingCustomNodeType}
+            onCreateComplete={onCreateTypeComplete}
           />
-        </Panel>
-        <Panel position="top-right">
-          {createCustomNodeTypeEnabled && isCreatingCustomNodeType && (
-            <CreateNodeDrawer
-              onClose={onCreateCustomNodeTypeClose}
-              onCreate={onCreateTypeComplete}
-            />
-          )}
         </Panel>
       </ReactFlow>
     </div>
