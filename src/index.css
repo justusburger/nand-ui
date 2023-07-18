@@ -26,97 +26,12 @@
   box-sizing: border-box;
 }
 
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  font-size: 15px;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.card-background {
-  background: #fff;
-  border-radius: 4px;
-  color: #222;
-}
-
-.card-content {
-  padding: 10px;
-}
-
-.card-floating {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.title {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.field {
-  margin-bottom: 15px;
-}
-
-.field-label {
-  font-size: 14px;
-}
-
-.field-input {
-  background: #fff;
-  color: #222;
-  border: solid 1px #ccc;
-  border-radius: 4px;
-  padding: 3px 5px;
-  outline: none;
-  display: block;
-  width: 100%;
-}
-
 .react-flow__node.selected {
   border: dashed 1px #535bf2;
   padding: 2px;
   margin: -3px;
   border-radius: 6px;
 }
-
-.react-flow__edge.selected path {
-  stroke: #535bf2 !important;
-} */
 
 .react-flow__handle-right,
 .react-flow__handle-left {

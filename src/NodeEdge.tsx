@@ -10,6 +10,7 @@ function NodeEdge({
   targetX,
   targetY,
   targetPosition,
+  selected,
 }: EdgeProps) {
   const nodes = useNodes()
   const enabled = useMemo(() => {
@@ -35,9 +36,9 @@ function NodeEdge({
       }
     return {
       stroke: '#fff',
-      opacity: 0.3,
+      opacity: selected ? 1 : 0.3,
     }
-  }, [enabled])
+  }, [enabled, selected])
 
   return (
     <BaseEdge path={edgePath} style={{ ...style, strokeLinecap: 'round' }} />

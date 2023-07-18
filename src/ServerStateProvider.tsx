@@ -61,8 +61,20 @@ function ServerStateProvider() {
       ])
 
       setInitialState({
-        nodes: nodes.data || [],
-        edges: edges.data || [],
+        nodes: (nodes.data || []).map((node: any) => {
+          node.selectable = true
+          node.selected = false
+          node.deletable = true
+          return node
+        }),
+        edges: (edges.data || []).map((edge: any) => {
+          edge.selectable = true
+          edge.selected = false
+          edge.deletable = true
+          edge.focusable = true
+          edge.updatable = true
+          return edge
+        }),
         customNodeTypes: customNodeTypes.data || [],
       })
     }

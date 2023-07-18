@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import NodeHandle from '../components/NodeHandle'
 import {
   useReactFlow,
@@ -10,6 +10,8 @@ import {
   useNodes,
   useEdges,
   EdgeTypes,
+  NodeToolbar,
+  Position,
 } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
@@ -34,19 +36,23 @@ const edgeTypes: EdgeTypes = {
 function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const [childNodes, setChildNodes, onChildNodesChange] = useNodesState(
     data.nodes.map((node) => {
-      node.selectable = false
-      node.selected = false
-      node.deletable = false
-      return node
+      return {
+        ...node,
+        selected: false,
+        selectable: false,
+        deletable: false,
+      }
     })
   )
   const [childEdges, , onChildEdgesChange] = useEdgesState(
     data.edges.map((edge) => {
-      edge.selected = false
-      edge.deletable = false
-      edge.focusable = false
-      edge.updatable = false
-      return edge
+      return {
+        ...edge,
+        selected: false,
+        deletable: false,
+        focusable: false,
+        updatable: false,
+      }
     })
   )
   const nodes = useNodes()
@@ -93,8 +99,50 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
     )
   }, [JSON.stringify(inboundState), reactFlowInstance, id])
 
+  const onUnpackClick = useCallback(() => {
+    reactFlowInstance.setNodes((nodes) =>
+      nodes
+        .map((node) => {
+          node.selected = false
+          return node
+        })
+        .concat(
+          data.nodes.map((node) => {
+            node.selectable = true
+            node.selected = true
+            node.deletable = true
+            return node
+          })
+        )
+    )
+    reactFlowInstance.setEdges((edges) =>
+      edges
+        .map((edge) => {
+          edge.selected = false
+          return edge
+        })
+        .concat(
+          data.edges.map((edge) => {
+            edge.selected = true
+            edge.deletable = true
+            edge.focusable = true
+            edge.updatable = true
+            return edge
+          })
+        )
+    )
+  }, [reactFlowInstance, data.nodes])
+
   return (
     <NodeContainer>
+      <NodeToolbar position={Position.Top}>
+        <button
+          className="bg-white text-black text-sm rounded px-2 py-1 active:opacity-50"
+          onClick={onUnpackClick}
+        >
+          Unpack
+        </button>
+      </NodeToolbar>
       <InputHandleRegion>
         {inputNodes.map((inputNode) => (
           <div
@@ -125,6 +173,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
                   key={handleData.id}
                   enabled={inboundState[handleData.id]}
                   type="input"
+                  custom
                 />
               ))}
           </div>
@@ -147,6 +196,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
             key={handleData.id}
             enabled={outboundState[handleData.id]}
             type="output"
+            custom
           />
         ))}
         {binaryOutputHandles.map((handleData, i) => (

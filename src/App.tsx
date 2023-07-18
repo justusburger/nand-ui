@@ -109,6 +109,13 @@ export default function App({
     [setCustomNodeTypes, setIsCreatingCustomNodeType, customNodeTypes]
   )
 
+  const onCustomNodeTypeDelete = useCallback(
+    (nodeType: CustomNodeType) => {
+      setCustomNodeTypes(customNodeTypes.filter((t) => t.id !== nodeType.id))
+    },
+    [customNodeTypes]
+  )
+
   const reactFlowInstance = useReactFlow()
   const [, drop] = useDrop(
     () => ({
@@ -161,6 +168,7 @@ export default function App({
             createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
             creating={isCreatingCustomNodeType}
             onCreateComplete={onCreateTypeComplete}
+            onCustomNodeTypeDelete={onCustomNodeTypeDelete}
           />
         </Panel>
       </ReactFlow>
