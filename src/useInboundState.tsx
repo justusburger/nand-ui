@@ -28,7 +28,7 @@ function useInboundState(
   const values = useMemo(() => {
     if (!nodeId) return {}
     return inboundEdgesWithNodes.reduce((acc, edge) => {
-      const { outboundHandleState = {} } = edge.sourceNode!.data
+      const { outboundHandleState = {} } = edge.sourceNode?.data || {}
       acc[edge.targetHandle!] =
         acc[edge.targetHandle!] || outboundHandleState[edge.sourceHandle!]
       return acc

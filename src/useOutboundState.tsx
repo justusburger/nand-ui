@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useNodeDataState from './useNodeDataState'
 
 export type OutboundHandleState = { [handleId: string]: boolean }
@@ -15,11 +15,17 @@ function useOutboundState(
     NodeWithOutboundStateData,
     OutboundHandleState
   >(nodeId, 'outboundHandleState', {})
+  const timeoutRef = useRef<number>()
 
   useEffect(() => {
-    if (delay) setTimeout(() => setOutboundHandleState(state), delay)
-    else setOutboundHandleState(state)
-  }, [JSON.stringify(state), delay])
+    if (delay) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      timeoutRef.current = setTimeout(
+        () => setOutboundHandleState(state),
+        delay
+      )
+    } else setOutboundHandleState(state)
+  }, [JSON.stringify(state), delay, timeoutRef])
 }
 
 export default useOutboundState

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import App from './App'
 import throttle from 'lodash.throttle'
+import { NODE_TYPES_IDS } from './nodeTypes'
 
 const serveBaseUrl = 'http://localhost:3000'
 const nodesUrl = `${serveBaseUrl}/items/nodes`
@@ -8,20 +9,73 @@ const edgesUrl = `${serveBaseUrl}/items/edges`
 const customNodeTypesUrl = `${serveBaseUrl}/items/customNodeTypes`
 const updateDelay = 2000
 
+function cleanNode(node: any) {
+  const result = {
+    ...node,
+  }
+  if (result.type === 'custom') {
+    result.data = {
+      customNodeTypeId: result.data.customNodeTypeId,
+    }
+  }
+  return result
+}
+
+const excludeKeys = [
+  'selected',
+  'sourceNode',
+  'selectable',
+  'dragging',
+  'deletable',
+  'focusable',
+  'updatable',
+  'style',
+  'outboundHandleState',
+  'animated',
+]
+const replacer = (key: string, value: any) => {
+  if (excludeKeys.indexOf(key) > -1) return undefined
+  return value
+}
+
 const saveNodes = throttle(async function saveNodes(nodes: any[]) {
   await fetch(nodesUrl, {
     method: 'PUT',
-    body: JSON.stringify({ id: 'nodes', data: nodes }),
+    body: JSON.stringify({ id: 'nodes', data: nodes.map(cleanNode) }, replacer),
     headers: {
       'Content-Type': 'application/json',
     },
   })
 }, updateDelay)
 
+function cleanEdge(edge: any) {
+  const result = {
+    ...edge,
+  }
+  return result
+}
+
+function cleanCustomNodeType(customNodeType: any) {
+  const result = {
+    ...customNodeType,
+    data: {
+      ...customNodeType.data,
+      edges: customNodeType.data.edges?.map(cleanEdge),
+    },
+  }
+  return result
+}
+
 const saveEdges = throttle(async function (edges: any[]) {
   await fetch(edgesUrl, {
     method: 'PUT',
-    body: JSON.stringify({ id: 'edges', data: edges }),
+    body: JSON.stringify(
+      {
+        id: 'edges',
+        data: edges.map(cleanEdge),
+      },
+      replacer
+    ),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -31,7 +85,13 @@ const saveEdges = throttle(async function (edges: any[]) {
 const saveCustomNodeTypes = throttle(async function (customNodeTypes: any[]) {
   await fetch(customNodeTypesUrl, {
     method: 'PUT',
-    body: JSON.stringify({ id: 'customNodeTypes', data: customNodeTypes }),
+    body: JSON.stringify(
+      {
+        id: 'customNodeTypes',
+        data: customNodeTypes.map(cleanCustomNodeType),
+      },
+      replacer
+    ),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -60,19 +120,34 @@ function ServerStateProvider() {
         customNodeTypesPromise,
       ])
 
+      const customNodeTypeLookup = (customNodeTypes.data || []).reduce(
+        (acc, customNodeType: any) => {
+          acc[customNodeType.id] = customNodeType
+          return acc
+        },
+        {} as { [key: string]: any }
+      )
+
       setInitialState({
-        nodes: (nodes.data || []).map((node: any) => {
-          node.selectable = true
-          node.selected = false
-          node.deletable = true
-          return node
-        }),
+        nodes: (nodes.data || [])
+          .map((node: any) => {
+            if (node.type === NODE_TYPES_IDS.CUSTOM) {
+              const { customNodeTypeId } = node.data
+              const nodeType = customNodeTypeLookup[customNodeTypeId]
+              if (nodeType) {
+                node.data = {
+                  ...node.data,
+                  ...nodeType.data,
+                }
+              } else {
+                return null
+              }
+            }
+            return node
+          })
+          .filter((n) => n),
         edges: (edges.data || []).map((edge: any) => {
-          edge.selectable = true
-          edge.selected = false
-          edge.deletable = true
-          edge.focusable = true
-          edge.updatable = true
+          edge.type = 'nodeEdge'
           return edge
         }),
         customNodeTypes: customNodeTypes.data || [],

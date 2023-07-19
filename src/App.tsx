@@ -132,7 +132,10 @@ export default function App({
             x: (dropPosition.x - x) / zoom,
             y: (dropPosition.y - y) / zoom,
           },
-          data: nodeType.data || {},
+          data: {
+            ...nodeType.data,
+            ...(customNode ? { customNodeTypeId: nodeType.id } : {}),
+          },
         })
       },
     }),

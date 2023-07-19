@@ -6,6 +6,7 @@ const outputEnabled = (inboundState: any) =>
   !(inboundState['a'] || inboundState['b'])
 
 function NorNode({ id }: NodeProps) {
+  const delay = parseInt(id) % 10
   return (
     <SimpleNode
       id={id}
@@ -13,6 +14,7 @@ function NorNode({ id }: NodeProps) {
       inputHandleIds={inputHandleIds}
       outputHandleId="out"
       outputEnabled={outputEnabled}
+      outboundStateDelay={isNaN(delay) ? 0 : delay}
     />
   )
 }

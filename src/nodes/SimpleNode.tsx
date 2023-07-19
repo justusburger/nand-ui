@@ -12,6 +12,7 @@ export interface SimpleNodeProps {
   inputHandleIds: string[]
   outputHandleId: string
   outputEnabled: (inboundState: { [key: string]: boolean }) => boolean
+  outboundStateDelay?: number
 }
 
 function SimpleNode({
@@ -20,6 +21,7 @@ function SimpleNode({
   inputHandleIds,
   outputHandleId,
   outputEnabled,
+  outboundStateDelay,
 }: SimpleNodeProps) {
   const nodes = useNodes()
   const edges = useEdges()
@@ -28,7 +30,7 @@ function SimpleNode({
     [outputHandleId]: outputEnabled(inboundState),
   }
 
-  useOutboundState(id, outboundState)
+  useOutboundState(id, outboundState, outboundStateDelay)
 
   return (
     <NodeContainer>
