@@ -1,5 +1,5 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Edge, useEdges, useNodes, useReactFlow, Node } from 'reactflow'
 import { v4 } from 'uuid'
 import { NodeHandleData } from '../NodeHandle'
@@ -86,6 +86,17 @@ function Toolbar() {
         .concat(newEdges)
     )
   }, [reactFlowInstance, nodes, edges, selectedNodes, selectedNodesMap])
+
+  useEffect(() => {
+    function onKeyPress(e: KeyboardEvent) {
+      if (e.key === 'd' && e.metaKey) {
+        onDuplicateClick()
+        e.preventDefault()
+      }
+    }
+    document.addEventListener('keydown', onKeyPress)
+    return () => document.removeEventListener('keydown', onKeyPress)
+  }, [onDuplicateClick])
 
   return (
     <div className="flex pb-10">

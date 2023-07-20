@@ -32,25 +32,29 @@ function Drawer({
         color: 'black',
       }}
     >
-      {nodeTypes.map((nodeType) =>
-        nodeType.hidden ? null : (
-          <NodeButton nodeType={nodeType} key={nodeType.id} />
-        )
-      )}
+      <div className="flex flex-wrap">
+        {nodeTypes.map((nodeType) =>
+          nodeType.hidden ? null : (
+            <NodeButton nodeType={nodeType} key={nodeType.id} />
+          )
+        )}
+      </div>
       <div style={{ width: 10 }} />
-      {customNodeTypes.map((customNodeType) => (
-        <CustomNodeButton
-          key={customNodeType.id}
-          nodeType={customNodeType}
-          onDelete={onCustomNodeTypeDelete}
+      <div className="flex flex-wrap">
+        {customNodeTypes.map((customNodeType) => (
+          <CustomNodeButton
+            key={customNodeType.id}
+            nodeType={customNodeType}
+            onDelete={onCustomNodeTypeDelete}
+          />
+        ))}
+        <CreateTypeButton
+          onCreateStart={onCreateStart}
+          enabled={createCustomNodeTypeEnabled}
+          onCreateComplete={onCreateComplete}
+          creating={creating}
         />
-      ))}
-      <CreateTypeButton
-        onCreateStart={onCreateStart}
-        enabled={createCustomNodeTypeEnabled}
-        onCreateComplete={onCreateComplete}
-        creating={creating}
-      />
+      </div>
     </div>
   )
 }

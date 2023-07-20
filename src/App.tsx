@@ -29,7 +29,7 @@ import NodeEdge from './NodeEdge'
 import Toolbar from './components/Toolbar'
 
 const edgeOptions: DefaultEdgeOptions = {
-  animated: true,
+  animated: false,
   style: {
     stroke: 'white',
   },

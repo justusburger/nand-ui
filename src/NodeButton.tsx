@@ -17,8 +17,7 @@ function NodeButton({ nodeType }: NodeButtonProps) {
     <button
       ref={dragRef}
       key={nodeType.id}
-      style={{ marginRight: 3 }}
-      className="bg-white rounded px-2 text-sm"
+      className="bg-white rounded px-2 py-1 text-sm mr-1 mb-1 shadow-md shadow-gray-500"
     >
       {nodeType.name}
     </button>

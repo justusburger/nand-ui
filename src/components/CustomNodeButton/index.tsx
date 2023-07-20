@@ -33,11 +33,14 @@ function CustomNodeButton({ nodeType, onDelete }: CustomNodeButtonProps) {
     []
   )
   return (
-    <div className="flex bg-white rounded mr-1" ref={containerRef}>
+    <div
+      className="flex bg-white rounded mr-1 mb-1 shadow-md shadow-gray-500"
+      ref={containerRef}
+    >
       <button
         ref={dragRef}
         key={nodeType.id}
-        className="rounded px-2 text-sm cursor-pointer"
+        className="rounded px-2 py-1 text-sm cursor-pointer"
       >
         {nodeType.name}
       </button>

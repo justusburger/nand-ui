@@ -10,6 +10,8 @@ import CustomNode from './nodes/CustomNode'
 import RelayNode from './nodes/RelayNode'
 import NotNode from './nodes/NotNode'
 import NorNode from './nodes/NorNode'
+import RegisterNode from './nodes/RegisterNode'
+import Memory256Node from './nodes/Memory256Node'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -22,6 +24,8 @@ export const NODE_TYPES_IDS = {
   RELAY: 'relay',
   NOT: 'not',
   NOR: 'nor',
+  REGISTER: 'register',
+  MEMORY_256: 'memory_256',
 } as const
 
 export type NodeType<TData = any> = {
@@ -89,6 +93,16 @@ export const defaultNodeTypes: NodeType[] = [
     id: NODE_TYPES_IDS.RELAY,
     name: 'RELAY',
     node: RelayNode,
+  },
+  {
+    id: NODE_TYPES_IDS.REGISTER,
+    name: 'REGISTER',
+    node: RegisterNode,
+  },
+  {
+    id: NODE_TYPES_IDS.MEMORY_256,
+    name: 'Memory 256',
+    node: Memory256Node,
   },
 ]
 

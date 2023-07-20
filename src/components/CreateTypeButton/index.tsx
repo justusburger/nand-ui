@@ -76,7 +76,7 @@ function CreateTypeButton({
       </div>
       <button
         disabled={!enabled}
-        className="bg-white rounded px-2 py-1 text-sm active:opacity-50 disabled:opacity-50"
+        className="bg-white rounded shadow-md shadow-gray-500 px-2 py-1 text-sm active:opacity-50 disabled:opacity-50"
         onClick={() => onCreateStart()}
       >
         + Create type
