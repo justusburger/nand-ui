@@ -12,6 +12,7 @@ import NotNode from './nodes/NotNode'
 import NorNode from './nodes/NorNode'
 import RegisterNode from './nodes/RegisterNode'
 import Memory256Node from './nodes/Memory256Node'
+import TextNode from './nodes/TextNode'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -26,6 +27,7 @@ export const NODE_TYPES_IDS = {
   NOR: 'nor',
   REGISTER: 'register',
   MEMORY_256: 'memory_256',
+  TEXT: 'text',
 } as const
 
 export type NodeType<TData = any> = {
@@ -43,6 +45,11 @@ export interface CustomNodeTypeData {
 export type CustomNodeType = NodeType<CustomNodeTypeData>
 
 export const defaultNodeTypes: NodeType[] = [
+  {
+    id: NODE_TYPES_IDS.TEXT,
+    name: 'Text',
+    node: TextNode,
+  },
   {
     id: NODE_TYPES_IDS.INPUT,
     name: 'IN',

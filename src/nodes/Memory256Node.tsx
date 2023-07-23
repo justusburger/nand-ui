@@ -5,42 +5,30 @@ import InputHandleRegion from '../InputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import useOutboundState from '../useOutboundState'
 
 const READ_ENABLED = 'Read enabled'
 const OUTPUT_ENABLED = 'Output enabled'
+const numberOfDataBits = 8
+const numberOfAddressBits = 8
+const outputHandleIds = new Array(numberOfDataBits)
+  .fill(true)
+  .map((_, i) => `d${i}`)
+const addressHandleIds = new Array(numberOfAddressBits)
+  .fill(true)
+  .map((_, i) => `a${i}`)
 const inputHandleIds = [
-  'd0',
-  'd1',
-  'd2',
-  'd3',
-  'd4',
-  'd5',
-  'd6',
-  'd7',
-  'a0',
-  'a1',
-  'a2',
-  'a3',
-  'a4',
-  'a5',
-  'a6',
-  'a7',
+  ...outputHandleIds,
+  ...addressHandleIds,
   READ_ENABLED,
   OUTPUT_ENABLED,
 ]
-const outputHandleIds = ['d0', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7']
-const numberOfRows = 16
-const numberOfBytes = 256
-const numberOfColumns = numberOfBytes / numberOfRows
-const rows = Array(numberOfRows)
-  .fill(true)
-  .map((_, i) => i)
-const columns = Array(numberOfColumns)
-  .fill(true)
-  .map((_, i) => i)
+const numberOfBytes = Math.pow(2, numberOfAddressBits)
+const addresses = new Array(numberOfBytes).fill(true).map((_, i) => i)
 
 function numberToHex(number: number) {
+  if (!number) return '00'
   const result = number.toString(16)
   if (result.length === 1) return `0${result}`
   return result
@@ -58,7 +46,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     { [key: number]: number }
   >(id, 'state', {})
   const inboundStateJSON = JSON.stringify(inboundState)
-  const address = useMemo(() => {
+  const selectedAddress = useMemo(() => {
     let result = 0
     for (let i = 0; i < 8; i++) {
       const columnValue = Math.pow(2, i)
@@ -80,40 +68,70 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     if (inboundState[READ_ENABLED]) {
       setState({
         ...state,
-        [address]: inboundData,
+        [selectedAddress]: inboundData,
       })
     }
-  }, [inboundStateJSON, address, inboundData])
+  }, [inboundStateJSON, selectedAddress, inboundData])
 
   const outboundData = useMemo(() => {
-    const binary = (state[address] >>> 0).toString(2)
+    const binary = (state[selectedAddress] >>> 0).toString(2).padStart(8, '0')
     const result: any = {}
-    for (let i = 0; i < 8; i++) {
-      result[`d${i}`] = parseInt(binary[i] || '0')
+    if (inboundState[OUTPUT_ENABLED]) {
+      for (let i = 0; i < 8; i++) {
+        result[`d${i}`] = parseInt(binary[i] || '0')
+      }
     }
     return result
-  }, [JSON.stringify(state), address])
+  }, [JSON.stringify(state), selectedAddress, inboundState[OUTPUT_ENABLED]])
+
+  useOutboundState(id, outboundData)
+
+  const handleCellValueChange = useCallback(
+    (address: number, value: number) => {
+      setState({
+        ...state,
+        [address]: value,
+      })
+    },
+    [state]
+  )
+
   return (
     <NodeContainer>
       <NodeToolbar position={Position.Bottom}>
-        <div className="bg-white rounded p-3 text-black tabular-nums shadow-lg shadow-gray-700">
-          <table>
-            <thead></thead>
-            <tbody>
-              {rows.map((row) => (
-                <tr key={row}>
-                  {columns.map((column) => (
-                    <DataDisplayCell
-                      key={column}
-                      column={column}
-                      address={row * numberOfRows + column}
-                      state={state}
+        <div className="bg-white rounded pt-3 pb-3 pl-3 text-gray-500 tabular-nums shadow-lg shadow-gray-700">
+          <div className="flex mb-4">
+            <div className="text-lg font-bold">Memory content</div>
+          </div>
+          <div
+            className="flex"
+            style={{ maxHeight: 650, overflowY: 'scroll', overflowX: 'hidden' }}
+          >
+            <div className="tabular-nums text-left text-2xl pt-2 pr-2">
+              <table cellPadding={0} cellSpacing={0}>
+                <thead>
+                  <tr>
+                    <th className="text-xs pr-2 pb-2">Address</th>
+                    <th className="text-xs pr-2 pb-2"></th>
+                    <th className="text-xs pr-2 pb-2 pl-2">Binary</th>
+                    <th className="text-xs pr-2 pb-2 pl-4">Hex</th>
+                    <th className="text-xs pr-2 pb-2 pl-2">Decimal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {addresses.map((address) => (
+                    <MemoryCellEditor
+                      key={address}
+                      address={address}
+                      value={state[address]}
+                      onChange={handleCellValueChange}
+                      addressSelected={selectedAddress === address}
                     />
                   ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </NodeToolbar>
       <InputHandleRegion>
@@ -144,23 +162,64 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
 }
 
 export default Memory256Node
-interface DataDisplayCellProps {
-  column: number
+
+interface MemoryCellEditorProps {
   address: number
-  state: { [key: number]: number }
+  value: number
+  onChange: (address: number, value: number) => void
+  addressSelected: boolean
 }
-function DataDisplayCell({ column, address, state }: DataDisplayCellProps) {
-  const value = state[address] || 0
+
+function MemoryCellEditor({
+  address,
+  value,
+  onChange,
+  addressSelected,
+}: MemoryCellEditorProps) {
+  const [binary, setBinary] = useState('')
+  useEffect(() => {
+    setBinary((value >>> 0).toString(2).padStart(8, '0'))
+  }, [value])
+  const handleOnChange = useCallback((e: any) => {
+    setBinary(e.target.value.replace(/[^0-1]/, ''))
+  }, [])
+  const handleBlur = useCallback(
+    (e: any) => {
+      let newValue = parseInt(e.target.value, 2)
+      if (isNaN(newValue)) newValue = 0
+      onChange(address, newValue)
+    },
+    [onChange, address]
+  )
   return (
-    <td
-      key={column}
-      className={
-        'px-1 ' +
-        (column % 4 === 3 ? 'pr-4 ' : '') +
-        (value === 0 ? 'text-gray-300 ' : '')
-      }
+    <tr
+      key={address}
+      className={'text-gray-500 ' + (addressSelected ? 'bg-slate-300' : '')}
     >
-      {numberToHex(value)}
-    </td>
+      <td className={'pr-2 text-sm ' + (value ? '' : 'opacity-30')}>
+        <div className="text-right">{address}</div>
+      </td>
+      <td className={'text-sm px-2 ' + (value ? '' : 'opacity-30')}>
+        {(address >>> 0).toString(2).padStart(8, '0')}
+      </td>
+      <td className="py-1">
+        <input
+          type="text"
+          style={{ width: 175, letterSpacing: 5 }}
+          className={
+            'tabular-nums bg-gray-100 px-2 py-0 rounded focus:opacity-100 ' +
+            (value ? '' : 'opacity-30')
+          }
+          value={binary}
+          onChange={handleOnChange}
+          onBlur={handleBlur}
+          maxLength={8}
+        />
+      </td>
+      <td className={'px-4 ' + (value ? '' : 'opacity-30')}>
+        {numberToHex(value)}
+      </td>
+      <td className={'pl-2 ' + (value ? '' : 'opacity-30')}>{value || 0}</td>
+    </tr>
   )
 }

@@ -4,7 +4,10 @@ import { useEffect } from 'react'
 import useInboundState from '../useInboundState'
 import useNodeDataState from '../useNodeDataState'
 
-const inputHandleIds = ['data', 'read']
+const dataInHandleId = 'Data in'
+const readHandleId = 'Read'
+const clockHandleId = 'Clock'
+const inputHandleIds = [dataInHandleId, readHandleId, clockHandleId]
 export interface RegisterNodeData {
   on: boolean
 }
@@ -18,8 +21,8 @@ function RegisterNode({ id }: NodeProps<RegisterNodeData>) {
     false
   )
   useEffect(() => {
-    if (inboundState['read']) {
-      setOn(inboundState['data'])
+    if (inboundState[readHandleId] && inboundState[clockHandleId]) {
+      setOn(inboundState[dataInHandleId])
     }
   }, [JSON.stringify(inboundState)])
   return (

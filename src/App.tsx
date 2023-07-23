@@ -157,6 +157,7 @@ export default function App({
         edgeTypes={edgeTypes}
         minZoom={0.1}
         maxZoom={5}
+        zoomOnDoubleClick={false}
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

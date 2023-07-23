@@ -1,40 +1,123 @@
-import NodeHandle from '../components/NodeHandle'
+import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
 import useInboundState from '../useInboundState'
-import { NodeProps, useEdges, useNodes } from 'reactflow'
+import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import useNodeDataState from '../useNodeDataState'
-import useOutboundState from '../useOutboundState'
+import useOutboundState, { OutboundHandleState } from '../useOutboundState'
+import { v4 } from 'uuid'
+import EditHandlesPanel from '../components/EditHandlesPanel'
+import getHandleBinaryValue from '../getHandleBinaryValue'
 
 export interface RelayNodeData {
   countHandles: number
+  outboundHandleState: OutboundHandleState
+  handles: NodeHandleData[]
 }
 
 function RelayNode({ id }: NodeProps<RelayNodeData>) {
   const nodes = useNodes()
   const edges = useEdges()
   const inboundState = useInboundState(id, nodes, edges)
-  const [countHandles, setCountHandles] = useNodeDataState<
+
+  const [handles, setHandles] = useNodeDataState<
     RelayNodeData,
-    number
-  >(id, 'countHandles', 1)
-  const handleIds = useMemo(() => {
-    return new Array(countHandles)
-      .fill(true)
-      .map((v: any, index) => `${index + 1}`)
-  }, [countHandles])
+    NodeHandleData[]
+  >(id, 'handles', [{ id: v4(), label: '', isBinary: true }])
+
   useOutboundState(id, inboundState)
+
+  const binaryHandles = useMemo(() => {
+    return handles.filter((handle) => handle.isBinary)
+  }, [handles])
+
+  const nonBinaryHandles = useMemo(() => {
+    return handles.filter((handle) => !handle.isBinary)
+  }, [handles])
+
+  const handleLabelChange = useCallback(
+    (e: any, handleId: string) => {
+      setHandles(
+        handles.map((handle) => {
+          if (handle.id === handleId) {
+            return {
+              ...handle,
+              label: e.target.value,
+            }
+          }
+          return handle
+        })
+      )
+    },
+    [handles]
+  )
+
+  const handleBinaryChange = useCallback(
+    (handleId: string) => {
+      setHandles(
+        handles.map((handle) => {
+          if (handle.id === handleId) {
+            return {
+              ...handle,
+              isBinary: !handle.isBinary,
+            }
+          }
+          return handle
+        })
+      )
+    },
+    [handles]
+  )
+
+  const handleAddHandle = useCallback(() => {
+    setHandles(
+      handles.concat({
+        id: v4(),
+        label: '',
+        isBinary: true,
+      })
+    )
+  }, [handles])
+
+  const handleRemoveHandle = useCallback(() => {
+    const newHandles = [...handles]
+    newHandles.pop()
+    setHandles(newHandles)
+  }, [handles])
 
   return (
     <NodeContainer>
+      <NodeToolbar position={Position.Left}>
+        <EditHandlesPanel
+          handles={handles}
+          handleAddHandle={handleAddHandle}
+          handleBinaryChange={handleBinaryChange}
+          handleLabelChange={handleLabelChange}
+          handleRemoveHandle={handleRemoveHandle}
+        />
+      </NodeToolbar>
       <InputHandleRegion>
-        {handleIds.map((handleId) => (
+        {nonBinaryHandles.map((handleData) => (
           <NodeHandle
-            id={handleId}
-            enabled={inboundState[handleId]}
-            key={handleId}
+            label={handleData.label}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
+            type="input"
+            custom
+          />
+        ))}
+        {binaryHandles.map((handleData, i) => (
+          <NodeHandle
+            label={
+              handleData.label ||
+              getHandleBinaryValue(i, binaryHandles.length).toString()
+            }
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
             type="input"
           />
         ))}
@@ -42,39 +125,32 @@ function RelayNode({ id }: NodeProps<RelayNodeData>) {
       <div
         style={{
           color: 'black',
-          padding: '10px 10px 10px 10px',
+          padding: '10px 10px 10px 20px',
           textAlign: 'center',
         }}
       >
         <div style={{ fontSize: 18 }}>Relay</div>
-        <div style={{ display: 'flex' }}>
-          <button
-            style={{
-              padding: `0px 5px 2px 5px`,
-              lineHeight: 1,
-              marginRight: 2,
-            }}
-            onClick={() => setCountHandles(countHandles - 1)}
-          >
-            -
-          </button>
-          <div style={{ fontSize: 12, padding: '0 4px 0 2px' }}>
-            {countHandles}bit
-          </div>
-          <button
-            style={{ padding: `0px 5px 2px 5px`, lineHeight: 1 }}
-            onClick={() => setCountHandles(countHandles + 1)}
-          >
-            +
-          </button>
-        </div>
       </div>
       <OutputHandleRegion>
-        {handleIds.map((handleId) => (
+        {nonBinaryHandles.map((handleData) => (
           <NodeHandle
-            id={handleId}
-            enabled={inboundState[handleId]}
-            key={handleId}
+            label={handleData.label}
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
+            type="output"
+            custom
+          />
+        ))}
+        {binaryHandles.map((handleData, i) => (
+          <NodeHandle
+            label={
+              handleData.label ||
+              getHandleBinaryValue(i, binaryHandles.length).toString()
+            }
+            id={handleData.id}
+            key={handleData.id}
+            enabled={inboundState[handleData.id]}
             type="output"
           />
         ))}
