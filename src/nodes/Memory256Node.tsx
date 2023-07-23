@@ -9,20 +9,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import useOutboundState from '../useOutboundState'
 
 const READ_ENABLED = 'Read enabled'
+const CLOCK = 'CLOCK'
 const OUTPUT_ENABLED = 'Output enabled'
 const numberOfDataBits = 8
 const numberOfAddressBits = 8
 const outputHandleIds = new Array(numberOfDataBits)
   .fill(true)
-  .map((_, i) => `d${i}`)
+  .map((_, i) => `d${i + 1}`)
 const addressHandleIds = new Array(numberOfAddressBits)
   .fill(true)
-  .map((_, i) => `a${i}`)
+  .map((_, i) => `a${i + 1}`)
 const inputHandleIds = [
   ...outputHandleIds,
   ...addressHandleIds,
   READ_ENABLED,
   OUTPUT_ENABLED,
+  CLOCK,
 ]
 const numberOfBytes = Math.pow(2, numberOfAddressBits)
 const addresses = new Array(numberOfBytes).fill(true).map((_, i) => i)
@@ -50,7 +52,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     let result = 0
     for (let i = 0; i < 8; i++) {
       const columnValue = Math.pow(2, i)
-      if (inboundState[`a${i}`]) result += columnValue
+      if (inboundState[`a${i + 1}`]) result += columnValue
     }
     return result
   }, [inboundStateJSON])
@@ -59,13 +61,13 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     let result = 0
     for (let i = 0; i < 8; i++) {
       const columnValue = Math.pow(2, i)
-      if (inboundState[`d${i}`]) result += columnValue
+      if (inboundState[`d${i + 1}`]) result += columnValue
     }
     return result
   }, [inboundStateJSON])
 
   useEffect(() => {
-    if (inboundState[READ_ENABLED]) {
+    if (inboundState[READ_ENABLED] && inboundState[CLOCK]) {
       setState({
         ...state,
         [selectedAddress]: inboundData,
@@ -78,7 +80,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     const result: any = {}
     if (inboundState[OUTPUT_ENABLED]) {
       for (let i = 0; i < 8; i++) {
-        result[`d${i}`] = parseInt(binary[i] || '0')
+        result[`d${i + 1}`] = parseInt(binary[i] || '0')
       }
     }
     return result
