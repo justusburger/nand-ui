@@ -26,7 +26,7 @@ function ClockNode({ id }: NodeProps) {
 
   useEffect(() => {
     if (running) {
-      const intervalHandle = setInterval(() => setOn((on) => !on), 1000)
+      const intervalHandle = setInterval(() => setOn((on) => !on), 800)
       return () => clearInterval(intervalHandle)
     }
   }, [setOn, running])

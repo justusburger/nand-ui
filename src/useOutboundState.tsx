@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import useNodeDataState from './useNodeDataState'
 
 export type OutboundHandleState = { [handleId: string]: boolean }
