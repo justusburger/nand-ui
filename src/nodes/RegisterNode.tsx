@@ -1,6 +1,6 @@
 import { NodeProps, useEdges, useNodes } from 'reactflow'
 import SimpleNode from './SimpleNode'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useInboundState from '../useInboundState'
 import useNodeDataState from '../useNodeDataState'
 
@@ -20,11 +20,17 @@ function RegisterNode({ id }: NodeProps<RegisterNodeData>) {
     'on',
     false
   )
+  const [previousInboundState, setPreviousInboundState] = useState<any>({})
   useEffect(() => {
-    if (inboundState[readHandleId] && inboundState[clockHandleId]) {
+    if (
+      inboundState[readHandleId] &&
+      inboundState[clockHandleId] &&
+      !previousInboundState[clockHandleId]
+    ) {
       setOn(inboundState[dataInHandleId])
     }
-  }, [JSON.stringify(inboundState)])
+    setPreviousInboundState(inboundState)
+  }, [JSON.stringify(inboundState), previousInboundState])
   return (
     <SimpleNode
       id={id}

@@ -13,6 +13,8 @@ import NorNode from './nodes/NorNode'
 import RegisterNode from './nodes/RegisterNode'
 import Memory256Node from './nodes/Memory256Node'
 import TextNode from './nodes/TextNode'
+import JKFFNode from './nodes/JKFFNode'
+import CounterNode from './nodes/CounterNode'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -28,6 +30,8 @@ export const NODE_TYPES_IDS = {
   REGISTER: 'register',
   MEMORY_256: 'memory_256',
   TEXT: 'text',
+  JKFF: 'jkff',
+  COUNTER: 'counter',
 } as const
 
 export type NodeType<TData = any> = {
@@ -110,6 +114,16 @@ export const defaultNodeTypes: NodeType[] = [
     id: NODE_TYPES_IDS.MEMORY_256,
     name: 'Memory 256',
     node: Memory256Node,
+  },
+  {
+    id: NODE_TYPES_IDS.JKFF,
+    name: 'JKFF',
+    node: JKFFNode,
+  },
+  {
+    id: NODE_TYPES_IDS.COUNTER,
+    name: 'Counter',
+    node: CounterNode,
   },
 ]
 

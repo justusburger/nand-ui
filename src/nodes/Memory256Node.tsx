@@ -80,7 +80,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     const result: any = {}
     if (inboundState[OUTPUT_ENABLED]) {
       for (let i = 0; i < 8; i++) {
-        result[`d${i + 1}`] = parseInt(binary[i] || '0')
+        result[`d${i + 1}`] = parseInt(binary[7 - i] || '0')
       }
     }
     return result
