@@ -108,6 +108,11 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
           <div
             className="flex"
             style={{ maxHeight: 650, overflowY: 'scroll', overflowX: 'hidden' }}
+            onWheelCapture={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              return false
+            }}
           >
             <div className="tabular-nums text-left text-2xl pt-2 pr-2">
               <table cellPadding={0} cellSpacing={0}>

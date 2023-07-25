@@ -15,6 +15,7 @@ import Memory256Node from './nodes/Memory256Node'
 import TextNode from './nodes/TextNode'
 import JKFFNode from './nodes/JKFFNode'
 import CounterNode from './nodes/CounterNode'
+import ClockNode from './nodes/ClockNode'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -32,6 +33,7 @@ export const NODE_TYPES_IDS = {
   TEXT: 'text',
   JKFF: 'jkff',
   COUNTER: 'counter',
+  CLOCK: 'clock',
 } as const
 
 export type NodeType<TData = any> = {
@@ -124,6 +126,11 @@ export const defaultNodeTypes: NodeType[] = [
     id: NODE_TYPES_IDS.COUNTER,
     name: 'Counter',
     node: CounterNode,
+  },
+  {
+    id: NODE_TYPES_IDS.CLOCK,
+    name: 'Clock',
+    node: ClockNode,
   },
 ]
 
