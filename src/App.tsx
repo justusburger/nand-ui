@@ -13,6 +13,7 @@ import ReactFlow, {
   DefaultEdgeOptions,
   useReactFlow,
   EdgeTypes,
+  useOnViewportChange,
 } from 'reactflow'
 import Drawer from './Drawer'
 import {
@@ -27,6 +28,7 @@ import { useDrop } from 'react-dnd'
 import { v4 } from 'uuid'
 import NodeEdge from './NodeEdge'
 import Toolbar from './components/Toolbar'
+import useLocalStorageState from './useLocalStorageState'
 
 const edgeOptions: DefaultEdgeOptions = {
   animated: false,
@@ -56,6 +58,15 @@ export default function App({
   initialCustomNodeTypes,
   saveCustomNodeTypes,
 }: AppProps) {
+  const [initialViewport, setInitialViewport] = useLocalStorageState({
+    key: 'viewport',
+    defaultValue: { x: 0, y: 0, zoom: 1 },
+  })
+  useOnViewportChange({
+    onEnd: (viewport) => {
+      setInitialViewport(viewport)
+    },
+  })
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   useEffect(() => {
     saveNodes(nodes)
@@ -158,6 +169,7 @@ export default function App({
         minZoom={0.1}
         maxZoom={5}
         zoomOnDoubleClick={false}
+        defaultViewport={initialViewport}
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
