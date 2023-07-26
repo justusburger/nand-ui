@@ -43,7 +43,7 @@
             "y": 105
           },
           "data": {
-            "count": 4
+            "count": 0
           },
           "positionAbsolute": {
             "x": 1005,
@@ -60,7 +60,7 @@
             "y": -525
           },
           "data": {
-            "count": 2
+            "count": 0
           },
           "positionAbsolute": {
             "x": 1005,
@@ -564,7 +564,8 @@
               "3": 240,
               "4": 0,
               "8": 0,
-              "14": 92,
+              "13": 0,
+              "14": 28,
               "15": 14,
               "16": 0,
               "160": 0
@@ -5445,3195 +5446,6 @@
           }
         },
         {
-          "id": "alu",
-          "name": "ALU",
-          "data": {
-            "nodes": [
-              {
-                "width": 240,
-                "height": 64,
-                "type": "custom",
-                "id": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "position": {
-                  "x": 660,
-                  "y": -1125
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -1125
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "type": "and",
-                "id": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
-                "position": {
-                  "x": 1065,
-                  "y": -930
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -930
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "type": "and",
-                "id": "a845b4af-3644-4077-b536-6e084364c7a8",
-                "position": {
-                  "x": 1065,
-                  "y": -990
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -990
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "type": "and",
-                "id": "e12bca49-82fb-4660-9d1d-a31b00712350",
-                "position": {
-                  "x": 1065,
-                  "y": -1050
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -1050
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "type": "xor",
-                "id": "386ffca1-55ee-4e8a-b487-934107739dce",
-                "position": {
-                  "x": 435,
-                  "y": -795
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -795
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "type": "xor",
-                "id": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
-                "position": {
-                  "x": 435,
-                  "y": -855
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -855
-                }
-              },
-              {
-                "width": 175,
-                "height": 47,
-                "type": "in",
-                "id": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "position": {
-                  "x": 180,
-                  "y": -1155
-                },
-                "data": {
-                  "handles": [
-                    {
-                      "id": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                      "label": "Subtract",
-                      "isBinary": false
-                    },
-                    {
-                      "id": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                      "label": "Output Enabled",
-                      "isBinary": false
-                    }
-                  ]
-                },
-                "positionAbsolute": {
-                  "x": 180,
-                  "y": -1155
-                }
-              },
-              {
-                "width": 128,
-                "height": 154,
-                "type": "out",
-                "id": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "position": {
-                  "x": 1245,
-                  "y": -1005
-                },
-                "data": {
-                  "handles": [
-                    {
-                      "id": "cd5acfc8-a835-4673-9107-2157338f1aa1",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "0471f7ab-f2be-4a6a-9f27-129cb53cc223",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "0e0842d5-230d-4596-95c6-8f3aefb605e9",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "4752ac14-8bea-4534-aa37-726bced7b4c1",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "5b3ac4e8-3e2d-457d-82d7-46040e556700",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "b9579340-266f-4e12-90c6-d0013f4034be",
-                      "label": "",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "aceae923-6d74-455c-be17-2687d778e20b",
-                      "label": "",
-                      "isBinary": true
-                    }
-                  ]
-                },
-                "positionAbsolute": {
-                  "x": 1245,
-                  "y": -1005
-                }
-              },
-              {
-                "width": 101,
-                "height": 154,
-                "type": "in",
-                "id": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "position": {
-                  "x": 255,
-                  "y": -1065
-                },
-                "data": {
-                  "handles": [
-                    {
-                      "id": "9e9902f7-ff2f-45d4-b9a3-25b828851d6d",
-                      "label": "a1",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "de850995-fcbb-4e46-bfb0-8b9bdb7dfd32",
-                      "label": "a2",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "889d3e09-5cd2-4a3a-a802-ef2053a5d212",
-                      "label": "a3",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "5367e821-de5f-4b58-9d2e-d1e3655ab742",
-                      "label": "a4",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "13a8acc2-5191-4bdc-bf0e-6fc4efcff8ff",
-                      "label": "a5",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "6da2ae49-5510-47ce-9d81-c1dcecafb30d",
-                      "label": "a6",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "7198d28b-ca65-4091-b28c-1a3d2b7efd0f",
-                      "label": "a7",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "90f9d496-2041-41ac-b5a1-c9453802f45f",
-                      "label": "a8",
-                      "isBinary": true
-                    }
-                  ]
-                },
-                "positionAbsolute": {
-                  "x": 255,
-                  "y": -1065
-                }
-              },
-              {
-                "width": 102,
-                "height": 154,
-                "id": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "type": "in",
-                "position": {
-                  "x": 255,
-                  "y": -855
-                },
-                "data": {
-                  "handles": [
-                    {
-                      "id": "71ad0219-ab0b-42b1-9f99-489b5cb2685c",
-                      "label": "b1",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "1d8de587-ce69-4144-8a75-b57ce9065e27",
-                      "label": "b2",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "245e38b6-d26e-4f7b-887f-b7ef414d54f0",
-                      "label": "b3",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "033fa122-e6cc-4e44-b566-843ce180521a",
-                      "label": "b4",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "8255cf86-beea-40b2-acc5-5ee6e22f9b36",
-                      "label": "b5",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "da297cb9-fede-494c-a0d8-e5e9f07b9e5b",
-                      "label": "b6",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "f22e2619-073b-443d-b563-c4c4f7a174ff",
-                      "label": "b7",
-                      "isBinary": true
-                    },
-                    {
-                      "id": "f7d59cce-95a3-4293-b5a6-8741e8f9e0a8",
-                      "label": "b8",
-                      "isBinary": true
-                    }
-                  ]
-                },
-                "positionAbsolute": {
-                  "x": 255,
-                  "y": -855
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "946bfb7f-b780-4901-8827-dcaba6eb0136",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -735
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -735
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "0f1d1723-a606-427c-8d06-84ea13847bcb",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -675
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -675
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -615
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -615
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "c3787681-5861-4093-b939-b24990552558",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -555
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -555
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -495
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -495
-                }
-              },
-              {
-                "width": 110,
-                "height": 46,
-                "id": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
-                "type": "xor",
-                "position": {
-                  "x": 435,
-                  "y": -435
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 435,
-                  "y": -435
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "id": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
-                "type": "and",
-                "position": {
-                  "x": 1065,
-                  "y": -750
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -750
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "id": "daca1be4-f547-4991-9967-991471f4e3e7",
-                "type": "and",
-                "position": {
-                  "x": 1065,
-                  "y": -810
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -810
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "id": "667d02d3-29c9-442c-9c33-420747d0899b",
-                "type": "and",
-                "position": {
-                  "x": 1065,
-                  "y": -870
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -870
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "id": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
-                "type": "and",
-                "position": {
-                  "x": 1065,
-                  "y": -630
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -630
-                }
-              },
-              {
-                "width": 111,
-                "height": 46,
-                "id": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
-                "type": "and",
-                "position": {
-                  "x": 1065,
-                  "y": -690
-                },
-                "data": {},
-                "positionAbsolute": {
-                  "x": 1065,
-                  "y": -690
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -1050
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -1050
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -900
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -900
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -975
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -975
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -750
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -750
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -825
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -825
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -675
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -675
-                }
-              },
-              {
-                "width": 240,
-                "height": 64,
-                "id": "218d5400-6b02-409c-9d0e-ee6bd54ec588",
-                "type": "custom",
-                "position": {
-                  "x": 660,
-                  "y": -600
-                },
-                "data": {
-                  "customNodeTypeId": "full_adder",
-                  "nodes": [
-                    {
-                      "width": 100,
-                      "height": 46,
-                      "type": "or",
-                      "id": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "position": {
-                        "x": 720,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "position": {
-                        "x": 720,
-                        "y": 405
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 405
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "960970d2-4238-4872-9064-7877cf945388",
-                      "position": {
-                        "x": 720,
-                        "y": 345
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 720,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 111,
-                      "height": 46,
-                      "type": "and",
-                      "id": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "position": {
-                        "x": 555,
-                        "y": 495
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 110,
-                      "height": 46,
-                      "type": "xor",
-                      "id": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "position": {
-                        "x": 555,
-                        "y": 435
-                      },
-                      "data": {},
-                      "positionAbsolute": {
-                        "x": 555,
-                        "y": 435
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "position": {
-                        "x": 390,
-                        "y": 495
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                            "label": "b",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 495
-                      }
-                    },
-                    {
-                      "width": 94,
-                      "height": 47,
-                      "type": "in",
-                      "id": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "position": {
-                        "x": 390,
-                        "y": 420
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                            "label": "a",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 420
-                      }
-                    },
-                    {
-                      "width": 162,
-                      "height": 47,
-                      "type": "out",
-                      "id": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "position": {
-                        "x": 945,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                            "label": "Sum",
-                            "isBinary": true
-                          },
-                          {
-                            "id": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                            "label": "Carry OUT",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 945,
-                        "y": 345
-                      }
-                    },
-                    {
-                      "width": 133,
-                      "height": 47,
-                      "type": "in",
-                      "id": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "position": {
-                        "x": 390,
-                        "y": 345
-                      },
-                      "data": {
-                        "handles": [
-                          {
-                            "id": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                            "label": "Carry IN",
-                            "isBinary": true
-                          }
-                        ]
-                      },
-                      "positionAbsolute": {
-                        "x": 390,
-                        "y": 345
-                      }
-                    }
-                  ],
-                  "edges": [
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-72ffe8ea-3975-4a17-acd1-f2abbbd96420a"
-                    },
-                    {
-                      "source": "6a156d76-4af7-4974-a3b4-3d763d77939f",
-                      "sourceHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-6a156d76-4af7-4974-a3b4-3d763d77939f9cccf2d0-6829-4569-a1f2-f022b5868f60-75d17aae-b1b2-49fa-966b-69f98083b2d4a"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-72ffe8ea-3975-4a17-acd1-f2abbbd96420b"
-                    },
-                    {
-                      "source": "bd744d90-ca6c-4e51-a4b4-8bf3108f026e",
-                      "sourceHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                      "target": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-bd744d90-ca6c-4e51-a4b4-8bf3108f026e4942407f-c011-40c3-bbe1-67407f1efe7f-75d17aae-b1b2-49fa-966b-69f98083b2d4b"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-960970d2-4238-4872-9064-7877cf945388a"
-                    },
-                    {
-                      "source": "ae890105-b185-449e-aad7-48f016a14ae8",
-                      "sourceHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ae890105-b185-449e-aad7-48f016a14ae812ca72df-85bd-41d7-bfab-a0b939933926-ac8a2731-b113-465b-97a8-1607e6af8ce1a"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "960970d2-4238-4872-9064-7877cf945388",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-960970d2-4238-4872-9064-7877cf945388b"
-                    },
-                    {
-                      "source": "72ffe8ea-3975-4a17-acd1-f2abbbd96420",
-                      "sourceHandle": "out",
-                      "target": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-72ffe8ea-3975-4a17-acd1-f2abbbd96420out-ac8a2731-b113-465b-97a8-1607e6af8ce1b"
-                    },
-                    {
-                      "source": "960970d2-4238-4872-9064-7877cf945388",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                      "id": "reactflow__edge-960970d2-4238-4872-9064-7877cf945388out-43aa6462-a917-408c-8533-f2b7a1f739fedd8c91e8-064a-4bdf-a968-bf3d679f4db6"
-                    },
-                    {
-                      "source": "75d17aae-b1b2-49fa-966b-69f98083b2d4",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "b",
-                      "id": "reactflow__edge-75d17aae-b1b2-49fa-966b-69f98083b2d4out-35272ac4-3da7-494b-88f7-3d1f40d11a59b"
-                    },
-                    {
-                      "source": "ac8a2731-b113-465b-97a8-1607e6af8ce1",
-                      "sourceHandle": "out",
-                      "target": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "targetHandle": "a",
-                      "id": "reactflow__edge-ac8a2731-b113-465b-97a8-1607e6af8ce1out-35272ac4-3da7-494b-88f7-3d1f40d11a59a"
-                    },
-                    {
-                      "source": "35272ac4-3da7-494b-88f7-3d1f40d11a59",
-                      "sourceHandle": "out",
-                      "target": "43aa6462-a917-408c-8533-f2b7a1f739fe",
-                      "targetHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                      "id": "reactflow__edge-35272ac4-3da7-494b-88f7-3d1f40d11a59out-43aa6462-a917-408c-8533-f2b7a1f739fe14573f39-b267-4b9c-a4e4-6acf9cb9be40"
-                    }
-                  ],
-                  "name": "Full Adder"
-                },
-                "positionAbsolute": {
-                  "x": 660,
-                  "y": -600
-                }
-              }
-            ],
-            "edges": [
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-079e15e3-1a2b-4cce-9abd-992565bdf2e2a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "71ad0219-ab0b-42b1-9f99-489b5cb2685c",
-                "target": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e71ad0219-ab0b-42b1-9f99-489b5cb2685c-079e15e3-1a2b-4cce-9abd-992565bdf2e2b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "1d8de587-ce69-4144-8a75-b57ce9065e27",
-                "target": "386ffca1-55ee-4e8a-b487-934107739dce",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e1d8de587-ce69-4144-8a75-b57ce9065e27-386ffca1-55ee-4e8a-b487-934107739dceb",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "245e38b6-d26e-4f7b-887f-b7ef414d54f0",
-                "target": "946bfb7f-b780-4901-8827-dcaba6eb0136",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e245e38b6-d26e-4f7b-887f-b7ef414d54f0-946bfb7f-b780-4901-8827-dcaba6eb0136b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "033fa122-e6cc-4e44-b566-843ce180521a",
-                "target": "0f1d1723-a606-427c-8d06-84ea13847bcb",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e033fa122-e6cc-4e44-b566-843ce180521a-0f1d1723-a606-427c-8d06-84ea13847bcbb",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "8255cf86-beea-40b2-acc5-5ee6e22f9b36",
-                "target": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e8255cf86-beea-40b2-acc5-5ee6e22f9b36-7faed115-981b-4d79-a42f-c5600e1f1d7bb",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "da297cb9-fede-494c-a0d8-e5e9f07b9e5b",
-                "target": "c3787681-5861-4093-b939-b24990552558",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330eda297cb9-fede-494c-a0d8-e5e9f07b9e5b-c3787681-5861-4093-b939-b24990552558b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "f22e2619-073b-443d-b563-c4c4f7a174ff",
-                "target": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330ef22e2619-073b-443d-b563-c4c4f7a174ff-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
-                "sourceHandle": "f7d59cce-95a3-4293-b5a6-8741e8f9e0a8",
-                "target": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
-                "targetHandle": "b",
-                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330ef7d59cce-95a3-4293-b5a6-8741e8f9e0a8-e85fd7c1-cf04-4b4b-83ab-485df7334592b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "386ffca1-55ee-4e8a-b487-934107739dce",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-386ffca1-55ee-4e8a-b487-934107739dcea",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "946bfb7f-b780-4901-8827-dcaba6eb0136",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-946bfb7f-b780-4901-8827-dcaba6eb0136a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "0f1d1723-a606-427c-8d06-84ea13847bcb",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-0f1d1723-a606-427c-8d06-84ea13847bcba",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-7faed115-981b-4d79-a42f-c5600e1f1d7ba",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "c3787681-5861-4093-b939-b24990552558",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-c3787681-5861-4093-b939-b24990552558a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-e85fd7c1-cf04-4b4b-83ab-485df7334592a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "e12bca49-82fb-4660-9d1d-a31b00712350",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-e12bca49-82fb-4660-9d1d-a31b00712350a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-47d38a3e-548b-4c5c-9170-5fca5e533bffa",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "667d02d3-29c9-442c-9c33-420747d0899b",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-667d02d3-29c9-442c-9c33-420747d0899ba",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "daca1be4-f547-4991-9967-991471f4e3e7",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-daca1be4-f547-4991-9967-991471f4e3e7a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-47095fdf-1bf2-42ae-ade5-9e10e7783f17a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-699b45cd-826e-4fe9-9509-c937ba4aabdba",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "a845b4af-3644-4077-b536-6e084364c7a8",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-a845b4af-3644-4077-b536-6e084364c7a8a",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "e12bca49-82fb-4660-9d1d-a31b00712350",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "cd5acfc8-a835-4673-9107-2157338f1aa1",
-                "id": "reactflow__edge-e12bca49-82fb-4660-9d1d-a31b00712350out-734c531b-1e83-4835-bf4a-0da1f10753fccd5acfc8-a835-4673-9107-2157338f1aa1",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "a845b4af-3644-4077-b536-6e084364c7a8",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
-                "id": "reactflow__edge-a845b4af-3644-4077-b536-6e084364c7a8out-734c531b-1e83-4835-bf4a-0da1f10753fc27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "0471f7ab-f2be-4a6a-9f27-129cb53cc223",
-                "id": "reactflow__edge-47d38a3e-548b-4c5c-9170-5fca5e533bffout-734c531b-1e83-4835-bf4a-0da1f10753fc0471f7ab-f2be-4a6a-9f27-129cb53cc223",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "667d02d3-29c9-442c-9c33-420747d0899b",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "0e0842d5-230d-4596-95c6-8f3aefb605e9",
-                "id": "reactflow__edge-667d02d3-29c9-442c-9c33-420747d0899bout-734c531b-1e83-4835-bf4a-0da1f10753fc0e0842d5-230d-4596-95c6-8f3aefb605e9",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "daca1be4-f547-4991-9967-991471f4e3e7",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "4752ac14-8bea-4534-aa37-726bced7b4c1",
-                "id": "reactflow__edge-daca1be4-f547-4991-9967-991471f4e3e7out-734c531b-1e83-4835-bf4a-0da1f10753fc4752ac14-8bea-4534-aa37-726bced7b4c1",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "5b3ac4e8-3e2d-457d-82d7-46040e556700",
-                "id": "reactflow__edge-47095fdf-1bf2-42ae-ade5-9e10e7783f17out-734c531b-1e83-4835-bf4a-0da1f10753fc5b3ac4e8-3e2d-457d-82d7-46040e556700",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "b9579340-266f-4e12-90c6-d0013f4034be",
-                "id": "reactflow__edge-263de8c4-b118-4288-93b2-4bb5ad2bff6aout-734c531b-1e83-4835-bf4a-0da1f10753fcb9579340-266f-4e12-90c6-d0013f4034be",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
-                "sourceHandle": "out",
-                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
-                "targetHandle": "aceae923-6d74-455c-be17-2687d778e20b",
-                "id": "reactflow__edge-699b45cd-826e-4fe9-9509-c937ba4aabdbout-734c531b-1e83-4835-bf4a-0da1f10753fcaceae923-6d74-455c-be17-2687d778e20b",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
-                "target": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
-                "targetHandle": "a",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-263de8c4-b118-4288-93b2-4bb5ad2bff6aa",
-                "type": "nodeEdge"
-              },
-              {
-                "source": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "e12bca49-82fb-4660-9d1d-a31b00712350",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-c2add0a9-cf18-4e0d-841c-b1a5ac3dd97ddd8c91e8-064a-4bdf-a968-bf3d679f4db6-e12bca49-82fb-4660-9d1d-a31b00712350b"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "9e9902f7-ff2f-45d4-b9a3-25b828851d6d",
-                "target": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7709e9902f7-ff2f-45d4-b9a3-25b828851d6d-c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d9cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
-                "sourceHandle": "out",
-                "target": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-079e15e3-1a2b-4cce-9abd-992565bdf2e2out-c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d4942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "386ffca1-55ee-4e8a-b487-934107739dce",
-                "sourceHandle": "out",
-                "target": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-386ffca1-55ee-4e8a-b487-934107739dceout-531dfbbc-a7d0-4f45-9303-5955bc2cec7f4942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "946bfb7f-b780-4901-8827-dcaba6eb0136",
-                "sourceHandle": "out",
-                "target": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-946bfb7f-b780-4901-8827-dcaba6eb0136out-7362b8b8-26ee-4819-a1d5-313e6cb0c9684942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "0f1d1723-a606-427c-8d06-84ea13847bcb",
-                "sourceHandle": "out",
-                "target": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-0f1d1723-a606-427c-8d06-84ea13847bcbout-dc4e5adf-0437-4c29-90fb-2db37898a5d34942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
-                "sourceHandle": "out",
-                "target": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-7faed115-981b-4d79-a42f-c5600e1f1d7bout-332d27b5-c3a7-4744-a9ea-e24e795a084e4942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "c3787681-5861-4093-b939-b24990552558",
-                "sourceHandle": "out",
-                "target": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-c3787681-5861-4093-b939-b24990552558out-f0a18783-2f12-48e8-aec5-7abb55ff95544942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
-                "sourceHandle": "out",
-                "target": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32out-fcf2af1f-800f-43b1-8d06-98869c4f3f4b4942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
-                "sourceHandle": "out",
-                "target": "218d5400-6b02-409c-9d0e-ee6bd54ec588",
-                "targetHandle": "4942407f-c011-40c3-bbe1-67407f1efe7f",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-e85fd7c1-cf04-4b4b-83ab-485df7334592out-218d5400-6b02-409c-9d0e-ee6bd54ec5884942407f-c011-40c3-bbe1-67407f1efe7f"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "90f9d496-2041-41ac-b5a1-c9453802f45f",
-                "target": "218d5400-6b02-409c-9d0e-ee6bd54ec588",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a77090f9d496-2041-41ac-b5a1-c9453802f45f-218d5400-6b02-409c-9d0e-ee6bd54ec5889cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "7198d28b-ca65-4091-b28c-1a3d2b7efd0f",
-                "target": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7707198d28b-ca65-4091-b28c-1a3d2b7efd0f-fcf2af1f-800f-43b1-8d06-98869c4f3f4b9cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "6da2ae49-5510-47ce-9d81-c1dcecafb30d",
-                "target": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7706da2ae49-5510-47ce-9d81-c1dcecafb30d-f0a18783-2f12-48e8-aec5-7abb55ff95549cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "13a8acc2-5191-4bdc-bf0e-6fc4efcff8ff",
-                "target": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a77013a8acc2-5191-4bdc-bf0e-6fc4efcff8ff-332d27b5-c3a7-4744-a9ea-e24e795a084e9cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "5367e821-de5f-4b58-9d2e-d1e3655ab742",
-                "target": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7705367e821-de5f-4b58-9d2e-d1e3655ab742-dc4e5adf-0437-4c29-90fb-2db37898a5d39cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "889d3e09-5cd2-4a3a-a802-ef2053a5d212",
-                "target": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a770889d3e09-5cd2-4a3a-a802-ef2053a5d212-7362b8b8-26ee-4819-a1d5-313e6cb0c9689cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
-                "sourceHandle": "de850995-fcbb-4e46-bfb0-8b9bdb7dfd32",
-                "target": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "targetHandle": "9cccf2d0-6829-4569-a1f2-f022b5868f60",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a770de850995-fcbb-4e46-bfb0-8b9bdb7dfd32-531dfbbc-a7d0-4f45-9303-5955bc2cec7f9cccf2d0-6829-4569-a1f2-f022b5868f60"
-              },
-              {
-                "source": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d14573f39-b267-4b9c-a4e4-6acf9cb9be40-531dfbbc-a7d0-4f45-9303-5955bc2cec7f12ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-531dfbbc-a7d0-4f45-9303-5955bc2cec7f14573f39-b267-4b9c-a4e4-6acf9cb9be40-7362b8b8-26ee-4819-a1d5-313e6cb0c96812ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-dc4e5adf-0437-4c29-90fb-2db37898a5d314573f39-b267-4b9c-a4e4-6acf9cb9be40-332d27b5-c3a7-4744-a9ea-e24e795a084e12ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-7362b8b8-26ee-4819-a1d5-313e6cb0c96814573f39-b267-4b9c-a4e4-6acf9cb9be40-dc4e5adf-0437-4c29-90fb-2db37898a5d312ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-332d27b5-c3a7-4744-a9ea-e24e795a084e14573f39-b267-4b9c-a4e4-6acf9cb9be40-f0a18783-2f12-48e8-aec5-7abb55ff955412ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-f0a18783-2f12-48e8-aec5-7abb55ff955414573f39-b267-4b9c-a4e4-6acf9cb9be40-fcf2af1f-800f-43b1-8d06-98869c4f3f4b12ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "sourceHandle": "14573f39-b267-4b9c-a4e4-6acf9cb9be40",
-                "target": "218d5400-6b02-409c-9d0e-ee6bd54ec588",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-fcf2af1f-800f-43b1-8d06-98869c4f3f4b14573f39-b267-4b9c-a4e4-6acf9cb9be40-218d5400-6b02-409c-9d0e-ee6bd54ec58812ca72df-85bd-41d7-bfab-a0b939933926"
-              },
-              {
-                "source": "218d5400-6b02-409c-9d0e-ee6bd54ec588",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-218d5400-6b02-409c-9d0e-ee6bd54ec588dd8c91e8-064a-4bdf-a968-bf3d679f4db6-699b45cd-826e-4fe9-9509-c937ba4aabdbb"
-              },
-              {
-                "source": "fcf2af1f-800f-43b1-8d06-98869c4f3f4b",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-fcf2af1f-800f-43b1-8d06-98869c4f3f4bdd8c91e8-064a-4bdf-a968-bf3d679f4db6-263de8c4-b118-4288-93b2-4bb5ad2bff6ab"
-              },
-              {
-                "source": "f0a18783-2f12-48e8-aec5-7abb55ff9554",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-f0a18783-2f12-48e8-aec5-7abb55ff9554dd8c91e8-064a-4bdf-a968-bf3d679f4db6-47095fdf-1bf2-42ae-ade5-9e10e7783f17b"
-              },
-              {
-                "source": "332d27b5-c3a7-4744-a9ea-e24e795a084e",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "daca1be4-f547-4991-9967-991471f4e3e7",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-332d27b5-c3a7-4744-a9ea-e24e795a084edd8c91e8-064a-4bdf-a968-bf3d679f4db6-daca1be4-f547-4991-9967-991471f4e3e7b"
-              },
-              {
-                "source": "dc4e5adf-0437-4c29-90fb-2db37898a5d3",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "667d02d3-29c9-442c-9c33-420747d0899b",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-dc4e5adf-0437-4c29-90fb-2db37898a5d3dd8c91e8-064a-4bdf-a968-bf3d679f4db6-667d02d3-29c9-442c-9c33-420747d0899bb"
-              },
-              {
-                "source": "7362b8b8-26ee-4819-a1d5-313e6cb0c968",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-7362b8b8-26ee-4819-a1d5-313e6cb0c968dd8c91e8-064a-4bdf-a968-bf3d679f4db6-47d38a3e-548b-4c5c-9170-5fca5e533bffb"
-              },
-              {
-                "source": "531dfbbc-a7d0-4f45-9303-5955bc2cec7f",
-                "sourceHandle": "dd8c91e8-064a-4bdf-a968-bf3d679f4db6",
-                "target": "a845b4af-3644-4077-b536-6e084364c7a8",
-                "targetHandle": "b",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-531dfbbc-a7d0-4f45-9303-5955bc2cec7fdd8c91e8-064a-4bdf-a968-bf3d679f4db6-a845b4af-3644-4077-b536-6e084364c7a8b"
-              },
-              {
-                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
-                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
-                "target": "c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d",
-                "targetHandle": "12ca72df-85bd-41d7-bfab-a0b939933926",
-                "type": "nodeEdge",
-                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-c2add0a9-cf18-4e0d-841c-b1a5ac3dd97d12ca72df-85bd-41d7-bfab-a0b939933926"
-              }
-            ],
-            "name": "ALU"
-          }
-        },
-        {
           "id": "8bit_register",
           "name": "8bit Register",
           "data": {
@@ -10200,6 +7012,1091 @@
               }
             ],
             "name": "GP Register"
+          }
+        },
+        {
+          "id": "alu",
+          "name": "ALU",
+          "data": {
+            "nodes": [
+              {
+                "width": 219,
+                "height": 64,
+                "type": "full_adder",
+                "id": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "position": {
+                  "x": -1650,
+                  "y": -1350
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -1350
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "type": "and",
+                "id": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
+                "position": {
+                  "x": -1215,
+                  "y": -1185
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1185
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "type": "and",
+                "id": "a845b4af-3644-4077-b536-6e084364c7a8",
+                "position": {
+                  "x": -1215,
+                  "y": -1245
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1245
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "type": "and",
+                "id": "e12bca49-82fb-4660-9d1d-a31b00712350",
+                "position": {
+                  "x": -1215,
+                  "y": -1305
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1305
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "type": "xor",
+                "id": "386ffca1-55ee-4e8a-b487-934107739dce",
+                "position": {
+                  "x": -1845,
+                  "y": -1050
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -1050
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "type": "xor",
+                "id": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
+                "position": {
+                  "x": -1845,
+                  "y": -1110
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -1110
+                }
+              },
+              {
+                "width": 181,
+                "height": 53,
+                "type": "in",
+                "id": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "position": {
+                  "x": -2100,
+                  "y": -1410
+                },
+                "data": {
+                  "handles": [
+                    {
+                      "id": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                      "label": "Subtract",
+                      "isBinary": false
+                    },
+                    {
+                      "id": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                      "label": "Output Enabled",
+                      "isBinary": false
+                    }
+                  ]
+                },
+                "positionAbsolute": {
+                  "x": -2100,
+                  "y": -1410
+                }
+              },
+              {
+                "width": 134,
+                "height": 160,
+                "type": "out",
+                "id": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "position": {
+                  "x": -1035,
+                  "y": -1260
+                },
+                "data": {
+                  "handles": [
+                    {
+                      "id": "cd5acfc8-a835-4673-9107-2157338f1aa1",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "0471f7ab-f2be-4a6a-9f27-129cb53cc223",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "0e0842d5-230d-4596-95c6-8f3aefb605e9",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "4752ac14-8bea-4534-aa37-726bced7b4c1",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "5b3ac4e8-3e2d-457d-82d7-46040e556700",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "b9579340-266f-4e12-90c6-d0013f4034be",
+                      "label": "",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "aceae923-6d74-455c-be17-2687d778e20b",
+                      "label": "",
+                      "isBinary": true
+                    }
+                  ]
+                },
+                "positionAbsolute": {
+                  "x": -1035,
+                  "y": -1260
+                }
+              },
+              {
+                "width": 107,
+                "height": 160,
+                "type": "in",
+                "id": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "position": {
+                  "x": -2025,
+                  "y": -1320
+                },
+                "data": {
+                  "handles": [
+                    {
+                      "id": "9e9902f7-ff2f-45d4-b9a3-25b828851d6d",
+                      "label": "a1",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "de850995-fcbb-4e46-bfb0-8b9bdb7dfd32",
+                      "label": "a2",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "889d3e09-5cd2-4a3a-a802-ef2053a5d212",
+                      "label": "a3",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "5367e821-de5f-4b58-9d2e-d1e3655ab742",
+                      "label": "a4",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "13a8acc2-5191-4bdc-bf0e-6fc4efcff8ff",
+                      "label": "a5",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "6da2ae49-5510-47ce-9d81-c1dcecafb30d",
+                      "label": "a6",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "7198d28b-ca65-4091-b28c-1a3d2b7efd0f",
+                      "label": "a7",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "90f9d496-2041-41ac-b5a1-c9453802f45f",
+                      "label": "a8",
+                      "isBinary": true
+                    }
+                  ]
+                },
+                "positionAbsolute": {
+                  "x": -2025,
+                  "y": -1320
+                }
+              },
+              {
+                "width": 108,
+                "height": 160,
+                "id": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "type": "in",
+                "position": {
+                  "x": -2025,
+                  "y": -1110
+                },
+                "data": {
+                  "handles": [
+                    {
+                      "id": "71ad0219-ab0b-42b1-9f99-489b5cb2685c",
+                      "label": "b1",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "1d8de587-ce69-4144-8a75-b57ce9065e27",
+                      "label": "b2",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "245e38b6-d26e-4f7b-887f-b7ef414d54f0",
+                      "label": "b3",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "033fa122-e6cc-4e44-b566-843ce180521a",
+                      "label": "b4",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "8255cf86-beea-40b2-acc5-5ee6e22f9b36",
+                      "label": "b5",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "da297cb9-fede-494c-a0d8-e5e9f07b9e5b",
+                      "label": "b6",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "f22e2619-073b-443d-b563-c4c4f7a174ff",
+                      "label": "b7",
+                      "isBinary": true
+                    },
+                    {
+                      "id": "f7d59cce-95a3-4293-b5a6-8741e8f9e0a8",
+                      "label": "b8",
+                      "isBinary": true
+                    }
+                  ]
+                },
+                "positionAbsolute": {
+                  "x": -2025,
+                  "y": -1110
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "946bfb7f-b780-4901-8827-dcaba6eb0136",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -990
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -990
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "0f1d1723-a606-427c-8d06-84ea13847bcb",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -930
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -930
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -870
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -870
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "c3787681-5861-4093-b939-b24990552558",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -810
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -810
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -750
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -750
+                }
+              },
+              {
+                "width": 116,
+                "height": 52,
+                "id": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
+                "type": "xor",
+                "position": {
+                  "x": -1845,
+                  "y": -690
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1845,
+                  "y": -690
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "id": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
+                "type": "and",
+                "position": {
+                  "x": -1215,
+                  "y": -1005
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1005
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "id": "daca1be4-f547-4991-9967-991471f4e3e7",
+                "type": "and",
+                "position": {
+                  "x": -1215,
+                  "y": -1065
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1065
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "id": "667d02d3-29c9-442c-9c33-420747d0899b",
+                "type": "and",
+                "position": {
+                  "x": -1215,
+                  "y": -1125
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -1125
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "id": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
+                "type": "and",
+                "position": {
+                  "x": -1215,
+                  "y": -885
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -885
+                }
+              },
+              {
+                "width": 117,
+                "height": 52,
+                "id": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
+                "type": "and",
+                "position": {
+                  "x": -1215,
+                  "y": -945
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1215,
+                  "y": -945
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -1275
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -1275
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -1200
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -1200
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -1125
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -1125
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -1050
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -1050
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -975
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -975
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -900
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -900
+                }
+              },
+              {
+                "width": 225,
+                "height": 70,
+                "id": "d94a0fe3-b81b-4989-964b-613daa56177f",
+                "type": "full_adder",
+                "position": {
+                  "x": -1650,
+                  "y": -825
+                },
+                "data": {},
+                "positionAbsolute": {
+                  "x": -1650,
+                  "y": -825
+                }
+              }
+            ],
+            "edges": [
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-079e15e3-1a2b-4cce-9abd-992565bdf2e2a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "71ad0219-ab0b-42b1-9f99-489b5cb2685c",
+                "target": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e71ad0219-ab0b-42b1-9f99-489b5cb2685c-079e15e3-1a2b-4cce-9abd-992565bdf2e2b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "1d8de587-ce69-4144-8a75-b57ce9065e27",
+                "target": "386ffca1-55ee-4e8a-b487-934107739dce",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e1d8de587-ce69-4144-8a75-b57ce9065e27-386ffca1-55ee-4e8a-b487-934107739dceb",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "245e38b6-d26e-4f7b-887f-b7ef414d54f0",
+                "target": "946bfb7f-b780-4901-8827-dcaba6eb0136",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e245e38b6-d26e-4f7b-887f-b7ef414d54f0-946bfb7f-b780-4901-8827-dcaba6eb0136b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "033fa122-e6cc-4e44-b566-843ce180521a",
+                "target": "0f1d1723-a606-427c-8d06-84ea13847bcb",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e033fa122-e6cc-4e44-b566-843ce180521a-0f1d1723-a606-427c-8d06-84ea13847bcbb",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "8255cf86-beea-40b2-acc5-5ee6e22f9b36",
+                "target": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330e8255cf86-beea-40b2-acc5-5ee6e22f9b36-7faed115-981b-4d79-a42f-c5600e1f1d7bb",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "da297cb9-fede-494c-a0d8-e5e9f07b9e5b",
+                "target": "c3787681-5861-4093-b939-b24990552558",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330eda297cb9-fede-494c-a0d8-e5e9f07b9e5b-c3787681-5861-4093-b939-b24990552558b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "f22e2619-073b-443d-b563-c4c4f7a174ff",
+                "target": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330ef22e2619-073b-443d-b563-c4c4f7a174ff-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "6300f8ae-2a1d-421e-bae5-e970bec7330e",
+                "sourceHandle": "f7d59cce-95a3-4293-b5a6-8741e8f9e0a8",
+                "target": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
+                "targetHandle": "b",
+                "id": "reactflow__edge-6300f8ae-2a1d-421e-bae5-e970bec7330ef7d59cce-95a3-4293-b5a6-8741e8f9e0a8-e85fd7c1-cf04-4b4b-83ab-485df7334592b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "386ffca1-55ee-4e8a-b487-934107739dce",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-386ffca1-55ee-4e8a-b487-934107739dcea",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "946bfb7f-b780-4901-8827-dcaba6eb0136",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-946bfb7f-b780-4901-8827-dcaba6eb0136a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "0f1d1723-a606-427c-8d06-84ea13847bcb",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-0f1d1723-a606-427c-8d06-84ea13847bcba",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-7faed115-981b-4d79-a42f-c5600e1f1d7ba",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "c3787681-5861-4093-b939-b24990552558",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-c3787681-5861-4093-b939-b24990552558a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-e85fd7c1-cf04-4b4b-83ab-485df7334592a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "e12bca49-82fb-4660-9d1d-a31b00712350",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-e12bca49-82fb-4660-9d1d-a31b00712350a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-47d38a3e-548b-4c5c-9170-5fca5e533bffa",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "667d02d3-29c9-442c-9c33-420747d0899b",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-667d02d3-29c9-442c-9c33-420747d0899ba",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "daca1be4-f547-4991-9967-991471f4e3e7",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-daca1be4-f547-4991-9967-991471f4e3e7a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-47095fdf-1bf2-42ae-ade5-9e10e7783f17a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-699b45cd-826e-4fe9-9509-c937ba4aabdba",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "a845b4af-3644-4077-b536-6e084364c7a8",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-a845b4af-3644-4077-b536-6e084364c7a8a",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "e12bca49-82fb-4660-9d1d-a31b00712350",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "cd5acfc8-a835-4673-9107-2157338f1aa1",
+                "id": "reactflow__edge-e12bca49-82fb-4660-9d1d-a31b00712350out-734c531b-1e83-4835-bf4a-0da1f10753fccd5acfc8-a835-4673-9107-2157338f1aa1",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "a845b4af-3644-4077-b536-6e084364c7a8",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
+                "id": "reactflow__edge-a845b4af-3644-4077-b536-6e084364c7a8out-734c531b-1e83-4835-bf4a-0da1f10753fc27e6a915-6d60-4c6d-8edf-5f60d9d67adc",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "0471f7ab-f2be-4a6a-9f27-129cb53cc223",
+                "id": "reactflow__edge-47d38a3e-548b-4c5c-9170-5fca5e533bffout-734c531b-1e83-4835-bf4a-0da1f10753fc0471f7ab-f2be-4a6a-9f27-129cb53cc223",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "667d02d3-29c9-442c-9c33-420747d0899b",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "0e0842d5-230d-4596-95c6-8f3aefb605e9",
+                "id": "reactflow__edge-667d02d3-29c9-442c-9c33-420747d0899bout-734c531b-1e83-4835-bf4a-0da1f10753fc0e0842d5-230d-4596-95c6-8f3aefb605e9",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "daca1be4-f547-4991-9967-991471f4e3e7",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "4752ac14-8bea-4534-aa37-726bced7b4c1",
+                "id": "reactflow__edge-daca1be4-f547-4991-9967-991471f4e3e7out-734c531b-1e83-4835-bf4a-0da1f10753fc4752ac14-8bea-4534-aa37-726bced7b4c1",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "5b3ac4e8-3e2d-457d-82d7-46040e556700",
+                "id": "reactflow__edge-47095fdf-1bf2-42ae-ade5-9e10e7783f17out-734c531b-1e83-4835-bf4a-0da1f10753fc5b3ac4e8-3e2d-457d-82d7-46040e556700",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "b9579340-266f-4e12-90c6-d0013f4034be",
+                "id": "reactflow__edge-263de8c4-b118-4288-93b2-4bb5ad2bff6aout-734c531b-1e83-4835-bf4a-0da1f10753fcb9579340-266f-4e12-90c6-d0013f4034be",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
+                "sourceHandle": "out",
+                "target": "734c531b-1e83-4835-bf4a-0da1f10753fc",
+                "targetHandle": "aceae923-6d74-455c-be17-2687d778e20b",
+                "id": "reactflow__edge-699b45cd-826e-4fe9-9509-c937ba4aabdbout-734c531b-1e83-4835-bf4a-0da1f10753fcaceae923-6d74-455c-be17-2687d778e20b",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "b8b34ec2-93f1-46f5-a882-0010d8c242e9",
+                "target": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
+                "targetHandle": "a",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f4197b8b34ec2-93f1-46f5-a882-0010d8c242e9-263de8c4-b118-4288-93b2-4bb5ad2bff6aa",
+                "type": "nodeEdge"
+              },
+              {
+                "source": "1943e133-9246-4fa6-93c9-c377e66f4197",
+                "sourceHandle": "82d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8",
+                "target": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-1943e133-9246-4fa6-93c9-c377e66f419782d8c59f-2c1d-4f3c-86e6-717fc3ba3aa8-684b9735-8f9a-4d99-85dd-a280366e90b4carry in"
+              },
+              {
+                "source": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "sourceHandle": "carry out",
+                "target": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-684b9735-8f9a-4d99-85dd-a280366e90b4carry out-62a5af5c-998e-4790-ac02-785021cf589dcarry in"
+              },
+              {
+                "source": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "sourceHandle": "carry out",
+                "target": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-62a5af5c-998e-4790-ac02-785021cf589dcarry out-9ddc3227-efef-44c7-ae90-4df906aad614carry in"
+              },
+              {
+                "source": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "sourceHandle": "carry out",
+                "target": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-9ddc3227-efef-44c7-ae90-4df906aad614carry out-eab7ae80-9052-41ff-8e9f-dd689c0d73ffcarry in"
+              },
+              {
+                "source": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "sourceHandle": "carry out",
+                "target": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-eab7ae80-9052-41ff-8e9f-dd689c0d73ffcarry out-7da1dcfb-a6c8-4cd8-9724-6419fe1ba92dcarry in"
+              },
+              {
+                "source": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "sourceHandle": "carry out",
+                "target": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-7da1dcfb-a6c8-4cd8-9724-6419fe1ba92dcarry out-0e102994-0810-4ee1-9dfb-69e0e4b595a3carry in"
+              },
+              {
+                "source": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "sourceHandle": "carry out",
+                "target": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-0e102994-0810-4ee1-9dfb-69e0e4b595a3carry out-b8358a16-348b-4a5f-b7e2-87281aad9d70carry in"
+              },
+              {
+                "source": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "sourceHandle": "carry out",
+                "target": "d94a0fe3-b81b-4989-964b-613daa56177f",
+                "targetHandle": "carry in",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-b8358a16-348b-4a5f-b7e2-87281aad9d70carry out-d94a0fe3-b81b-4989-964b-613daa56177fcarry in"
+              },
+              {
+                "source": "d94a0fe3-b81b-4989-964b-613daa56177f",
+                "sourceHandle": "sum",
+                "target": "699b45cd-826e-4fe9-9509-c937ba4aabdb",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-d94a0fe3-b81b-4989-964b-613daa56177fsum-699b45cd-826e-4fe9-9509-c937ba4aabdbb"
+              },
+              {
+                "source": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "sourceHandle": "sum",
+                "target": "263de8c4-b118-4288-93b2-4bb5ad2bff6a",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-b8358a16-348b-4a5f-b7e2-87281aad9d70sum-263de8c4-b118-4288-93b2-4bb5ad2bff6ab"
+              },
+              {
+                "source": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "sourceHandle": "sum",
+                "target": "47095fdf-1bf2-42ae-ade5-9e10e7783f17",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-0e102994-0810-4ee1-9dfb-69e0e4b595a3sum-47095fdf-1bf2-42ae-ade5-9e10e7783f17b"
+              },
+              {
+                "source": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "sourceHandle": "sum",
+                "target": "daca1be4-f547-4991-9967-991471f4e3e7",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-7da1dcfb-a6c8-4cd8-9724-6419fe1ba92dsum-daca1be4-f547-4991-9967-991471f4e3e7b"
+              },
+              {
+                "source": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "sourceHandle": "sum",
+                "target": "667d02d3-29c9-442c-9c33-420747d0899b",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-eab7ae80-9052-41ff-8e9f-dd689c0d73ffsum-667d02d3-29c9-442c-9c33-420747d0899bb"
+              },
+              {
+                "source": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "sourceHandle": "sum",
+                "target": "47d38a3e-548b-4c5c-9170-5fca5e533bff",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-9ddc3227-efef-44c7-ae90-4df906aad614sum-47d38a3e-548b-4c5c-9170-5fca5e533bffb"
+              },
+              {
+                "source": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "sourceHandle": "sum",
+                "target": "a845b4af-3644-4077-b536-6e084364c7a8",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-62a5af5c-998e-4790-ac02-785021cf589dsum-a845b4af-3644-4077-b536-6e084364c7a8b"
+              },
+              {
+                "source": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "sourceHandle": "sum",
+                "target": "e12bca49-82fb-4660-9d1d-a31b00712350",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-684b9735-8f9a-4d99-85dd-a280366e90b4sum-e12bca49-82fb-4660-9d1d-a31b00712350b"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "9e9902f7-ff2f-45d4-b9a3-25b828851d6d",
+                "target": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7709e9902f7-ff2f-45d4-b9a3-25b828851d6d-684b9735-8f9a-4d99-85dd-a280366e90b4a"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "de850995-fcbb-4e46-bfb0-8b9bdb7dfd32",
+                "target": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a770de850995-fcbb-4e46-bfb0-8b9bdb7dfd32-62a5af5c-998e-4790-ac02-785021cf589da"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "889d3e09-5cd2-4a3a-a802-ef2053a5d212",
+                "target": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a770889d3e09-5cd2-4a3a-a802-ef2053a5d212-9ddc3227-efef-44c7-ae90-4df906aad614a"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "5367e821-de5f-4b58-9d2e-d1e3655ab742",
+                "target": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7705367e821-de5f-4b58-9d2e-d1e3655ab742-eab7ae80-9052-41ff-8e9f-dd689c0d73ffa"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "13a8acc2-5191-4bdc-bf0e-6fc4efcff8ff",
+                "target": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a77013a8acc2-5191-4bdc-bf0e-6fc4efcff8ff-7da1dcfb-a6c8-4cd8-9724-6419fe1ba92da"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "6da2ae49-5510-47ce-9d81-c1dcecafb30d",
+                "target": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7706da2ae49-5510-47ce-9d81-c1dcecafb30d-0e102994-0810-4ee1-9dfb-69e0e4b595a3a"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "7198d28b-ca65-4091-b28c-1a3d2b7efd0f",
+                "target": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a7707198d28b-ca65-4091-b28c-1a3d2b7efd0f-b8358a16-348b-4a5f-b7e2-87281aad9d70a"
+              },
+              {
+                "source": "5316a1e4-6bf8-4c8f-af2a-21892274a770",
+                "sourceHandle": "90f9d496-2041-41ac-b5a1-c9453802f45f",
+                "target": "d94a0fe3-b81b-4989-964b-613daa56177f",
+                "targetHandle": "a",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-5316a1e4-6bf8-4c8f-af2a-21892274a77090f9d496-2041-41ac-b5a1-c9453802f45f-d94a0fe3-b81b-4989-964b-613daa56177fa"
+              },
+              {
+                "source": "079e15e3-1a2b-4cce-9abd-992565bdf2e2",
+                "sourceHandle": "out",
+                "target": "684b9735-8f9a-4d99-85dd-a280366e90b4",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-079e15e3-1a2b-4cce-9abd-992565bdf2e2out-684b9735-8f9a-4d99-85dd-a280366e90b4b"
+              },
+              {
+                "source": "386ffca1-55ee-4e8a-b487-934107739dce",
+                "sourceHandle": "out",
+                "target": "62a5af5c-998e-4790-ac02-785021cf589d",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-386ffca1-55ee-4e8a-b487-934107739dceout-62a5af5c-998e-4790-ac02-785021cf589db"
+              },
+              {
+                "source": "946bfb7f-b780-4901-8827-dcaba6eb0136",
+                "sourceHandle": "out",
+                "target": "9ddc3227-efef-44c7-ae90-4df906aad614",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-946bfb7f-b780-4901-8827-dcaba6eb0136out-9ddc3227-efef-44c7-ae90-4df906aad614b"
+              },
+              {
+                "source": "0f1d1723-a606-427c-8d06-84ea13847bcb",
+                "sourceHandle": "out",
+                "target": "eab7ae80-9052-41ff-8e9f-dd689c0d73ff",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-0f1d1723-a606-427c-8d06-84ea13847bcbout-eab7ae80-9052-41ff-8e9f-dd689c0d73ffb"
+              },
+              {
+                "source": "7faed115-981b-4d79-a42f-c5600e1f1d7b",
+                "sourceHandle": "out",
+                "target": "7da1dcfb-a6c8-4cd8-9724-6419fe1ba92d",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-7faed115-981b-4d79-a42f-c5600e1f1d7bout-7da1dcfb-a6c8-4cd8-9724-6419fe1ba92db"
+              },
+              {
+                "source": "c3787681-5861-4093-b939-b24990552558",
+                "sourceHandle": "out",
+                "target": "0e102994-0810-4ee1-9dfb-69e0e4b595a3",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-c3787681-5861-4093-b939-b24990552558out-0e102994-0810-4ee1-9dfb-69e0e4b595a3b"
+              },
+              {
+                "source": "2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32",
+                "sourceHandle": "out",
+                "target": "b8358a16-348b-4a5f-b7e2-87281aad9d70",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-2565a7e1-d0a4-43ca-9f2c-4b4cec7c9a32out-b8358a16-348b-4a5f-b7e2-87281aad9d70b"
+              },
+              {
+                "source": "e85fd7c1-cf04-4b4b-83ab-485df7334592",
+                "sourceHandle": "out",
+                "target": "d94a0fe3-b81b-4989-964b-613daa56177f",
+                "targetHandle": "b",
+                "type": "nodeEdge",
+                "id": "reactflow__edge-e85fd7c1-cf04-4b4b-83ab-485df7334592out-d94a0fe3-b81b-4989-964b-613daa56177fb"
+              }
+            ],
+            "name": "ALU"
           }
         }
       ]

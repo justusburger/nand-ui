@@ -16,6 +16,7 @@ import TextNode from './nodes/TextNode'
 import JKFFNode from './nodes/JKFFNode'
 import CounterNode from './nodes/CounterNode'
 import ClockNode from './nodes/ClockNode'
+import FullAdderNode from './nodes/FullAdderNode'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -34,6 +35,7 @@ export const NODE_TYPES_IDS = {
   JKFF: 'jkff',
   COUNTER: 'counter',
   CLOCK: 'clock',
+  FULL_ADDER: 'full_adder',
 } as const
 
 export type NodeType<TData = any> = {
@@ -131,6 +133,11 @@ export const defaultNodeTypes: NodeType[] = [
     id: NODE_TYPES_IDS.CLOCK,
     name: 'Clock',
     node: ClockNode,
+  },
+  {
+    id: NODE_TYPES_IDS.FULL_ADDER,
+    name: 'Full Adder',
+    node: FullAdderNode,
   },
 ]
 
