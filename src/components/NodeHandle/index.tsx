@@ -30,7 +30,7 @@ function NodeHandle({
         flexDirection: type === 'input' ? 'row-reverse' : 'row',
       }}
     >
-      <div className="text-gray-300 text-xs px-1">{label || id}</div>
+      <div className="text-gray-300 text-xs px-1">{label}</div>
       <HandleIndicator
         type={type === 'input' ? 'target' : 'source'}
         id={id}

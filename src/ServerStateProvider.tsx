@@ -41,7 +41,10 @@ const replacer = (key: string, value: any) => {
 const saveNodes = throttle(async function saveNodes(nodes: any[]) {
   await fetch(nodesUrl, {
     method: 'PUT',
-    body: JSON.stringify({ id: 'nodes', data: nodes.map(cleanNode) }, replacer),
+    body: JSON.stringify(
+      { id: 'nodes', data: nodes.filter((n) => !n.parentNode).map(cleanNode) },
+      replacer
+    ),
     headers: {
       'Content-Type': 'application/json',
     },

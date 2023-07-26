@@ -9,9 +9,11 @@ import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
+import { OutboundHandleState } from '../useOutboundState'
 
 export interface OutputNodeData {
   handles: NodeHandleData[]
+  outboundHandleState: OutboundHandleState
 }
 
 function OutputNode({ id }: NodeProps) {

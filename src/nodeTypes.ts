@@ -17,6 +17,7 @@ import JKFFNode from './nodes/JKFFNode'
 import CounterNode from './nodes/CounterNode'
 import ClockNode from './nodes/ClockNode'
 import FullAdderNode from './nodes/FullAdderNode'
+import { OutboundHandleState } from './useOutboundState'
 
 export const NODE_TYPES_IDS = {
   INPUT: 'in',
@@ -49,6 +50,8 @@ export interface CustomNodeTypeData {
   nodes: Node[]
   edges: Edge[]
   name: string
+  customNodeTypeId: string
+  outboundHandleState: OutboundHandleState
 }
 export type CustomNodeType = NodeType<CustomNodeTypeData>
 

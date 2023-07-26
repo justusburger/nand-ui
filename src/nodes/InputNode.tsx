@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
-import { NodeProps, NodeToolbar, Position } from 'reactflow'
+import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
@@ -9,6 +9,7 @@ import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
+import useInboundState from '../useInboundState'
 
 export interface InputNodeData {
   parentNodeId?: string
@@ -16,11 +17,17 @@ export interface InputNodeData {
   handles: NodeHandleData[]
 }
 
-function InputNode({ id }: NodeProps<InputNodeData>) {
+function InputNode({ id, data: { parentNodeId } }: NodeProps<InputNodeData>) {
+  const nodes = useNodes()
+  const edges = useEdges()
+  const inboundState = useInboundState(parentNodeId, nodes, edges)
   const [outboundHandleState, setOutboundHandleState] = useNodeDataState<
     InputNodeData,
     OutboundHandleState
   >(id, 'outboundHandleState', {})
+  useEffect(() => {
+    if (parentNodeId) setOutboundHandleState(inboundState)
+  }, [JSON.stringify(inboundState), parentNodeId])
   const [handles, setHandles] = useNodeDataState<
     InputNodeData,
     NodeHandleData[]

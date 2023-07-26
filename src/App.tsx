@@ -29,6 +29,7 @@ import { v4 } from 'uuid'
 import NodeEdge from './NodeEdge'
 import Toolbar from './components/Toolbar'
 import useLocalStorageState from './useLocalStorageState'
+import CustomNodeTypesProvider from './components/CutomNodeTypesProvider'
 
 const edgeOptions: DefaultEdgeOptions = {
   animated: false,
@@ -73,8 +74,19 @@ export default function App({
   }, [nodes])
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   useEffect(() => {
-    saveEdges(edges)
-  }, [edges])
+    const nodeLookup = nodes.reduce((acc, node) => {
+      acc[node.id] = node
+      return acc
+    }, {} as { [key: string]: Node })
+    const filteredEdges = edges.filter((e) => {
+      const sourceNode = nodeLookup[e.source]
+      if (!sourceNode) return false
+      const targetNode = nodeLookup[e.target]
+      if (!targetNode) return false
+      return true
+    })
+    saveEdges(filteredEdges)
+  }, [edges, nodes])
   const [customNodeTypes, setCustomNodeTypes] = useState<CustomNodeType[]>(
     initialCustomNodeTypes
   )
@@ -136,58 +148,81 @@ export default function App({
         const dropPosition = manager.getClientOffset()
         if (!dropPosition) throw new Error('No drop location')
         const customNode = !defaultNodeTypeMap[nodeType.id]
-        reactFlowInstance.addNodes({
-          type: customNode ? NODE_TYPES_IDS.CUSTOM : nodeType.id,
-          id: v4(),
-          position: {
-            x: (dropPosition.x - x) / zoom,
-            y: (dropPosition.y - y) / zoom,
-          },
-          data: {
-            ...nodeType.data,
-            ...(customNode ? { customNodeTypeId: nodeType.id } : {}),
-          },
-        })
+        if (customNode) {
+          const parentId = v4()
+          reactFlowInstance.addNodes([
+            {
+              type: NODE_TYPES_IDS.CUSTOM,
+              id: parentId,
+              position: {
+                x: (dropPosition.x - x) / zoom,
+                y: (dropPosition.y - y) / zoom,
+              },
+              data: {
+                ...nodeType.data,
+                customNodeTypeId: nodeType.id,
+              },
+            },
+          ])
+          reactFlowInstance.addEdges([...nodeType.data.edges])
+        } else {
+          reactFlowInstance.addNodes({
+            type: nodeType.id,
+            id: v4(),
+            position: {
+              x: (dropPosition.x - x) / zoom,
+              y: (dropPosition.y - y) / zoom,
+            },
+            data: {
+              ...nodeType.data,
+            },
+          })
+        }
       },
     }),
     [reactFlowInstance]
   )
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }} ref={drop}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={defaultNodeTypeMap}
-        defaultEdgeOptions={edgeOptions}
-        connectionLineStyle={{ stroke: 'white' }}
-        snapToGrid={true}
-        edgeTypes={edgeTypes}
-        minZoom={0.1}
-        maxZoom={5}
-        zoomOnDoubleClick={false}
-        defaultViewport={initialViewport}
-      >
-        <Controls position="bottom-right" />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        <Panel position="top-left">
-          <Toolbar />
-        </Panel>
-        <Panel position="bottom-left">
-          <Drawer
-            nodeTypes={defaultNodeTypes}
-            customNodeTypes={customNodeTypes}
-            onCreateStart={onCreateCustomNodeTypeClick}
-            createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
-            creating={isCreatingCustomNodeType}
-            onCreateComplete={onCreateTypeComplete}
-            onCustomNodeTypeDelete={onCustomNodeTypeDelete}
-          />
-        </Panel>
-      </ReactFlow>
-    </div>
+    <CustomNodeTypesProvider
+      customNodeTypes={customNodeTypes}
+      setCustomNodeTypes={setCustomNodeTypes}
+    >
+      <div style={{ width: '100vw', height: '100vh' }} ref={drop}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          nodeTypes={defaultNodeTypeMap}
+          defaultEdgeOptions={edgeOptions}
+          connectionLineStyle={{ stroke: 'white' }}
+          snapToGrid={true}
+          edgeTypes={edgeTypes}
+          minZoom={0.1}
+          maxZoom={5}
+          zoomOnDoubleClick={false}
+          defaultViewport={initialViewport}
+        >
+          <Controls position="bottom-right" />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+          <Panel position="top-left">
+            <Toolbar />
+          </Panel>
+          <Panel position="bottom-left">
+            <Drawer
+              nodeTypes={defaultNodeTypes}
+              customNodeTypes={customNodeTypes}
+              onCreateStart={onCreateCustomNodeTypeClick}
+              createCustomNodeTypeEnabled={createCustomNodeTypeEnabled}
+              creating={isCreatingCustomNodeType}
+              onCreateComplete={onCreateTypeComplete}
+              onCustomNodeTypeDelete={onCustomNodeTypeDelete}
+            />
+          </Panel>
+        </ReactFlow>
+      </div>
+    </CustomNodeTypesProvider>
   )
 }

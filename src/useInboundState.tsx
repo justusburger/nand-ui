@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Edge, Node } from 'reactflow'
 
 function useInboundState(
@@ -25,15 +25,19 @@ function useInboundState(
     [edges, nodesLookup]
   )
 
-  const values = useMemo(() => {
-    if (!nodeId) return {}
-    return inboundEdgesWithNodes.reduce((acc, edge) => {
+  const [values, setValues] = useState({})
+
+  useEffect(() => {
+    if (!nodeId) return
+    const newValues = inboundEdgesWithNodes.reduce((acc, edge) => {
       const { outboundHandleState = {} } = edge.sourceNode?.data || {}
       acc[edge.targetHandle!] =
         acc[edge.targetHandle!] || outboundHandleState[edge.sourceHandle!]
       return acc
     }, {} as { [key: string]: boolean })
-  }, [inboundEdgesWithNodes, nodeId])
+    if (JSON.stringify(newValues) !== JSON.stringify(values))
+      setValues(newValues)
+  }, [inboundEdgesWithNodes, nodeId, values])
 
   return values
 }
