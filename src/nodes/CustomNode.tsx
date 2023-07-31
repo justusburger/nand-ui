@@ -38,7 +38,6 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
       return {
         ...node,
         id: newNodeId,
-        parentNode: id,
         position: {
           x: node.position.x - minX + 250,
           y: node.position.y - minY,
@@ -48,6 +47,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
           parentNodeId: id,
         },
         focusable: false,
+        selectable: false,
         style: { display: 'none' },
       }
     })
@@ -133,7 +133,7 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 18 }}>{data.name}</div>
+        <div style={{ fontSize: 18 }}>{nodeType?.data?.name}</div>
       </div>
       <OutputHandleRegion>
         {outputHandles.map((handle) => (

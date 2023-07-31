@@ -32,6 +32,8 @@ const excludeKeys = [
   'style',
   'outboundHandleState',
   'animated',
+  'width',
+  'height',
 ]
 const replacer = (key: string, value: any) => {
   if (excludeKeys.indexOf(key) > -1) return undefined

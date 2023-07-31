@@ -148,38 +148,39 @@ export default function App({
         const dropPosition = manager.getClientOffset()
         if (!dropPosition) throw new Error('No drop location')
         const customNode = !defaultNodeTypeMap[nodeType.id]
-        if (customNode) {
-          const parentId = v4()
-          reactFlowInstance.addNodes([
-            {
-              type: NODE_TYPES_IDS.CUSTOM,
-              id: parentId,
-              position: {
-                x: (dropPosition.x - x) / zoom,
-                y: (dropPosition.y - y) / zoom,
-              },
-              data: {
-                ...nodeType.data,
-                customNodeTypeId: nodeType.id,
-              },
-            },
-          ])
-          reactFlowInstance.addEdges([...nodeType.data.edges])
-        } else {
-          reactFlowInstance.addNodes({
-            type: nodeType.id,
+        reactFlowInstance.addNodes([
+          {
+            type: customNode ? NODE_TYPES_IDS.CUSTOM : nodeType.id,
             id: v4(),
             position: {
               x: (dropPosition.x - x) / zoom,
               y: (dropPosition.y - y) / zoom,
             },
-            data: {
-              ...nodeType.data,
-            },
-          })
-        }
+            data: customNode
+              ? {
+                  customNodeTypeId: nodeType.id,
+                }
+              : {},
+          },
+        ])
       },
     }),
+    [reactFlowInstance]
+  )
+
+  const onNodesDelete = useCallback(
+    (deletedNodes: Node[]) => {
+      const parentNodeIds = deletedNodes.reduce((acc, deletedNode) => {
+        if (deletedNode.data.customNodeTypeId) acc.push(deletedNode.id)
+        return acc
+      }, [] as string[])
+      if (parentNodeIds.length === 0) return
+      reactFlowInstance.setNodes((nodes) =>
+        nodes.filter(
+          (node) => parentNodeIds.indexOf(node.data.parentNodeId) === -1
+        )
+      )
+    },
     [reactFlowInstance]
   )
 
@@ -204,6 +205,7 @@ export default function App({
           maxZoom={5}
           zoomOnDoubleClick={false}
           defaultViewport={initialViewport}
+          onNodesDelete={onNodesDelete}
         >
           <Controls position="bottom-right" />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
