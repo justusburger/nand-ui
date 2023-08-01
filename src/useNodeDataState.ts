@@ -9,10 +9,9 @@ function useNodeDataState<TData, T>(
 ): [T, (newValue: T | ((oldValue: T) => T)) => void] {
   const reactFlowInstance = useReactFlow()
   const node = useNodeById(nodeId)
-  if (!node) throw new Error('Node not found')
-  const currentValue = (node.data as TData)[key] as T
   const setValue = useCallback(
     (newValue: T | ((oldValue: T) => T)) => {
+      if (!nodeId) return
       reactFlowInstance.setNodes((nodes) =>
         nodes.map((node) => {
           if (node.id === nodeId) {
@@ -30,12 +29,13 @@ function useNodeDataState<TData, T>(
     },
     [reactFlowInstance, nodeId, key]
   )
+  const currentValue = ((node?.data || {}) as TData)[key] as T
   const [initialised, setInitialised] = useState(false)
   useEffect(() => {
-    if (initialised) return
+    if (initialised || !nodeId) return
     setInitialised(true)
     if (!currentValue) setValue(defaultValue)
-  }, [initialised, currentValue, defaultValue])
+  }, [initialised, currentValue, defaultValue, nodeId])
   return [currentValue || defaultValue, setValue]
 }
 

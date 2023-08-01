@@ -9,17 +9,19 @@ import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
-import { OutboundHandleState } from '../useOutboundState'
+import useOutboundState, { OutboundHandleState } from '../useOutboundState'
 
 export interface OutputNodeData {
   handles: NodeHandleData[]
   outboundHandleState: OutboundHandleState
+  parentNodeId?: string
 }
 
-function OutputNode({ id }: NodeProps) {
+function OutputNode({ id, data: { parentNodeId } }: NodeProps) {
   const nodes = useNodes()
   const edges = useEdges()
   const inboundState = useInboundState(id, nodes, edges)
+  useOutboundState(parentNodeId, inboundState)
   const [handles, setHandles] = useNodeDataState<
     OutputNodeData,
     NodeHandleData[]

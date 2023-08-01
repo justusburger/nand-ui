@@ -13,9 +13,14 @@ function cleanNode(node: any) {
   const result = {
     ...node,
   }
-  if (result.type === 'custom') {
+  if (result.type === NODE_TYPES_IDS.CUSTOM) {
     result.data = {
       customNodeTypeId: result.data.customNodeTypeId,
+    }
+  }
+  if (result.type === NODE_TYPES_IDS.REGISTER) {
+    result.data = {
+      on: false,
     }
   }
   return result
@@ -44,7 +49,10 @@ const saveNodes = throttle(async function saveNodes(nodes: any[]) {
   await fetch(nodesUrl, {
     method: 'PUT',
     body: JSON.stringify(
-      { id: 'nodes', data: nodes.filter((n) => !n.parentNode).map(cleanNode) },
+      {
+        id: 'nodes',
+        data: nodes.filter((n) => !n.data?.parentNodeId).map(cleanNode),
+      },
       replacer
     ),
     headers: {

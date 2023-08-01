@@ -1,6 +1,15 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
-import { useReactFlow, NodeProps, Node, useNodes, useEdges } from 'reactflow'
+import {
+  useReactFlow,
+  NodeProps,
+  Node,
+  useNodes,
+  useEdges,
+  Position,
+  NodeToolbar,
+  useUpdateNodeInternals,
+} from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import InputHandleRegion from '../InputHandleRegion'
@@ -11,20 +20,23 @@ import { OutputNodeData } from './OutputNode'
 import { useCustomNodeTypes } from '../components/CutomNodeTypesProvider'
 import { v4 } from 'uuid'
 
-function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
+function CustomNode({ id, data, xPos, yPos }: NodeProps<CustomNodeTypeData>) {
+  const updateNodeInternals = useUpdateNodeInternals()
   const { customNodeTypes } = useCustomNodeTypes()
   const nodeType = useMemo(
     () => customNodeTypes.find((c) => c.id === data.customNodeTypeId),
     [customNodeTypes, data.customNodeTypeId]
   )
-  const [nodesAdded, setNodesAdded] = useState(false)
   const reactFlowInstance = useReactFlow()
   const [inputHandles, setInputHandles] = useState<NodeHandleData[]>([])
   const [outputHandles, setOutputHandles] = useState<NodeHandleData[]>([])
   const [outputNode, setOutputNode] = useState<Node>()
+  const initRef = useRef(false)
   useEffect(() => {
-    if (!nodeType || !nodeType.data || nodesAdded) return
-    setNodesAdded(true)
+    if (!nodeType || !nodeType.data || initRef.current) {
+      return
+    }
+    initRef.current = true
     const oldToNewNodeIdsMap: { [oldNodeId: string]: string } = {}
     const minX = Math.min(
       ...nodeType.data.nodes.map((node: Node) => node.position.x)
@@ -39,8 +51,8 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         ...node,
         id: newNodeId,
         position: {
-          x: node.position.x - minX + 250,
-          y: node.position.y - minY,
+          x: node.position.x - minX + xPos,
+          y: node.position.y - minY + yPos,
         },
         data: {
           ...node.data,
@@ -60,19 +72,22 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         style: { display: 'none' },
       }
     })
-    reactFlowInstance.addNodes(newNodes)
-    reactFlowInstance.addEdges(newEdges)
-
-    const inputNodes = newNodes.filter((n) => n.type === NODE_TYPES_IDS.INPUT)
-    const inputHandles = inputNodes.reduce((acc, node) => {
-      return acc.concat((node.data as InputNodeData).handles)
-    }, [] as NodeHandleData[])
-    setInputHandles(inputHandles)
-    const outputNode = newNodes.find((n) => n.type === NODE_TYPES_IDS.OUTPUT)
-    setOutputNode(outputNode)
-    const outputHandles = (outputNode?.data as OutputNodeData).handles
-    setOutputHandles(outputHandles)
-  }, [nodeType, nodesAdded, reactFlowInstance, id])
+    setTimeout(() => {
+      console.log('init', id, nodeType.id)
+      reactFlowInstance.addNodes(newNodes)
+      reactFlowInstance.addEdges(newEdges)
+      updateNodeInternals([id, ...newNodes.map((n) => n.id)])
+      const inputNodes = newNodes.filter((n) => n.type === NODE_TYPES_IDS.INPUT)
+      const inputHandles = inputNodes.reduce((acc, node) => {
+        return acc.concat((node.data as InputNodeData).handles)
+      }, [] as NodeHandleData[])
+      setInputHandles(inputHandles)
+      const outputNode = newNodes.find((n) => n.type === NODE_TYPES_IDS.OUTPUT)
+      setOutputNode(outputNode)
+      const outputHandles = (outputNode?.data as OutputNodeData).handles
+      setOutputHandles(outputHandles)
+    }, 0)
+  }, [nodeType, reactFlowInstance, id, initRef, updateNodeInternals])
 
   const nodes = useNodes()
   const edges = useEdges()
@@ -81,40 +96,46 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
     nodes,
     edges
   )
+  // console.log(outputNode?.id)
   const outboundState: { [key: string]: boolean } = useInboundState(
     outputNode?.id,
     nodes,
     edges
   )
 
-  useEffect(() => {
-    if (!nodesAdded) return
-    reactFlowInstance.setNodes((nodes) =>
-      nodes.map((node) => {
-        if (node.id === id) {
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              outboundHandleState: outboundState,
-            },
-          }
-        }
-        return node
-      })
-    )
-  }, [outboundState, reactFlowInstance, nodesAdded])
+  // useEffect(() => {
+  //   if (!nodesAdded) return
+  //   reactFlowInstance.setNodes((nodes) =>
+  //     nodes.map((node) => {
+  //       if (node.id === id) {
+  //         return {
+  //           ...node,
+  //           data: {
+  //             ...node.data,
+  //             outboundHandleState: outboundState,
+  //           },
+  //         }
+  //       }
+  //       return node
+  //     })
+  //   )
+  // }, [outboundState, reactFlowInstance, nodesAdded])
 
   return (
     <NodeContainer>
-      {/* <NodeToolbar position={Position.Top}>
-        <button
+      {/* <NodeToolbar position={Position.Bottom}> */}
+      {/* <div className="bg-white rounded p-3">
+          <pre className="text-xs text-black"> */}
+      {/* {JSON.stringify(outputNode, null, 2)} */}
+      {/* </pre>
+        </div> */}
+      {/* <button
           className="bg-white text-black text-sm rounded px-2 py-1 active:opacity-50"
           onClick={onUnpackClick}
         >
           Unpack
-        </button>
-      </NodeToolbar> */}
+        </button> */}
+      {/* </NodeToolbar> */}
       <InputHandleRegion>
         {inputHandles.map((handle, i) => (
           <NodeHandle
