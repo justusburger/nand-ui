@@ -1,11 +1,9 @@
-import { NodeProps, useEdges, useNodes } from 'reactflow'
+import { NodeProps } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import useInboundState from '../useInboundState'
-import useOutboundState from '../useOutboundState'
-import { useMemo } from 'react'
+import { useHandleState } from '../components/HandleStateProvider'
 
 const A_HANDLE_ID = 'a'
 const B_HANDLE_ID = 'b'
@@ -16,10 +14,7 @@ const CARRY_OUT_HANDLE_ID = 'carry out'
 const outputHandleIds = [SUM_HANDLE_ID, CARRY_OUT_HANDLE_ID]
 
 function FullAdderNode({ id }: NodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
-  const outboundState: any = useMemo(() => {
+  const { inboundState, outboundState } = useHandleState(id, (inboundState) => {
     let sum = 0
     if (inboundState[A_HANDLE_ID]) sum += 1
     if (inboundState[B_HANDLE_ID]) sum += 1
@@ -29,8 +24,7 @@ function FullAdderNode({ id }: NodeProps) {
       [SUM_HANDLE_ID]: sum === 1 || sum === 3,
       [CARRY_OUT_HANDLE_ID]: sum === 2 || sum === 3,
     }
-  }, [inboundState])
-  useOutboundState(id, outboundState)
+  })
 
   return (
     <NodeContainer>

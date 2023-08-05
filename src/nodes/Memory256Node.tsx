@@ -1,12 +1,12 @@
-import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
-import useInboundState from '../useInboundState'
+import { NodeProps, NodeToolbar, Position } from 'reactflow'
+
 import useNodeDataState from '../useNodeDataState'
 import InputHandleRegion from '../InputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import useOutboundState from '../useOutboundState'
+import { useHandleState } from '../components/HandleStateProvider'
 
 const READ_ENABLED = 'Read enabled'
 const CLOCK = 'CLOCK'
@@ -41,9 +41,7 @@ export interface Memory256NodeData {
   state: { [key: number]: number }
 }
 function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
+  const { inboundState, updateOutboundState } = useHandleState(id)
   const [state, setState] = useNodeDataState<
     Memory256NodeData,
     { [key: number]: number }
@@ -76,20 +74,25 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
     }
   }, [inboundStateJSON, selectedAddress, inboundData])
 
-  const outboundData = useMemo(() => {
+  useEffect(() => {
     const binary = (state[selectedAddress] >>> 0)
       .toString(2)
       .padStart(numberOfDataBits, '0')
-    const result: any = {}
+    const newOutboundState: any = {}
     if (inboundState[OUTPUT_ENABLED]) {
       for (let i = 0; i < numberOfDataBits; i++) {
-        result[`d${i + 1}`] = parseInt(binary[numberOfDataBits - 1 - i] || '0')
+        newOutboundState[`d${i + 1}`] = parseInt(
+          binary[numberOfDataBits - 1 - i] || '0'
+        )
       }
     }
-    return result
-  }, [JSON.stringify(state), selectedAddress, inboundState[OUTPUT_ENABLED]])
-
-  useOutboundState(id, outboundData)
+    updateOutboundState(newOutboundState)
+  }, [
+    state,
+    selectedAddress,
+    inboundState[OUTPUT_ENABLED],
+    updateOutboundState,
+  ])
 
   const handleCellValueChange = useCallback(
     (address: number, value: number) => {

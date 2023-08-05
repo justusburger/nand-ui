@@ -3,21 +3,19 @@ import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
 import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import InputHandleRegion from '../InputHandleRegion'
-import useInboundState from '../useInboundState'
 import useNodeDataState from '../useNodeDataState'
 import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
+import { useHandleState } from '../components/HandleStateProvider'
 
 export interface OutputNodeData {
   handles: NodeHandleData[]
 }
 
 function OutputNode({ id }: NodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
+  const { inboundState } = useHandleState(id, (inboundState) => inboundState)
   const [handles, setHandles] = useNodeDataState<
     OutputNodeData,
     NodeHandleData[]

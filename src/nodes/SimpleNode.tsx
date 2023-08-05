@@ -1,10 +1,8 @@
 import NodeHandle from '../components/NodeHandle'
-import useInboundState from '../useInboundState'
-import useOutboundState from '../useOutboundState'
-import { useEdges, useNodes } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
+import { useHandleState } from '../components/HandleStateProvider'
 
 export interface SimpleNodeProps {
   id: string
@@ -12,7 +10,6 @@ export interface SimpleNodeProps {
   inputHandleIds: string[]
   outputHandleId: string
   outputEnabled: (inboundState: { [key: string]: boolean }) => boolean
-  outboundStateDelay?: number
 }
 
 function SimpleNode({
@@ -21,16 +18,12 @@ function SimpleNode({
   inputHandleIds,
   outputHandleId,
   outputEnabled,
-  outboundStateDelay,
 }: SimpleNodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
-  const outboundState = {
-    [outputHandleId]: outputEnabled(inboundState),
-  }
-
-  useOutboundState(id, outboundState, outboundStateDelay)
+  const { inboundState, outboundState } = useHandleState(id, (inboundState) => {
+    return {
+      [outputHandleId]: outputEnabled(inboundState),
+    }
+  })
 
   return (
     <NodeContainer>

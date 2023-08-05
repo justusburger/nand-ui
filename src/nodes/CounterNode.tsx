@@ -1,12 +1,11 @@
-import { NodeProps, useEdges, useNodes } from 'reactflow'
+import { NodeProps } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import useInboundState from '../useInboundState'
-import useOutboundState from '../useOutboundState'
+import { useHandleState } from '../components/HandleStateProvider'
 import useNodeDataState from '../useNodeDataState'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const INCREMENT = 'Increment'
 const CLOCK = 'Clock'
@@ -26,25 +25,23 @@ interface CounterData {
 }
 
 function CounterNode({ id }: NodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
+  const { inboundState, outboundState, updateOutboundState } =
+    useHandleState(id)
   const [previousInboundState, setPreviousInboundState] = useState<any>({})
   const [count, setCount] = useNodeDataState<CounterData, number>(
     id,
     'count',
     0
   )
-  const outboundState: { [key: string]: boolean } = useMemo(() => {
+  useEffect(() => {
     const binary = count.toString(2).padStart(numberOfDataHandles, '0')
-    const result: any = {}
+    const newOutboundState: any = {}
     for (let i = 0; i < numberOfDataHandles; i++) {
-      result[`d${i + 1}`] = binary[numberOfDataHandles - 1 - i] === '1'
+      newOutboundState[`d${i + 1}`] =
+        binary[numberOfDataHandles - 1 - i] === '1'
     }
-    return result
-  }, [count])
-
-  useOutboundState(id, outboundState)
+    updateOutboundState(newOutboundState)
+  }, [count, updateOutboundState])
 
   useEffect(() => {
     if (inboundState[CLEAR]) {

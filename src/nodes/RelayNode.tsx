@@ -1,33 +1,27 @@
 import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
-import useInboundState from '../useInboundState'
-import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
+import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import { useCallback, useMemo } from 'react'
 import useNodeDataState from '../useNodeDataState'
-import useOutboundState, { OutboundHandleState } from '../useOutboundState'
 import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import getHandleBinaryValue from '../getHandleBinaryValue'
+import { useHandleState } from '../components/HandleStateProvider'
 
 export interface RelayNodeData {
   countHandles: number
-  outboundHandleState: OutboundHandleState
   handles: NodeHandleData[]
 }
 
 function RelayNode({ id }: NodeProps<RelayNodeData>) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
+  const { inboundState } = useHandleState(id, (inboundState) => inboundState)
 
   const [handles, setHandles] = useNodeDataState<
     RelayNodeData,
     NodeHandleData[]
   >(id, 'handles', [{ id: v4(), label: '', isBinary: true }])
-
-  useOutboundState(id, inboundState)
 
   const binaryHandles = useMemo(() => {
     return handles.filter((handle) => handle.isBinary)

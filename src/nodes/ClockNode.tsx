@@ -1,8 +1,7 @@
-import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
+import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import useOutboundState from '../useOutboundState'
 import { useCallback, useEffect, useState } from 'react'
 import {
   PlayCircleIcon,
@@ -11,24 +10,17 @@ import {
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
 import InputHandleRegion from '../InputHandleRegion'
-import useInboundState from '../useInboundState'
+import { useHandleState } from '../components/HandleStateProvider'
 
 const HALT_HANDLE_ID = 'halt'
 const CLOCK_HANDLE_ID = 'out'
 const inputHandleIds = [HALT_HANDLE_ID]
 
 function ClockNode({ id }: NodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
   const [on, setOn] = useState(false)
   const [delay, setDelay] = useState(800)
   const [running, setRunning] = useState(false)
-  const outboundState = {
-    [CLOCK_HANDLE_ID]: on,
-  }
-
-  useOutboundState(id, outboundState)
+  const { inboundState, outboundState } = useHandleState(id)
 
   useEffect(() => {
     if (running) {

@@ -1,12 +1,11 @@
-import { NodeProps, useEdges, useNodes } from 'reactflow'
+import { NodeProps } from 'reactflow'
 import InputHandleRegion from '../InputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import useInboundState from '../useInboundState'
-import useOutboundState from '../useOutboundState'
 import useNodeDataState from '../useNodeDataState'
 import { useEffect, useState } from 'react'
+import { useHandleState } from '../components/HandleStateProvider'
 
 const J_HANDLE_ID = 'J'
 const ENABLE_HANDLE_ID = 'Enabled'
@@ -21,17 +20,17 @@ interface JKFFData {
 }
 
 function JKFFNode({ id }: NodeProps) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
+  const { inboundState, outboundState, updateOutboundState } =
+    useHandleState(id)
   const [previousInboundState, setPreviousInboundState] = useState<any>({})
   const [on, setOn] = useNodeDataState<JKFFData, boolean>(id, 'on', false)
-  const outboundState: { [key: string]: boolean } = {
-    [Q_HANDLE_ID]: on,
-    [NOT_Q_HANDLE_ID]: !on,
-  }
-
-  useOutboundState(id, outboundState)
+  useEffect(() => {
+    const newOutboundState: { [key: string]: boolean } = {
+      [Q_HANDLE_ID]: on,
+      [NOT_Q_HANDLE_ID]: !on,
+    }
+    updateOutboundState(newOutboundState)
+  }, [on, updateOutboundState])
 
   useEffect(() => {
     if (

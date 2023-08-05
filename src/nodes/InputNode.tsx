@@ -4,23 +4,19 @@ import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
-import { OutboundHandleState } from '../useOutboundState'
 import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
+import { useHandleState } from '../components/HandleStateProvider'
 
 export interface InputNodeData {
   parentNodeId?: string
-  outboundHandleState: OutboundHandleState
   handles: NodeHandleData[]
 }
 
 function InputNode({ id }: NodeProps<InputNodeData>) {
-  const [outboundHandleState, setOutboundHandleState] = useNodeDataState<
-    InputNodeData,
-    OutboundHandleState
-  >(id, 'outboundHandleState', {})
+  const { outboundState, updateOutboundState } = useHandleState(id)
   const [handles, setHandles] = useNodeDataState<
     InputNodeData,
     NodeHandleData[]
@@ -29,12 +25,12 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   const handleOnClick = useCallback(
     (handleId: string) => {
       const newState = {
-        ...outboundHandleState,
-        [handleId]: !outboundHandleState[handleId],
+        ...outboundState,
+        [handleId]: !outboundState[handleId],
       }
-      setOutboundHandleState(newState)
+      updateOutboundState(newState)
     },
-    [id, outboundHandleState]
+    [id, outboundState]
   )
 
   const binaryHandles = useMemo(() => {
@@ -47,7 +43,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
 
   const decimalValue = binaryHandles.reduce((acc, handle, i) => {
     const binaryColumnValue = getHandleBinaryValue(i, binaryHandles.length)
-    return acc + (outboundHandleState[handle.id] ? binaryColumnValue : 0)
+    return acc + (outboundState[handle.id] ? binaryColumnValue : 0)
   }, 0)
 
   const handleLabelChange = useCallback(
@@ -128,7 +124,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
               label={handleData.label}
               id={handleData.id}
               key={handleData.id}
-              enabled={outboundHandleState[handleData.id]}
+              enabled={outboundState[handleData.id]}
               onClick={handleOnClick}
               type="output"
               custom
@@ -143,7 +139,7 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
               }
               id={handleData.id}
               key={handleData.id}
-              enabled={outboundHandleState[handleData.id]}
+              enabled={outboundState[handleData.id]}
               onClick={handleOnClick}
               type="output"
               toggleable

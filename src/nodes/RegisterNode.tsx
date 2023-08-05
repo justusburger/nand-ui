@@ -1,25 +1,16 @@
-import { NodeProps, useEdges, useNodes } from 'reactflow'
+import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
 import { useEffect, useState } from 'react'
-import useInboundState from '../useInboundState'
-import useNodeDataState from '../useNodeDataState'
+import { useHandleState } from '../components/HandleStateProvider'
 
 const dataInHandleId = 'Data in'
 const readHandleId = 'Read'
 const clockHandleId = 'Clock'
 const inputHandleIds = [dataInHandleId, readHandleId, clockHandleId]
-export interface RegisterNodeData {
-  on: boolean
-}
-function RegisterNode({ id }: NodeProps<RegisterNodeData>) {
-  const nodes = useNodes()
-  const edges = useEdges()
-  const inboundState = useInboundState(id, nodes, edges)
-  const [on, setOn] = useNodeDataState<RegisterNodeData, boolean>(
-    id,
-    'on',
-    false
-  )
+
+function RegisterNode({ id }: NodeProps) {
+  const { inboundState } = useHandleState(id)
+  const [on, setOn] = useState<boolean>(false)
   const [previousInboundState, setPreviousInboundState] = useState<any>({})
   useEffect(() => {
     if (
@@ -30,7 +21,11 @@ function RegisterNode({ id }: NodeProps<RegisterNodeData>) {
       setOn(inboundState[dataInHandleId])
     }
     setPreviousInboundState(inboundState)
-  }, [JSON.stringify(inboundState), previousInboundState])
+  }, [
+    inboundState[readHandleId],
+    inboundState[clockHandleId],
+    previousInboundState[clockHandleId],
+  ])
   return (
     <SimpleNode
       id={id}

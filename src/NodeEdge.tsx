@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { EdgeProps, BaseEdge, useNodes, getSmoothStepPath } from 'reactflow'
+import { EdgeProps, BaseEdge, getSmoothStepPath } from 'reactflow'
+import { useHandleState } from './components/HandleStateProvider'
 
 function NodeEdge({
   source,
@@ -12,13 +13,8 @@ function NodeEdge({
   targetPosition,
   selected,
 }: EdgeProps) {
-  const nodes = useNodes()
-  const enabled = useMemo(() => {
-    const sourceNode = nodes.find((node) => node.id === source)
-    if (!sourceNode || !sourceHandleId) return false
-    const { outboundHandleState = {} } = sourceNode.data || ({} as any)
-    return outboundHandleState[sourceHandleId]
-  }, [nodes])
+  const { outboundState } = useHandleState(source)
+  const enabled = outboundState[sourceHandleId!]
   const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -32,7 +28,7 @@ function NodeEdge({
     if (enabled)
       return {
         stroke: 'red',
-        strokeWidth: 2,
+        strokeWidth: selected ? 3 : 1,
       }
     return {
       stroke: selected ? '#5c60b0' : '#fff',
