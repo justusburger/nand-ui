@@ -2,6 +2,7 @@ import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
 import { useEffect, useState } from 'react'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 const dataInHandleId = 'Data in'
 const readHandleId = 'Read'
@@ -37,4 +38,4 @@ function RegisterNode({ id }: NodeProps) {
   )
 }
 
-export default RegisterNode
+export default React.memo(RegisterNode)

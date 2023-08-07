@@ -4,6 +4,7 @@ import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 const A_HANDLE_ID = 'a'
 const B_HANDLE_ID = 'b'
@@ -55,4 +56,4 @@ function FullAdderNode({ id }: NodeProps) {
   )
 }
 
-export default FullAdderNode
+export default React.memo(FullAdderNode)

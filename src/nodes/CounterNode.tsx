@@ -6,6 +6,7 @@ import NodeHandle from '../components/NodeHandle'
 import { useHandleState } from '../components/HandleStateProvider'
 import useNodeDataState from '../useNodeDataState'
 import { useEffect, useState } from 'react'
+import React from 'react'
 
 const INCREMENT = 'Increment'
 const CLOCK = 'Clock'
@@ -95,4 +96,4 @@ function CounterNode({ id }: NodeProps) {
   )
 }
 
-export default CounterNode
+export default React.memo(CounterNode)

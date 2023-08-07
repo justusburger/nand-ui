@@ -9,6 +9,7 @@ import EditHandlesPanel from '../components/EditHandlesPanel'
 import DigitalNumber from '../components/DigitalNumber'
 import getHandleBinaryValue from '../getHandleBinaryValue'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 export interface InputNodeData {
   parentNodeId?: string
@@ -151,4 +152,4 @@ function InputNode({ id }: NodeProps<InputNodeData>) {
   )
 }
 
-export default InputNode
+export default React.memo(InputNode)

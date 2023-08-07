@@ -3,6 +3,7 @@ import InputHandleRegion from '../InputHandleRegion'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeContainer from '../NodeContainer'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 export interface SimpleNodeProps {
   id: string
@@ -52,4 +53,4 @@ function SimpleNode({
   )
 }
 
-export default SimpleNode
+export default React.memo(SimpleNode)

@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { EdgeProps, BaseEdge, getSmoothStepPath } from 'reactflow'
 import { useHandleState } from './components/HandleStateProvider'
+import React from 'react'
 
 function NodeEdge({
   source,
@@ -40,4 +41,4 @@ function NodeEdge({
   return <BaseEdge path={edgePath} style={style} />
 }
 
-export default NodeEdge
+export default React.memo(NodeEdge)

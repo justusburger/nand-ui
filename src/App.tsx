@@ -50,7 +50,7 @@ interface AppProps {
   saveCustomNodeTypes: (customNodeTypes: CustomNodeType[]) => Promise<void>
 }
 
-// let edgeIds: any = {}
+let edgeIds: any = {}
 export default function App({
   initialNodes,
   saveNodes,
@@ -171,31 +171,31 @@ export default function App({
     [reactFlowInstance]
   )
 
-  // const onError = useCallback(
-  //   (id: string, message: string) => {
-  //     if (message.indexOf("Couldn't create edge for") > -1) {
-  //       // return
-  //       let edgeId = message.substring(message.indexOf('edge id:') + 9)
-  //       edgeId = edgeId.substring(0, edgeId.length - 1)
-  //       // console.log(edgeId)
+  const onError = useCallback(
+    (id: string, message: string) => {
+      if (message.indexOf("Couldn't create edge for") > -1) {
+        // return
+        let edgeId = message.substring(message.indexOf('edge id:') + 9)
+        edgeId = edgeId.substring(0, edgeId.length - 1)
+        // console.log(edgeId)
 
-  //       edgeIds[edgeId] = true
-  //       console.log(edgeIds, Object.keys(edgeIds).length)
-  //       // if (Object.keys(edgeIds).length > 50) {
-  //       setTimeout(() => {
-  //         reactFlowInstance.setEdges((edges) => {
-  //           const filteredEdges = edges.filter((edge) => !edgeIds[edge.id])
-  //           console.log(edges.length, filteredEdges.length)
-  //           return filteredEdges
-  //         })
-  //         edgeIds = {}
-  //       }, 100)
-  //       // }
-  //     }
-  //     console.log(id, message)
-  //   },
-  //   [reactFlowInstance]
-  // )
+        edgeIds[edgeId] = true
+        console.log(edgeIds, Object.keys(edgeIds).length)
+        // if (Object.keys(edgeIds).length > 50) {
+        setTimeout(() => {
+          reactFlowInstance.setEdges((edges) => {
+            const filteredEdges = edges.filter((edge) => !edgeIds[edge.id])
+            console.log(edges.length, filteredEdges.length)
+            return filteredEdges
+          })
+          edgeIds = {}
+        }, 100)
+        // }
+      }
+      console.log(id, message)
+    },
+    [reactFlowInstance]
+  )
 
   return (
     <div style={{ width: '100vw', height: '100vh' }} ref={drop}>

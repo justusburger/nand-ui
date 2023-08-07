@@ -2,6 +2,7 @@ import { CustomNodeType, NodeType } from './nodeTypes'
 import NodeButton from './NodeButton'
 import CreateTypeButton from './components/CreateTypeButton'
 import CustomNodeButton from './components/CustomNodeButton'
+import React from 'react'
 
 interface DrawerProps {
   nodeTypes: NodeType[]
@@ -59,4 +60,4 @@ function Drawer({
   )
 }
 
-export default Drawer
+export default React.memo(Drawer)

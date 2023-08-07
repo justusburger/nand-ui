@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react'
-import NodeHandle from '../components/NodeHandle'
+import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
 import {
   useReactFlow,
   NodeProps,
@@ -23,7 +23,11 @@ import { InputNodeData } from './InputNode'
 import { OutputNodeData } from './OutputNode'
 import { ReactFlowProvider, ReactFlow } from 'reactflow'
 import NodeEdge from '../NodeEdge'
-import { useHandleState } from '../components/HandleStateProvider'
+import {
+  useHandleState,
+  useHandleStateInternal,
+} from '../components/HandleStateProvider'
+import React from 'react'
 
 const edgeTypes: EdgeTypes = {
   nodeEdge: NodeEdge,
@@ -35,22 +39,31 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   const parentHandleState = useHandleState(id)
   const reactFlowInstance = useReactFlow()
 
-  const inputNode: Node<InputNodeData> = useMemo(
-    () => childNodes.find((node) => node.type === NODE_TYPES_IDS.INPUT)!,
-    [childNodes]
+  const inputNodes: Node<InputNodeData>[] = useMemo(
+    () => childNodes.filter((node) => node.type === NODE_TYPES_IDS.INPUT),
+    childNodes
+  )
+  const outputNodes: Node<OutputNodeData>[] = useMemo(
+    () => childNodes.filter((node) => node.type === NODE_TYPES_IDS.OUTPUT),
+    childNodes
   )
 
-  const outputNode: Node<OutputNodeData> = useMemo(
-    () => childNodes.find((node) => node.type === NODE_TYPES_IDS.OUTPUT)!,
-    [childNodes]
-  )
+  const handleStateInternal = useHandleStateInternal()
 
-  const childInputHandleState = useHandleState(outputNode?.id)
-  const childOutputHandleState = useHandleState(outputNode?.id)
   useEffect(() => {
-    childInputHandleState.updateOutboundState(parentHandleState.inboundState)
-    parentHandleState.updateOutboundState(childOutputHandleState.inboundState)
-  }, [parentHandleState, childInputHandleState, childOutputHandleState])
+    inputNodes.forEach((node) => {
+      const inboundState = node.data.handles.reduce((acc, handleData) => {
+        acc[handleData.id] = parentHandleState.inboundState[handleData.id]
+        return acc
+      }, {} as Record<string, boolean>)
+      handleStateInternal.updateNode(node.id, inboundState)
+    })
+    const newParentOutboundState = outputNodes.reduce((acc, node) => {
+      const outputInboundState = handleStateInternal.nodes[node.id]
+      return { ...acc, ...outputInboundState }
+    }, {} as Record<string, boolean>)
+    parentHandleState.updateOutboundState(newParentOutboundState)
+  }, [handleStateInternal, parentHandleState, inputNodes, outputNodes])
 
   const onUnpackClick = useCallback(() => {
     reactFlowInstance.setNodes((nodes) =>
@@ -97,14 +110,25 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         </button>
       </NodeToolbar>
       <InputHandleRegion>
-        {inputNode.data.handles.map((handleData, i) => (
-          <NodeHandle
-            label={handleData.label || Math.pow(2, i).toString()}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={parentHandleState.inboundState[handleData.id]}
-            type="input"
-          />
+        {inputNodes.map((node) => (
+          <div
+            key={node.id}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'start',
+            }}
+          >
+            {node.data.handles.map((handleData: NodeHandleData, i: number) => (
+              <NodeHandle
+                label={handleData.label || Math.pow(2, i).toString()}
+                id={handleData.id}
+                key={handleData.id}
+                enabled={parentHandleState.inboundState[handleData.id]}
+                type="input"
+              />
+            ))}
+          </div>
         ))}
       </InputHandleRegion>
       <div
@@ -117,14 +141,25 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
         <div style={{ fontSize: 18 }}>{data.name}</div>
       </div>
       <OutputHandleRegion>
-        {outputNode.data.handles.map((handleData) => (
-          <NodeHandle
-            label={handleData.label}
-            id={handleData.id}
-            key={handleData.id}
-            enabled={parentHandleState.outboundState[handleData.id]}
-            type="output"
-          />
+        {outputNodes.map((node) => (
+          <div
+            key={node.id}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'end',
+            }}
+          >
+            {node.data.handles.map((handleData: NodeHandleData, i: number) => (
+              <NodeHandle
+                label={handleData.label || Math.pow(2, i).toString()}
+                id={handleData.id}
+                key={handleData.id}
+                enabled={parentHandleState.outboundState[handleData.id]}
+                type="output"
+              />
+            ))}
+          </div>
         ))}
       </OutputHandleRegion>
       <ReactFlowProvider>
@@ -145,4 +180,4 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   )
 }
 
-export default CustomNode
+export default React.memo(CustomNode)

@@ -6,6 +6,7 @@ import NodeHandle from '../components/NodeHandle'
 import useNodeDataState from '../useNodeDataState'
 import { useEffect, useState } from 'react'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 const J_HANDLE_ID = 'J'
 const ENABLE_HANDLE_ID = 'Enabled'
@@ -77,4 +78,4 @@ function JKFFNode({ id }: NodeProps) {
   )
 }
 
-export default JKFFNode
+export default React.memo(JKFFNode)

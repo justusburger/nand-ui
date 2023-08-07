@@ -7,6 +7,7 @@ import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 const READ_ENABLED = 'Read enabled'
 const CLOCK = 'CLOCK'
@@ -174,7 +175,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
   )
 }
 
-export default Memory256Node
+export default React.memo(Memory256Node)
 
 interface MemoryCellEditorProps {
   address: number

@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline'
 import InputHandleRegion from '../InputHandleRegion'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 const HALT_HANDLE_ID = 'halt'
 const CLOCK_HANDLE_ID = 'out'
@@ -94,4 +95,4 @@ function ClockNode({ id }: NodeProps) {
   )
 }
 
-export default ClockNode
+export default React.memo(ClockNode)

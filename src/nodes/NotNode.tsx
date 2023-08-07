@@ -1,5 +1,6 @@
 import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
+import React from 'react'
 
 const inputHandleIds = ['a']
 const outputEnabled = (inboundState: any) => !inboundState['a']
@@ -16,4 +17,4 @@ function NotNode({ id }: NodeProps) {
   )
 }
 
-export default NotNode
+export default React.memo(NotNode)

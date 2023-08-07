@@ -1,3 +1,5 @@
+import React from 'react'
+
 function OutputHandleRegion({ children }: React.PropsWithChildren) {
   return (
     <div
@@ -15,4 +17,4 @@ function OutputHandleRegion({ children }: React.PropsWithChildren) {
   )
 }
 
-export default OutputHandleRegion
+export default React.memo(OutputHandleRegion)

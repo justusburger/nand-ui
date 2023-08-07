@@ -1,12 +1,12 @@
 import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
+import React from 'react'
 
 const inputHandleIds = ['a', 'b']
 const outputEnabled = (inboundState: any) =>
   !(inboundState['a'] || inboundState['b'])
 
 function NorNode({ id }: NodeProps) {
-  const delay = parseInt(id) % 10
   return (
     <SimpleNode
       id={id}
@@ -14,9 +14,8 @@ function NorNode({ id }: NodeProps) {
       inputHandleIds={inputHandleIds}
       outputHandleId="out"
       outputEnabled={outputEnabled}
-      outboundStateDelay={isNaN(delay) ? 0 : delay}
     />
   )
 }
 
-export default NorNode
+export default React.memo(NorNode)

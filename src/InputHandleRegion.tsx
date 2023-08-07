@@ -1,3 +1,5 @@
+import React from 'react'
+
 function InputHandleRegion({ children }: React.PropsWithChildren) {
   return (
     <div
@@ -15,4 +17,4 @@ function InputHandleRegion({ children }: React.PropsWithChildren) {
   )
 }
 
-export default InputHandleRegion
+export default React.memo(InputHandleRegion)

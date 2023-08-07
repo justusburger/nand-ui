@@ -1,3 +1,5 @@
+import React from 'react'
+
 function NodeContainer({ children }: React.PropsWithChildren) {
   return (
     <div
@@ -14,4 +16,4 @@ function NodeContainer({ children }: React.PropsWithChildren) {
   )
 }
 
-export default NodeContainer
+export default React.memo(NodeContainer)

@@ -1,5 +1,6 @@
 import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
+import React from 'react'
 
 const inputHandleIds = ['a', 'b']
 const outputEnabled = (inboundState: any) =>
@@ -18,4 +19,4 @@ function XORNode({ id }: NodeProps) {
   )
 }
 
-export default XORNode
+export default React.memo(XORNode)

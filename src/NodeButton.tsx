@@ -1,5 +1,6 @@
 import { useDrag } from 'react-dnd'
 import { CustomNodeType, NodeType } from './nodeTypes'
+import React from 'react'
 
 interface NodeButtonProps {
   nodeType: NodeType | CustomNodeType
@@ -24,4 +25,4 @@ function NodeButton({ nodeType }: NodeButtonProps) {
   )
 }
 
-export default NodeButton
+export default React.memo(NodeButton)

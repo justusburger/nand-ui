@@ -9,6 +9,7 @@ import { v4 } from 'uuid'
 import EditHandlesPanel from '../components/EditHandlesPanel'
 import getHandleBinaryValue from '../getHandleBinaryValue'
 import { useHandleState } from '../components/HandleStateProvider'
+import React from 'react'
 
 export interface RelayNodeData {
   countHandles: number
@@ -153,4 +154,4 @@ function RelayNode({ id }: NodeProps<RelayNodeData>) {
   )
 }
 
-export default RelayNode
+export default React.memo(RelayNode)

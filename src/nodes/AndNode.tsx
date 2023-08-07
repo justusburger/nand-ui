@@ -1,5 +1,6 @@
 import { NodeProps } from 'reactflow'
 import SimpleNode from './SimpleNode'
+import React from 'react'
 
 const inputHandleIds = ['a', 'b']
 const outputEnabled = (inboundState: any) =>
@@ -17,4 +18,4 @@ function AndNode({ id }: NodeProps) {
   )
 }
 
-export default AndNode
+export default React.memo(AndNode)

@@ -2,6 +2,7 @@ import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import useNodeDataState from '../useNodeDataState'
 import { useCallback, useState } from 'react'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import React from 'react'
 
 interface TextNodeData {
   text: string
@@ -97,4 +98,4 @@ function TextNode({ id }: NodeProps<TextNodeData>) {
   )
 }
 
-export default TextNode
+export default React.memo(TextNode)
