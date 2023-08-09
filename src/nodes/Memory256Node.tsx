@@ -42,7 +42,8 @@ export interface Memory256NodeData {
   state: { [key: number]: number }
 }
 function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
-  const { inboundState, updateOutboundState } = useHandleState(id)
+  const { inboundState, outboundState, updateOutboundState } =
+    useHandleState(id)
   const [state, setState] = useNodeDataState<
     Memory256NodeData,
     { [key: number]: number }
@@ -165,7 +166,7 @@ function Memory256Node({ id }: NodeProps<Memory256NodeData>) {
           <NodeHandle
             id={handleId}
             label={handleId}
-            enabled={inboundState[OUTPUT_ENABLED] && outboundData[handleId]}
+            enabled={inboundState[OUTPUT_ENABLED] && outboundState[handleId]}
             key={handleId}
             type="output"
           />

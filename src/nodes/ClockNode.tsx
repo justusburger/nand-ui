@@ -18,17 +18,23 @@ const CLOCK_HANDLE_ID = 'out'
 const inputHandleIds = [HALT_HANDLE_ID]
 
 function ClockNode({ id }: NodeProps) {
-  const [on, setOn] = useState(false)
   const [delay, setDelay] = useState(800)
   const [running, setRunning] = useState(false)
-  const { inboundState, outboundState } = useHandleState(id)
+  const { inboundState, outboundState, updateOutboundState } =
+    useHandleState(id)
 
   useEffect(() => {
     if (running) {
-      const intervalHandle = setInterval(() => setOn((on) => !on), delay)
+      const intervalHandle = setInterval(
+        () =>
+          updateOutboundState({
+            [CLOCK_HANDLE_ID]: !outboundState[CLOCK_HANDLE_ID],
+          }),
+        delay
+      )
       return () => clearInterval(intervalHandle)
     }
-  }, [setOn, running, delay])
+  }, [running, delay, outboundState])
 
   useEffect(() => {
     if (inboundState[HALT_HANDLE_ID]) setRunning(false)
@@ -36,7 +42,6 @@ function ClockNode({ id }: NodeProps) {
 
   const toggleRunning = useCallback(() => {
     setRunning(!running)
-    if (running) setOn(false)
   }, [setRunning, running])
 
   const reduceDelay = useCallback(() => {

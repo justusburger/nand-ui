@@ -29,6 +29,7 @@ import { v4 } from 'uuid'
 import NodeEdge from './NodeEdge'
 import Toolbar from './components/Toolbar'
 import useLocalStorageState from './useLocalStorageState'
+import cloneNodesAndEdges from './cloneNodesAndEdges'
 
 const edgeOptions: DefaultEdgeOptions = {
   animated: false,
@@ -137,6 +138,31 @@ export default function App({
         const dropPosition = manager.getClientOffset()
         if (!dropPosition) throw new Error('No drop location')
         const customNode = !defaultNodeTypeMap[nodeType.id]
+
+        let customNodeData = {}
+        if (customNode) {
+          const [initialNodes, initialEdges] = cloneNodesAndEdges(
+            nodeType.data.nodes.map((node: any) => ({
+              ...node,
+              selected: false,
+              selectable: false,
+              deletable: false,
+            })),
+            nodeType.data.edges.map((edge: any) => ({
+              ...edge,
+              selected: false,
+              deletable: false,
+              focusable: false,
+              updatable: false,
+            }))
+          )
+          customNodeData = {
+            customNodeTypeId: nodeType.id,
+            initialNodes,
+            initialEdges,
+          }
+        }
+
         reactFlowInstance.addNodes({
           type: customNode ? NODE_TYPES_IDS.CUSTOM : nodeType.id,
           id: v4(),
@@ -146,24 +172,7 @@ export default function App({
           },
           data: {
             ...nodeType.data,
-            ...(customNode
-              ? {
-                  customNodeTypeId: nodeType.id,
-                  initialNodes: nodeType.data.nodes.map((node: any) => ({
-                    ...node,
-                    selected: false,
-                    selectable: false,
-                    deletable: false,
-                  })),
-                  initialEdges: nodeType.data.edges.map((edge: any) => ({
-                    ...edge,
-                    selected: false,
-                    deletable: false,
-                    focusable: false,
-                    updatable: false,
-                  })),
-                }
-              : {}),
+            ...customNodeData,
           },
         })
       },
@@ -197,6 +206,10 @@ export default function App({
     [reactFlowInstance]
   )
 
+  nodes.forEach((node) => {
+    if (node.selected) console.log('Selected node: ', node)
+  })
+
   return (
     <div style={{ width: '100vw', height: '100vh' }} ref={drop}>
       <ReactFlow
@@ -215,6 +228,8 @@ export default function App({
         zoomOnDoubleClick={false}
         defaultViewport={initialViewport}
         // onError={onError}
+        elevateEdgesOnSelect
+        elevateNodesOnSelect
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

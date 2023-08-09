@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { CustomNodeType } from '../../nodeTypes'
 import { useEdges, useNodes } from 'reactflow'
+import cloneNodesAndEdges from '../../cloneNodesAndEdges'
 
 interface CreateTypeButtonProps {
   enabled: boolean
@@ -20,16 +21,20 @@ function CreateTypeButton({
   const edges = useEdges<any>()
   const onCreateClick = useCallback(() => {
     const selectedNodesIdLookup: Record<string, boolean> = {}
-    const newNodes = nodes
+    const selectedNodes = nodes
       .filter((n) => n.selected)
       .map((node) => {
         selectedNodesIdLookup[node.id] = true
         return node
       })
-
-    const newEdges = edges.filter(
+    const selectedEdges = edges.filter(
       (e) => selectedNodesIdLookup[e.source] && selectedNodesIdLookup[e.target]
     )
+    const [newNodes, newEdges] = cloneNodesAndEdges(
+      selectedNodes,
+      selectedEdges
+    )
+
     onCreateComplete({
       id: name.toLocaleLowerCase().replace(' ', '_'),
       name,

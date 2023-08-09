@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import NodeHandle, { NodeHandleData } from '../components/NodeHandle'
-import { NodeProps, NodeToolbar, Position, useEdges, useNodes } from 'reactflow'
+import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import InputHandleRegion from '../InputHandleRegion'
 import useNodeDataState from '../useNodeDataState'
@@ -96,82 +96,6 @@ function OutputNode({ id }: NodeProps) {
             handleRemoveHandle={handleRemoveHandle}
           />
         </NodeToolbar>
-        {/* <NodeToolbar position={Position.Top}>
-        <div
-          className="card-background"
-          style={{
-            display: 'flex',
-            background: '#fff',
-            color: '#000',
-            padding: 3,
-          }}
-        >
-          <button
-            style={{
-              padding: `0px 7px 2px 7px`,
-              lineHeight: 1,
-              marginRight: 2,
-            }}
-            onClick={handleRemoveHandle}
-          >
-            -
-          </button>
-          <div
-            style={{ fontSize: 15, padding: '2px 4px 0 2px', lineHeight: 1 }}
-          >
-            {handles.length}bit
-          </div>
-          <button
-            style={{ padding: `2px 6px 2px 6px`, lineHeight: 1 }}
-            onClick={handleAddHandle}
-          >
-            +
-          </button>
-        </div>
-      </NodeToolbar> */}
-        {/* <NodeToolbar position={Position.Right}>
-        <div className="card-background card-content card-floating">
-          <div>Handles</div>
-          {nonBinaryHandles.map((handleData) => (
-            <div key={handleData.id}>
-              <input
-                type="checkbox"
-                checked={false}
-                onChange={(e) => handleBinaryChange(e, handleData.id)}
-              />
-              <input
-                type="text"
-                value={handleData.label}
-                onChange={(e) => handleLabelChange(e, handleData.id)}
-                style={{
-                  background: '#fff',
-                  border: 'solid 1px #ccc',
-                  color: '#000',
-                }}
-              />
-            </div>
-          ))}
-          {binaryHandles.map((handleData, i) => (
-            <div key={handleData.id}>
-              <input
-                type="checkbox"
-                checked={true}
-                onChange={(e) => handleBinaryChange(e, handleData.id)}
-              />
-              <input
-                type="text"
-                value={handleData.label}
-                onChange={(e) => handleLabelChange(e, handleData.id)}
-                style={{
-                  background: '#fff',
-                  border: 'solid 1px #ccc',
-                  color: '#000',
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      </NodeToolbar> */}
         <InputHandleRegion>
           {nonBinaryHandles.map((handleData) => (
             <NodeHandle

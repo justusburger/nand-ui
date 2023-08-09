@@ -1,5 +1,6 @@
 import { Position } from 'reactflow'
 import { Container, HandleIndicator } from './styles'
+import React from 'react'
 
 export interface NodeHandleData {
   id: string
@@ -64,4 +65,4 @@ function NodeHandle({
   )
 }
 
-export default NodeHandle
+export default React.memo(NodeHandle)

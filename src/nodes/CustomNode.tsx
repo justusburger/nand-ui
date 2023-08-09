@@ -28,6 +28,7 @@ import {
   useHandleStateInternal,
 } from '../components/HandleStateProvider'
 import React from 'react'
+import cloneNodesAndEdges from '../cloneNodesAndEdges'
 
 const edgeTypes: EdgeTypes = {
   nodeEdge: NodeEdge,
@@ -49,7 +50,6 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   )
 
   const handleStateInternal = useHandleStateInternal()
-
   useEffect(() => {
     inputNodes.forEach((node) => {
       const inboundState = node.data.handles.reduce((acc, handleData) => {
@@ -66,20 +66,28 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   }, [handleStateInternal, parentHandleState, inputNodes, outputNodes])
 
   const onUnpackClick = useCallback(() => {
+    const [newNodes, newEdges] = cloneNodesAndEdges(
+      data.nodes.map((node) => ({
+        ...node,
+        selectable: true,
+        selected: true,
+        deletable: true,
+      })),
+      data.edges.map((edge) => ({
+        ...edge,
+        selected: true,
+        deletable: true,
+        focusable: true,
+        updatable: true,
+      }))
+    )
     reactFlowInstance.setNodes((nodes) =>
       nodes
         .map((node) => {
           node.selected = false
           return node
         })
-        .concat(
-          data.nodes.map((node) => {
-            node.selectable = true
-            node.selected = true
-            node.deletable = true
-            return node
-          })
-        )
+        .concat(newNodes)
     )
     reactFlowInstance.setEdges((edges) =>
       edges
@@ -87,15 +95,11 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
           edge.selected = false
           return edge
         })
-        .concat(
-          data.edges.map((edge) => {
-            edge.selected = true
-            edge.deletable = true
-            edge.focusable = true
-            edge.updatable = true
-            return edge
-          })
-        )
+        .concat(newEdges)
+    )
+    setTimeout(
+      () => reactFlowInstance.fitView({ nodes: newNodes, duration: 500 }),
+      100
     )
   }, [reactFlowInstance, data.nodes])
 

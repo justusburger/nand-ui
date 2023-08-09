@@ -41,7 +41,6 @@ const replacer = (key: string, value: any) => {
 }
 
 const saveNodes = throttle(async function saveNodes(nodes: any[]) {
-  return
   await fetch(nodesUrl, {
     method: 'PUT',
     body: JSON.stringify({ id: 'nodes', data: nodes.map(cleanNode) }, replacer),
@@ -70,7 +69,6 @@ function cleanCustomNodeType(customNodeType: any) {
 }
 
 const saveEdges = throttle(async function (edges: any[]) {
-  return
   await fetch(edgesUrl, {
     method: 'PUT',
     body: JSON.stringify(
@@ -87,7 +85,6 @@ const saveEdges = throttle(async function (edges: any[]) {
 }, updateDelay) as any
 
 const saveCustomNodeTypes = throttle(async function (customNodeTypes: any[]) {
-  return
   await fetch(customNodeTypesUrl, {
     method: 'PUT',
     body: JSON.stringify(
