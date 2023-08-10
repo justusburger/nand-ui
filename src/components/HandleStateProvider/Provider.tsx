@@ -7,19 +7,17 @@ function HandleStateProvider({ children }: PropsWithChildren) {
   )
   const updateNode = useCallback(
     (nodeId: string, newState: Record<string, boolean>) => {
-      setTimeout(
-        () =>
-          setState((prevState) => {
-            const prevOutboundState = prevState[nodeId]
-            if (JSON.stringify(prevOutboundState) === JSON.stringify(newState))
-              return prevState
-            return {
-              ...prevState,
-              [nodeId]: newState,
-            }
-          }),
-        0
-      )
+      setTimeout(() => {
+        setState((prevState) => {
+          const prevOutboundState = prevState[nodeId]
+          if (JSON.stringify(prevOutboundState) === JSON.stringify(newState))
+            return prevState
+          return {
+            ...prevState,
+            [nodeId]: newState,
+          }
+        })
+      }, 0)
     },
     [setState]
   )

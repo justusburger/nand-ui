@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import App from './App'
 import throttle from 'lodash.throttle'
 import { NODE_TYPES_IDS } from './nodeTypes'
+import cloneNodesAndEdges from './cloneNodesAndEdges'
 
 const serveBaseUrl = 'http://localhost:3000'
 const nodesUrl = `${serveBaseUrl}/items/nodes`
@@ -137,22 +138,26 @@ function ServerStateProvider() {
               const { customNodeTypeId } = node.data
               const nodeType = customNodeTypeLookup[customNodeTypeId]
               if (nodeType) {
-                node.data = {
-                  ...node.data,
-                  ...nodeType.data,
-                  initialNodes: nodeType.data.nodes.map((node: any) => ({
+                const [initialNodes, initialEdges] = cloneNodesAndEdges(
+                  nodeType.data.nodes.map((node: any) => ({
                     ...node,
                     selected: false,
                     selectable: false,
                     deletable: false,
                   })),
-                  initialEdges: nodeType.data.edges.map((edge: any) => ({
+                  nodeType.data.edges.map((edge: any) => ({
                     ...edge,
                     selected: false,
                     deletable: false,
                     focusable: false,
                     updatable: false,
-                  })),
+                  }))
+                )
+                node.data = {
+                  ...node.data,
+                  ...nodeType.data,
+                  initialNodes,
+                  initialEdges,
                 }
               } else {
                 return null

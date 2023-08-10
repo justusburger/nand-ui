@@ -41,7 +41,7 @@ export const NODE_TYPES_IDS = {
 export type NodeType<TData = any> = {
   id: string
   name: string
-  node?: (props: NodeProps<any>) => ReactElement
+  node?: any
   data?: TData
   hidden?: boolean
 }

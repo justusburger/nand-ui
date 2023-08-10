@@ -2,7 +2,7 @@ import { NodeProps, NodeToolbar, Position } from 'reactflow'
 import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   PlayCircleIcon,
   PauseCircleIcon,
@@ -18,23 +18,22 @@ const CLOCK_HANDLE_ID = 'out'
 const inputHandleIds = [HALT_HANDLE_ID]
 
 function ClockNode({ id }: NodeProps) {
-  const [delay, setDelay] = useState(800)
+  const [delay, setDelay] = useState(200)
   const [running, setRunning] = useState(false)
   const { inboundState, outboundState, updateOutboundState } =
     useHandleState(id)
-
+  const onRef = useRef(false)
   useEffect(() => {
     if (running) {
-      const intervalHandle = setInterval(
-        () =>
-          updateOutboundState({
-            [CLOCK_HANDLE_ID]: !outboundState[CLOCK_HANDLE_ID],
-          }),
-        delay
-      )
+      const intervalHandle = setInterval(() => {
+        onRef.current = !onRef.current
+        updateOutboundState({
+          [CLOCK_HANDLE_ID]: onRef.current,
+        })
+      }, delay)
       return () => clearInterval(intervalHandle)
     }
-  }, [running, delay, outboundState])
+  }, [running, delay])
 
   useEffect(() => {
     if (inboundState[HALT_HANDLE_ID]) setRunning(false)

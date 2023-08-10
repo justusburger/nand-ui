@@ -1,9 +1,8 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
-import { useCallback, useEffect, useMemo } from 'react'
-import { Edge, useEdges, useNodes, useReactFlow, Node } from 'reactflow'
-import { v4 } from 'uuid'
-import { NodeHandleData } from '../NodeHandle'
+import { useCallback, useEffect } from 'react'
+import { useEdges, useNodes, useReactFlow, Node } from 'reactflow'
 import cloneNodesAndEdges from '../../cloneNodesAndEdges'
+import { NODE_TYPES_IDS } from '../../nodeTypes'
 
 function Toolbar() {
   const reactFlowInstance = useReactFlow()
@@ -21,10 +20,34 @@ function Toolbar() {
     const selectedEdges = edges.filter(
       (edge) => selectedNodesMap[edge.source] && selectedNodesMap[edge.target]
     )
-    const [newNodes, newEdges] = cloneNodesAndEdges(
-      selectedNodes,
-      selectedEdges
-    )
+    let [newNodes, newEdges] = cloneNodesAndEdges(selectedNodes, selectedEdges)
+
+    newNodes.forEach((node) => {
+      node.position = { x: node.position.x + 30, y: node.position.y + 30 }
+      if (node.type === NODE_TYPES_IDS.CUSTOM) {
+        const [initialNodes, initialEdges] = cloneNodesAndEdges(
+          node.data.nodes.map((node: any) => ({
+            ...node,
+            selected: false,
+            selectable: false,
+            deletable: false,
+          })),
+          node.data.edges.map((edge: any) => ({
+            ...edge,
+            selected: false,
+            deletable: false,
+            focusable: false,
+            updatable: false,
+          }))
+        )
+        node.data = {
+          ...node.data,
+          initialNodes,
+          initialEdges,
+        }
+      }
+      return node
+    })
 
     // const selectedToNewNodeLookup = {} as { [selectedNodeId: string]: string }
     // const handleLookup = {} as { [oldHandleId: string]: string }

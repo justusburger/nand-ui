@@ -4,7 +4,6 @@ import NodeContainer from '../NodeContainer'
 import OutputHandleRegion from '../OutputHandleRegion'
 import NodeHandle from '../components/NodeHandle'
 import { useHandleState } from '../components/HandleStateProvider'
-import useNodeDataState from '../useNodeDataState'
 import { useEffect, useState } from 'react'
 import React from 'react'
 
@@ -21,19 +20,11 @@ const inputHandleIds = [INCREMENT, CLOCK, CLEAR, READ, ...dataHandleIds]
 
 const outputHandleIds = [...dataHandleIds]
 
-interface CounterData {
-  count: number
-}
-
 function CounterNode({ id }: NodeProps) {
   const { inboundState, outboundState, updateOutboundState } =
     useHandleState(id)
   const [previousInboundState, setPreviousInboundState] = useState<any>({})
-  const [count, setCount] = useNodeDataState<CounterData, number>(
-    id,
-    'count',
-    0
-  )
+  const [count, setCount] = useState<number>(0)
   useEffect(() => {
     const binary = count.toString(2).padStart(numberOfDataHandles, '0')
     const newOutboundState: any = {}
