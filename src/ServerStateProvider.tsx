@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import App from './App'
 import throttle from 'lodash.throttle'
-import { NODE_TYPES_IDS } from './nodeTypes'
-import cloneNodesAndEdges from './cloneNodesAndEdges'
+import recursivelySetupCustomNodes from './recursivelySetupCustomNodes'
 
 const serveBaseUrl = 'http://localhost:3000'
 const nodesUrl = `${serveBaseUrl}/items/nodes`
@@ -132,40 +131,10 @@ function ServerStateProvider() {
       )
 
       setInitialState({
-        nodes: (nodes.data || [])
-          .map((node: any) => {
-            if (node.type === NODE_TYPES_IDS.CUSTOM) {
-              const { customNodeTypeId } = node.data
-              const nodeType = customNodeTypeLookup[customNodeTypeId]
-              if (nodeType) {
-                const [initialNodes, initialEdges] = cloneNodesAndEdges(
-                  nodeType.data.nodes.map((node: any) => ({
-                    ...node,
-                    selected: false,
-                    selectable: false,
-                    deletable: false,
-                  })),
-                  nodeType.data.edges.map((edge: any) => ({
-                    ...edge,
-                    selected: false,
-                    deletable: false,
-                    focusable: false,
-                    updatable: false,
-                  }))
-                )
-                node.data = {
-                  ...node.data,
-                  ...nodeType.data,
-                  initialNodes,
-                  initialEdges,
-                }
-              } else {
-                return null
-              }
-            }
-            return node
-          })
-          .filter((n: any) => n),
+        nodes: recursivelySetupCustomNodes(
+          nodes.data || [],
+          customNodeTypeLookup
+        ),
         edges: (edges.data || []).map((edge: any) => {
           edge.type = 'nodeEdge'
           return edge
