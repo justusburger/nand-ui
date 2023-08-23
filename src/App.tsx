@@ -29,6 +29,7 @@ import { v4 } from 'uuid'
 import NodeEdge from './NodeEdge'
 import Toolbar from './components/Toolbar'
 import useLocalStorageState from './useLocalStorageState'
+import cloneNodesAndEdges from './cloneNodesAndEdges'
 
 const edgeOptions: DefaultEdgeOptions = {
   animated: false,
@@ -50,7 +51,7 @@ interface AppProps {
   saveCustomNodeTypes: (customNodeTypes: CustomNodeType[]) => Promise<void>
 }
 
-// let edgeIds: any = {}
+let edgeIds: any = {}
 export default function App({
   initialNodes,
   saveNodes,
@@ -137,6 +138,31 @@ export default function App({
         const dropPosition = manager.getClientOffset()
         if (!dropPosition) throw new Error('No drop location')
         const customNode = !defaultNodeTypeMap[nodeType.id]
+
+        let customNodeData = {}
+        if (customNode) {
+          const [initialNodes, initialEdges] = cloneNodesAndEdges(
+            nodeType.data.nodes.map((node: any) => ({
+              ...node,
+              selected: false,
+              selectable: false,
+              deletable: false,
+            })),
+            nodeType.data.edges.map((edge: any) => ({
+              ...edge,
+              selected: false,
+              deletable: false,
+              focusable: false,
+              updatable: false,
+            }))
+          )
+          customNodeData = {
+            customNodeTypeId: nodeType.id,
+            initialNodes,
+            initialEdges,
+          }
+        }
+
         reactFlowInstance.addNodes({
           type: customNode ? NODE_TYPES_IDS.CUSTOM : nodeType.id,
           id: v4(),
@@ -146,24 +172,7 @@ export default function App({
           },
           data: {
             ...nodeType.data,
-            ...(customNode
-              ? {
-                  customNodeTypeId: nodeType.id,
-                  initialNodes: nodeType.data.nodes.map((node: any) => ({
-                    ...node,
-                    selected: false,
-                    selectable: false,
-                    deletable: false,
-                  })),
-                  initialEdges: nodeType.data.edges.map((edge: any) => ({
-                    ...edge,
-                    selected: false,
-                    deletable: false,
-                    focusable: false,
-                    updatable: false,
-                  })),
-                }
-              : {}),
+            ...customNodeData,
           },
         })
       },
@@ -171,31 +180,31 @@ export default function App({
     [reactFlowInstance]
   )
 
-  // const onError = useCallback(
-  //   (id: string, message: string) => {
-  //     if (message.indexOf("Couldn't create edge for") > -1) {
-  //       // return
-  //       let edgeId = message.substring(message.indexOf('edge id:') + 9)
-  //       edgeId = edgeId.substring(0, edgeId.length - 1)
-  //       // console.log(edgeId)
+  const onError = useCallback(
+    (id: string, message: string) => {
+      if (message.indexOf("Couldn't create edge for") > -1) {
+        // return
+        let edgeId = message.substring(message.indexOf('edge id:') + 9)
+        edgeId = edgeId.substring(0, edgeId.length - 1)
+        // console.log(edgeId)
 
-  //       edgeIds[edgeId] = true
-  //       console.log(edgeIds, Object.keys(edgeIds).length)
-  //       // if (Object.keys(edgeIds).length > 50) {
-  //       setTimeout(() => {
-  //         reactFlowInstance.setEdges((edges) => {
-  //           const filteredEdges = edges.filter((edge) => !edgeIds[edge.id])
-  //           console.log(edges.length, filteredEdges.length)
-  //           return filteredEdges
-  //         })
-  //         edgeIds = {}
-  //       }, 100)
-  //       // }
-  //     }
-  //     console.log(id, message)
-  //   },
-  //   [reactFlowInstance]
-  // )
+        edgeIds[edgeId] = true
+        console.log(edgeIds, Object.keys(edgeIds).length)
+        // if (Object.keys(edgeIds).length > 50) {
+        setTimeout(() => {
+          reactFlowInstance.setEdges((edges) => {
+            const filteredEdges = edges.filter((edge) => !edgeIds[edge.id])
+            console.log(edges.length, filteredEdges.length)
+            return filteredEdges
+          })
+          edgeIds = {}
+        }, 100)
+        // }
+      }
+      console.log(id, message)
+    },
+    [reactFlowInstance]
+  )
 
   return (
     <div style={{ width: '100vw', height: '100vh' }} ref={drop}>
@@ -214,7 +223,7 @@ export default function App({
         maxZoom={5}
         zoomOnDoubleClick={false}
         defaultViewport={initialViewport}
-        // onError={onError}
+        onError={onError}
       >
         <Controls position="bottom-right" />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
