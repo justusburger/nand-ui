@@ -64,9 +64,6 @@ function CustomNodeButton({ nodeType, onDelete }: CustomNodeButtonProps) {
           horizontal: 'right',
         }}
       >
-        <MenuItem onClick={handleUnpack}>
-          <div className="text-sm">Unpack</div>
-        </MenuItem>
         <MenuItem onClick={handleDelete}>
           <div className="text-sm">Delete</div>
         </MenuItem>

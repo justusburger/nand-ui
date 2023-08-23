@@ -83,20 +83,19 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
   }, [JSON.stringify(inboundState), reactFlowInstance, id])
 
   const onUnpackClick = useCallback(() => {
+    const newNodes = data.nodes.map((node) => {
+      node.selectable = true
+      node.selected = true
+      node.deletable = true
+      return node
+    })
     reactFlowInstance.setNodes((nodes) =>
       nodes
         .map((node) => {
           node.selected = false
           return node
         })
-        .concat(
-          data.nodes.map((node) => {
-            node.selectable = true
-            node.selected = true
-            node.deletable = true
-            return node
-          })
-        )
+        .concat(newNodes)
     )
     reactFlowInstance.setEdges((edges) =>
       edges
@@ -113,6 +112,10 @@ function CustomNode({ id, data }: NodeProps<CustomNodeTypeData>) {
             return edge
           })
         )
+    )
+    setTimeout(
+      () => reactFlowInstance.fitView({ nodes: newNodes, duration: 500 }),
+      100
     )
   }, [reactFlowInstance, data.nodes])
 
